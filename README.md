@@ -20,7 +20,7 @@ Una vez completada la fase anterior, y teniendo bien presentes los requisitos ne
 
     3 Implementación.
 
-En esta fase pasaremos a implementar la aplicación utilizando las tecnologías definidas en las fases anteriores.
+En esta fase se procederá a implementar la aplicación utilizando las tecnologías definidas en las fases anteriores.
 
     4 Pruebas.
 
@@ -28,7 +28,7 @@ La fase de pruebas será crucial para comprobar la correcta implementación de t
 
     5 Despliegue en producción y mantenimiento.
 
-Una vez que la aplicación haya sido completada y convenientemente testeada, se pasará a desplegarla en un entorno de producción y a realizar el mantenimiento de la misma.
+Una vez que la aplicación haya sido completada y convenientemente testeada, se pasará a desplegarla en un entorno de producción y a realizar todas las comprobaciones que garanticen el correcto funcionamiento de la misma.
 
 ### Análisis
 
@@ -37,13 +37,10 @@ El primer punto del ciclo de vida del desarrollo del software es el análisis.
 En este punto se procede a la identificación de las partes interesadas del proyecto y los requisitos que debe cumplir la aplicación; ya sean funcionales, no funcionales o de sistema.
 
 También es conveniente realizar diferentes diagramas como el de casos de uso con sus respectivos documentos detallados de requisitos para cada caso de uso.
-También se realizan una serie de pruebas de aceptación con el cliente para asegurarse de focalizar el objetivo requerido.
 
 Otra parte importante de la fase de análisis es la selección de las tecnologías que van a ser usadas para cumplir con los requisitos: lenguajes a utilizar, servidores, Sistema Gestor de Bases de Datos(SGBD), IDEs y otras herramientas necesarias para la implementación de la aplicación.
 
-Con el objetivo de cumplir con todos los requisitos, es conveniente realizar una tabla/matriz de tecnologías usadas por requisito funcional.
-
-Otro punto de la fase de análisis es el primer modelado de lo que será la base de datos, creando un modelo entidad-relación que será de utilidad a la hora de elegir el SGBD.
+Otro punto de la fase de análisis es el primer modelado de lo que será la base de datos, creando un modelo entidad-relación que resultará crucial a la hora de definir y crear dicha base de datos.
 
 ### Tecnologías
 
