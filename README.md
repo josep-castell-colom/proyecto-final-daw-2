@@ -6,6 +6,8 @@
 
 En este proyecto se pretende la creación de un portal web dirigido a músicos, en el que se propone dar solución a un problema detectado. Es evidente que, en el contexto de nuestra sociedad, el ritmo de tareas siempre es acelerado. Así, algo aparentemente tan sencillo como organizar ensayos entre músicos puede llegar a ser bastante complicado. La aplicación que se propone para este proyecto tratará de ofrecer una herramienta para coordinar los horarios en los que los diferentes componentes de un grupo puedan ensayar juntos.
 
+Los usuarios de la aplicación podrán, en primer lugar, crear una cuenta personal de usuario, que les concederá unas credenciales a través de las que podrán acceder a las funcionalidades previstas. Una vez registrados, podrán crear grupos con los demás miembros de su banda, conjunto, etc. Un calendario interactivo les permitirá entonces coordinar fechas y horarios para sus ensayos. Adicionalmente, la aplicación tendrá ciertas funcionalidades propias de una red social, donde los usuarios podrán interactuar entre sí de diferentes modos.
+
 ## Fases del desarrollo de software
 
 Las fases a recorrer en el proceso de desarrollo de la aplicación seguirán un estándar habitual, constando de:
@@ -79,3 +81,4 @@ Funcionalidad básica
 Creación de cuentas de músicos->parámetros tipo->intrumento, estilo/s, localidad, nivel, rol
 Creación de un grupo/comunidad->gente que ensaya junta->estilo musical, centro de operaciones/área
 	->definir horarios, encontrar huecos/disponibilidad
+
