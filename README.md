@@ -2,11 +2,32 @@
 
 ### Josep Maria Castell Colom y Rafael Ivorra Llodrá.
 
-## Introducción 
+## Introducción
 
 En este proyecto se pretende la creación de un portal web dirigido a músicos, en el que se propone dar solución a un problema detectado. Es evidente que, en el contexto de nuestra sociedad, el ritmo de tareas siempre es acelerado. Así, algo aparentemente tan sencillo como organizar ensayos entre músicos puede llegar a ser bastante complicado. La aplicación que se propone para este proyecto tratará de ofrecer una herramienta para coordinar los horarios en los que los diferentes componentes de un grupo puedan ensayar juntos.
 
 Los usuarios de la aplicación podrán, en primer lugar, crear una cuenta personal de usuario, que les concederá unas credenciales a través de las que podrán acceder a las funcionalidades previstas. Una vez registrados, podrán crear grupos con los demás miembros de su banda, conjunto, etc. Un calendario interactivo les permitirá entonces coordinar fechas y horarios para sus ensayos. Adicionalmente, la aplicación tendrá ciertas funcionalidades propias de una red social, donde los usuarios podrán interactuar entre sí de diferentes modos.
+
+Se tratará de que la aplicación tenga unas funcionalidades útiles y, sobre todo, que dé solución al problema planteado inicialmente. Se priorizará que la aplicación funcione de forma segura, correcta y sin fallos, frente al exceso de funcionalidades. Por ello resultará de vital importancia la fase de testeo de la aplicación.
+
+## Descripción de la aplicación
+
+La aplicación contará, como mínimo, con las siguientes funcionalidades implementadas.
+
+- Registro en la aplicación, mediante credenciales de usuario (nombre/ contraseña).
+
+- *Login* en la aplicación, utilizando las claves obtenidas tras el registro.
+
+- Crear y modificar un perfil personal, con información que se compartirá públicamente con los demás usuarios y relevante para el funcionamiento de la aplicación. Los parámetros serán, entre otros, instrumento/s, estilo/s, localidad, nivel de competencia, rol (solista, acompañante, de sesión, cantautor...).
+
+- Posibilidad de crear uno o varios grupos, comunidades, conjuntos... de músicos.
+
+- Dentro del grupo, habrá diferentes secciones con distintas visibilidades (pública o privada). En estas secciones se podrán enviar y responder mensajes, tanto dentro del grupo como a la comunidad más amplia de usuarios, dependiendo de la visibilidad que se haya establecido.
+
+- Se podrá añadir y modificar la información del grupo (estilo musical, centro u área de operaciones, etc.)
+
+- Se podrán definir horarios con la disponibilidad de cada músico. A partir de la información que aporte cada miembro, se podrán concretar citas para ensayos en común.
+
 
 ## Fases del desarrollo de software
 
@@ -73,12 +94,3 @@ Las tecnologías a emplear en el proyecto son consideradas estándard, de uso am
 - Otros
 
 	- El trabajo en local será realizado en sistemas operativos Ubuntu, versión 22.04. El editor de texto principal será Visual Studio Code/ VS Codium.
-
-
-
-***
-Funcionalidad básica
-Creación de cuentas de músicos->parámetros tipo->intrumento, estilo/s, localidad, nivel, rol
-Creación de un grupo/comunidad->gente que ensaya junta->estilo musical, centro de operaciones/área
-	->definir horarios, encontrar huecos/disponibilidad
-
