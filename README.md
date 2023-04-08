@@ -65,6 +65,47 @@ Otra parte importante de la fase de análisis es la selección de las tecnologí
 
 Otro punto de la fase de análisis es el primer modelado de lo que será la base de datos, creando un modelo entidad-relación que resultará crucial a la hora de definir y crear dicha base de datos.
 
+#### Identificación de las partes interesadas del proyecto
+
+- Invitado
+- Usuario autenticado
+	- Administrador de grupo
+	- Miembro de grupo
+
+#### Requisitos funcionales
+
+- **Invitado**
+	- Visitar 'landing page'
+	- Visitar 'login'
+	- Visitar 'register'
+	- Visitar secciones públicas
+
+- **Usuario autenticado**
+	- Visitar 'landing page'
+	- Visitar secciones públicas
+	- Cerrar sesión
+	- Añadir/modificar/eliminar información del perfil personal
+	- Eliminar cuenta propia de usuario
+	- Crear grupo
+	- Añadir/modificar/eliminar comentarios propios de secciones públicas
+
+	- **Administrador de grupo**
+		- Añadir/modificar/eliminar información de grupo/s propio/s
+		- Añadir/eliminar secciones de grupo/s propio/s
+		- Definir privacidad de las secciones
+		- Añadir/eliminar miembros de grupo/s propio/s
+		- Añadir/modificar/eliminar publicaciones de grupo/s propio/s
+		- Añadir/modificar/eliminar comentarios propios de publicaciones
+		- Eliminar comentarios/publicaciones ajenos
+		- Definir administradores de grupos propios
+		- Solicitar y confirmar cita/ensayo
+
+	- **Miembro de grupo**
+		- Visitar secciones públicas y privadas de sus grupos
+		- Añadir/modificar/eliminar publicaciones propias
+		- Añadir/modificar/eliminar comentarios propios de publicaciones
+		- Definir horarios disponibles
+
 ### Tecnologías
 
 Las tecnologías a emplear en el proyecto son consideradas estándard, de uso ampliamente difundido, en el contexto del desarrollo web. En concreto, se utilizarán las siguientes.
@@ -94,3 +135,101 @@ Las tecnologías a emplear en el proyecto son consideradas estándard, de uso am
 - Otros
 
 	- El trabajo en local será realizado en sistemas operativos Ubuntu, versión 22.04. El editor de texto principal será Visual Studio Code/ VS Codium.
+
+### Diseño de la base de datos
+
+- users
+	- id(PRIMARY_KEY): int
+	- name: string
+	- lastname: string
+	- email: string
+	- password: string
+	- phone?: string
+	- address?: string
+	- image?: string
+
+- instruments
+	- id(PRIMARY_KEY): int
+	- name: string
+
+- instrument_user
+	- id(PRIMARY_KEY): int
+	- user_id(FOREIGN_KEY): int
+	- instrument_id(FOREIGN_KEY): int
+
+- musicianrole
+	- id(PRIMARY_KEY): int
+	- name: string
+
+- musicianrole_user
+	- id(PRIMARY_KEY): int
+	- musicianrole_id(FOREIGN_KEY): int
+	- user_id(FOREIGN_KEY): int
+
+- groups
+	- id(PRIMARY_KEY): int
+	- name: string
+	- city?: string
+	- description?: longtext
+	- image?: string
+
+- section
+	- id(PRIMARY_KEY): int
+	- name: string
+	- description?: longtext
+	- image?: string
+	- isPublic: boolean
+	- group_id(FOREIGN_KEY): int
+
+- group_user
+	- id(PRIMARY_KEY): int
+	- isAdmin: boolean
+	- group_id(FOREIGN_KEY): int
+	- user_id(FOREIGN_KEY): int
+
+- style
+	- id(PRIMARY_KEY): int
+	- name: string
+
+- group_style
+	- id(PRIMARY_KEY): int
+	- group_id(FOREIGN_KEY): int
+	- style_id(FOREIGN_KEY): int
+
+- style_user
+	- id(PRIMARY_KEY): int
+	- style_id(FOREIGN_KEY): int
+	- user_id(FOREIGN_KEY): int
+
+- post
+	- id(PRIMARY_KEY): int
+	- title: string
+	- body: longtext
+	- image?: string
+	- section_id(FOREIGN_KEY): int
+	- user_id(FOREIGN_KEY): int
+
+- comment
+	- id(PRIMARY_KEY): int
+	- body: longtext
+	- post_id(FOREIGN_KEY): int
+	- user_id(FOREIGN_KEY): int
+
+- timeframe
+	- id(PRIMARY_KEY): int
+	- dayofweek: int
+	- start: int
+	- end: int
+
+- timeframe_user
+	- id(PRIMARY_KEY): int
+	- group_id(FOREING_KEY): int
+	- timeframe_id(FOREIGN_KEY): int
+	- user_id(FOREIGN_KEY): int
+
+- timeframe_group
+	- id(PRIMARY_KEY): int
+	- confirmed: boolean
+	- timeframe_id(FOREIGN_KEY): int
+	- group_id(FOREING_KEY): int
+
