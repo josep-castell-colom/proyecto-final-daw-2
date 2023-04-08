@@ -106,7 +106,7 @@ Otro punto de la fase de análisis es el primer modelado de lo que será la base
 		- Añadir/modificar/eliminar comentarios propios de publicaciones
 		- Definir horarios disponibles
 
-### Tecnologías
+#### Tecnologías
 
 Las tecnologías a emplear en el proyecto son consideradas estándard, de uso ampliamente difundido, en el contexto del desarrollo web. En concreto, se utilizarán las siguientes.
 
@@ -136,7 +136,7 @@ Las tecnologías a emplear en el proyecto son consideradas estándard, de uso am
 
 	- El trabajo en local será realizado en sistemas operativos Ubuntu, versión 22.04. El editor de texto principal será Visual Studio Code/ VS Codium.
 
-### Diseño de la base de datos
+#### Diseño de la base de datos
 
 - users
 	- id(PRIMARY_KEY): int
@@ -232,4 +232,66 @@ Las tecnologías a emplear en el proyecto son consideradas estándard, de uso am
 	- confirmed: boolean
 	- timeframe_id(FOREIGN_KEY): int
 	- group_id(FOREING_KEY): int
+
+### Diseño del frontend
+
+#### Wireframes
+
+De cara a identificar los elementos y la estructura de la página se ha procedido a realizar los correspondientes *wireframes* utilizando la aplicación web [WireframePro](https://wireframepro.mockflow.com/).
+
+- News seed:
+
+![wireframe-news-seed](https://user-images.githubusercontent.com/91564460/230741468-d9623b36-cafb-46b1-a0c7-a9343184e7e7.PNG)
+
+- News seed con comentario:
+
+![wireframe-news-seed-comment](https://user-images.githubusercontent.com/91564460/230741489-99858145-635c-4c27-bb23-40be6fa2f583.PNG)
+
+- Sección de grupo:
+
+![wireframe-group-section](https://user-images.githubusercontent.com/91564460/230741495-140f90eb-62fe-4610-92c6-f3024406393e.PNG)
+
+- Sección de grupo con nueva publicación:
+
+![wireframe-group-section-post](https://user-images.githubusercontent.com/91564460/230741500-f420dbb2-ee20-401c-b218-15de1aac5b32.PNG)
+
+- Calendario:
+
+![wireframe-calendar](https://user-images.githubusercontent.com/91564460/230741527-5459551a-810e-4af3-8d13-f0aaf19bade3.PNG)
+
+#### Paleta de colores
+
+Para la paleta de colores hemos seleccionado dos colores principales, a partir de los cuales se inspirará el resto del diseño. Se incluyen tres tonalidades intermedias como colores secundarios.
+
+A parte de estos colores principales, la interfaz contará con un un color claro, muy cercano al blanco y un color oscuro muy cercano al negro.
+
+Además se dispondrá de un color extra (color de acento) el cual servirá para señalar y dar importancia a los errores que puedan surgir.
+
+Se añade a continuación una tabla con el esquema de colores:
+
+Colores principales:
+
+#5EE7FD
+
+#5EFD60
+
+Colores secundarios:
+
+#54E3D0
+
+#69FABE
+
+#54E37F
+
+Color de error:
+
+#EB3B26
+
+Color oscuro:
+
+#EEEEEE
+
+Color claro:
+
+#333333
 
