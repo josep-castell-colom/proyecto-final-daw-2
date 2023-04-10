@@ -140,6 +140,7 @@ Las tecnologías a emplear en el proyecto son consideradas estándard, de uso am
 
 - users
 	- id(PRIMARY_KEY): int
+	- username: string
 	- name: string
 	- lastname: string
 	- email: string
