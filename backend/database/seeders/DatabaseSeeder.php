@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             InstrumentSeeder::class,
             MusicianroleSeeder::class,
             GroupSeeder::class,
+            SectionSeeder::class,
             UserSeeder::class,
         ]);
     }

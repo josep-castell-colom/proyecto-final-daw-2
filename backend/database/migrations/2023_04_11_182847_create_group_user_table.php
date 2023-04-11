@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->boolean('isPublic')->default(0);
+            $table->boolean('isAdmin')->default(0);
             $table->timestamps();
         });
     }

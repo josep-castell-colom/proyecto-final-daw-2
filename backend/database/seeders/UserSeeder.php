@@ -73,7 +73,7 @@ class UserSeeder extends Seeder
 
         $pep->instruments()->attach(4);
         $pep->musicianroles()->attach(3);
-        $pep->groups()->attach(1);
+        $pep->groups()->attach(1, ['isAdmin' => 1]);
 
     }
 }
