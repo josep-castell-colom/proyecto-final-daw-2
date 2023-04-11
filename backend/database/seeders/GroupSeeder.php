@@ -13,12 +13,17 @@ class GroupSeeder extends Seeder
      */
     public function run(): void
     {
-        Group::factory()->create([
+        $esforadats = Group::factory()->create([
             'id' => 1,
             'name' => 'Es Foradats',
             'city' => 'Palma de Mallorca',
             'description' => 'Feim rumba trash pop metal. O quelcom així, diuen.',
             'image' => '/storage/img/1/esforadats.jpg',
         ]);
+
+        $esforadats->styles()->attach(1);
+        $esforadats->styles()->attach(2);
+        $esforadats->styles()->attach(3);
+        $esforadats->styles()->attach(4);
     }
 }

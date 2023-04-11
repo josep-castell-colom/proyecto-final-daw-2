@@ -27,4 +27,13 @@ class Group extends Model
     {
         return $this->hasMany(Section::class);
     }
+
+    /**
+     * The styles that belong to the groups
+     */
+    public function styles(): BelongsToMany
+    {
+        return $this->belongsToMany(Style::class)
+            ->withTimestamps();
+    }
 }

@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Musicianrole;
 use Illuminate\Database\Seeder;
+use Termwind\Repositories\Styles;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             InstrumentSeeder::class,
             MusicianroleSeeder::class,
+            StyleSeeder::class,
             GroupSeeder::class,
             SectionSeeder::class,
             UserSeeder::class,

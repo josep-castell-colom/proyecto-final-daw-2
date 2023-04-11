@@ -62,18 +62,33 @@ class UserSeeder extends Seeder
         $josep->instruments()->attach(3);
         $josep->musicianroles()->attach(2);
         $josep->groups()->attach(1);
+        $josep->styles()->attach(1);
+        $josep->styles()->attach(2);
+        $josep->styles()->attach(3);
+        $josep->styles()->attach(4);
 
         $rafael->instruments()->attach(1);
         $rafael->musicianroles()->attach(1);
         $rafael->groups()->attach(1);
+        $rafael->styles()->attach(1);
+        $rafael->styles()->attach(2);
+        $rafael->styles()->attach(3);
+        $rafael->styles()->attach(4);
 
         $jaume->instruments()->attach(2);
         $jaume->musicianroles()->attach(4);
         $jaume->groups()->attach(1);
+        $jaume->styles()->attach(1);
+        $jaume->styles()->attach(2);
+        $jaume->styles()->attach(3);
+        $jaume->styles()->attach(4);
 
         $pep->instruments()->attach(4);
         $pep->musicianroles()->attach(3);
         $pep->groups()->attach(1, ['isAdmin' => 1]);
-
+        $pep->styles()->attach(1);
+        $pep->styles()->attach(2);
+        $pep->styles()->attach(3);
+        $pep->styles()->attach(4);
     }
 }

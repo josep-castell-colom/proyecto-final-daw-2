@@ -69,4 +69,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Group::class)
             ->withTimestamps();
     }
+
+    /**
+     * The styles that belong to the users
+     */
+    public function styles(): BelongsToMany
+    {
+        return $this->belongsToMany(Style::class)
+            ->withTimestamps();
+    }
 }
