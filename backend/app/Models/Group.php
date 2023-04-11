@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Musicianrole extends Model
+class Group extends Model
 {
     use HasFactory;
 
     /**
-     * The users that belong to the musician roles
+     * The users that belong to the groups
      */
     public function users(): BelongsToMany
     {

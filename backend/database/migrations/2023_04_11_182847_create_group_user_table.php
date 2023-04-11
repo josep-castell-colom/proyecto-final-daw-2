@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('instrument_user', function (Blueprint $table) {
+        Schema::create('group_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
+            $table->foreignId('group_id')
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->foreignId('instrument_id')
-                ->constrained()
+            $table->foreignId('user_id')->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
+            $table->boolean('isPublic')->default(0);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('instrument_user');
+        Schema::dropIfExists('group_user');
     }
 };

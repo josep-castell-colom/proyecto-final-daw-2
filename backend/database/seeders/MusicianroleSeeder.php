@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Musicianrole;
 use Illuminate\Database\Seeder;
 
 class MusicianroleSeeder extends Seeder
@@ -12,6 +12,22 @@ class MusicianroleSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Musicianrole::factory()->create([
+            'id' => 1,
+            'name' => 'vocalista',
+        ]);
+        Musicianrole::factory()->create([
+            'id' => 2,
+            'name' => 'bajista',
+        ]);
+        Musicianrole::factory()->create([
+            'id' => 3,
+            'name' => 'baterista',
+        ]);
+        Musicianrole::factory()->create([
+            'id' => 4,
+            'name' => 'guitarrista',
+        ]);
+
     }
 }

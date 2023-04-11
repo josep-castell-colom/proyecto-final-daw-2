@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,7 +13,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
+        $josep = User::factory()->create([
             'id' => 1,
             'username' => 'josep',
             'name' => 'Josep',
@@ -25,7 +24,7 @@ class UserSeeder extends Seeder
             'image' => '/storage/img/1/josep.jpg',
             'password' => Hash::make('patata123'),
         ]);
-        User::factory()->create([
+        $rafael = User::factory()->create([
             'id' => 2,
             'username' => 'rafael',
             'name' => 'Rafael',
@@ -36,7 +35,7 @@ class UserSeeder extends Seeder
             'image' => '/storage/img/1/rafael.jpg',
             'password' => Hash::make('patata123'),
         ]);
-        User::factory()->create([
+        $jaume = User::factory()->create([
             'id' => 3,
             'username' => 'jaume',
             'name' => 'Jaume',
@@ -48,7 +47,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('patata123'),
         ]);
 
-        User::factory()->create([
+        $pep = User::factory()->create([
             'id' => 4,
             'username' => 'pep',
             'name' => 'Pep',
@@ -59,5 +58,22 @@ class UserSeeder extends Seeder
             'image' => '/storage/img/1/pep.jpg',
             'password' => Hash::make('patata123'),
         ]);
+
+        $josep->instruments()->attach(3);
+        $josep->musicianroles()->attach(2);
+        $josep->groups()->attach(1);
+
+        $rafael->instruments()->attach(1);
+        $rafael->musicianroles()->attach(1);
+        $rafael->groups()->attach(1);
+
+        $jaume->instruments()->attach(2);
+        $jaume->musicianroles()->attach(4);
+        $jaume->groups()->attach(1);
+
+        $pep->instruments()->attach(4);
+        $pep->musicianroles()->attach(3);
+        $pep->groups()->attach(1);
+
     }
 }

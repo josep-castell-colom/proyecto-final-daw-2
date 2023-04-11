@@ -48,7 +48,8 @@ class User extends Authenticatable
      */
     public function instruments(): BelongsToMany
     {
-        return $this->belongsToMany(Instrument::class);
+        return $this->belongsToMany(Instrument::class)
+            ->withTimestamps();
     }
 
     /**
@@ -56,6 +57,16 @@ class User extends Authenticatable
      */
     public function musicianroles(): BelongsToMany
     {
-        return $this->belongsToMany(Musicianrole::class);
+        return $this->belongsToMany(Musicianrole::class)
+            ->withTimestamps();
+    }
+
+    /**
+     * The groups that belong to the users
+     */
+    public function groups(): BelongsToMany
+    {
+        return $this->belongsToMany(Group::class)
+            ->withTimestamps();
     }
 }
