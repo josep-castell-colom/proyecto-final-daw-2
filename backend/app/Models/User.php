@@ -92,4 +92,21 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+
+    /**
+     * The comments that belong to the user
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * The timeframes that belong to the users
+     */
+    public function timeframes(): BelongsToMany
+    {
+        return $this->belongsToMany(Timeframe::class)
+            ->withTimestamps();
+    }
 }

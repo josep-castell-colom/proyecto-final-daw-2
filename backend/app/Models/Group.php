@@ -36,4 +36,13 @@ class Group extends Model
         return $this->belongsToMany(Style::class)
             ->withTimestamps();
     }
+
+    /**
+     * The timeframes that belong to the groups
+     */
+    public function timeframes(): BelongsToMany
+    {
+        return $this->belongsToMany(Timeframe::class)
+            ->withTimestamps();
+    }
 }

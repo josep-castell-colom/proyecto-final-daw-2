@@ -4,9 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Musicianrole;
 use Illuminate\Database\Seeder;
-use Termwind\Repositories\Styles;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,6 +21,8 @@ class DatabaseSeeder extends Seeder
             SectionSeeder::class,
             UserSeeder::class,
             PostSeeder::class,
+            CommentSeeder::class,
+            TimeframeSeeder::class,
         ]);
     }
 }

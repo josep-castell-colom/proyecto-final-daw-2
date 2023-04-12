@@ -224,11 +224,11 @@ Las tecnologías a emplear en el proyecto son consideradas estándard, de uso am
 
 - timeframe_user
 	- id(PRIMARY_KEY): int
-	- group_id(FOREING_KEY): int
+	- group_id(FOREIGN_KEY): int
 	- timeframe_id(FOREIGN_KEY): int
 	- user_id(FOREIGN_KEY): int
 
-- timeframe_group
+- group_timeframe
 	- id(PRIMARY_KEY): int
 	- confirmed: boolean
 	- timeframe_id(FOREIGN_KEY): int
