@@ -1,0 +1,6 @@
+@import "variables";
+
+:host > div {
+  display: flex;
+  background-color: $white;
+}

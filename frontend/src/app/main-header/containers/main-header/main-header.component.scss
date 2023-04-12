@@ -1,0 +1,19 @@
+@import "variables";
+
+:host > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $main-blue;
+  height: 50px;
+}
+
+.logo {
+  font-size: 1.3rem;
+  margin: 0 0 -5px 1rem;
+  cursor: pointer;
+}
+
+.tools {
+  display: flex;
+}

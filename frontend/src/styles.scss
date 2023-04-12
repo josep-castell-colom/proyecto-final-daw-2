@@ -1,0 +1,22 @@
+@import "variables";
+
+:root,
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: $font-primary;
+  color: $black;
+}
+
+a {
+  text-decoration: none;
+  color: $black;
+  &:hover {
+    text-decoration: underline;
+  }
+}
