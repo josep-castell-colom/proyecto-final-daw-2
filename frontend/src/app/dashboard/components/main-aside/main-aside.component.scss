@@ -1,0 +1,25 @@
+@import "variables";
+
+:host > div {
+  height: calc(100vh - 50px);
+  width: fit-content;
+  background-color: $white;
+  border-right: solid 1px $black;
+  border-top: solid 1px $black;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  padding: 0.5rem 1rem;
+  border-bottom: solid 1px $black;
+}
+
+.active {
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.3);
+}

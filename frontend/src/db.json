@@ -1,0 +1,48 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Josep",
+      "lastname": "Castell Colom",
+      "email": "josep@hola.com",
+      "password": "hola"
+    },
+    {
+      "id": 2,
+      "name": "Rafa",
+      "lastname": "Ivorra Llodrà",
+      "email": "rafa@hola.com",
+      "password": "hola"
+    },
+    {
+      "id": 3,
+      "name": "Josshi",
+      "lastname": "MacGhi",
+      "email": "josshi@hola.com",
+      "password": "adeu"
+    },
+    {
+      "id": 4,
+      "name": "Toni",
+      "lastname": "Mateu Colom",
+      "email": "toni@hola.com",
+      "password": "adeu"
+    }
+  ],
+  "instruments": [
+    {
+      "id": 1,
+      "name": "bass"
+    },
+    {
+      "id": 2,
+      "name": "guitar"
+    },
+    {
+      "id": 3,
+      "name": "drums"
+    }
+  ],
+  "groups": [],
+  "posts": []
+}
