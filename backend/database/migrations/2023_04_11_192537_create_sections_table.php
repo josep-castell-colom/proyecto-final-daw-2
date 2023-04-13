@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->longText('description')->nullable();
+            $table->string('description')->nullable();
             $table->string('image')->nullable();
             $table->boolean('isPublic')->default(0);
             $table->foreignId('group_id')->constrained();

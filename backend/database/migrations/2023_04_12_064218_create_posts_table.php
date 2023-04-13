@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->longtext('body');
+            $table->string('body', 2500);
             $table->string('image')->nullable();
             $table->foreignId('section_id')->constrained();
             $table->foreignId('user_id')->constrained();
