@@ -8,7 +8,7 @@ import { User } from 'src/app/models/User.interface';
   template: `
     <div *ngIf="user">
       <img [src]="user.image" alt="user profile picture" />
-      <a [routerLink]="['/dashboard/news']">{{ user.name }}</a>
+      <a [routerLink]="['/dashboard/news-feed']">{{ user.name }}</a>
     </div>
     <div *ngIf="!user">
       <a [routerLink]="['/auth/login']">Log in</a>

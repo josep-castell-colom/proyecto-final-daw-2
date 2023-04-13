@@ -6,6 +6,8 @@ import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { MainAsideComponent } from './components/main-aside/main-aside.component';
 import { NewsFeedComponent } from './components/news-feed/news-feed.component';
 import { MyGroupsComponent } from './components/my-groups/my-groups.component';
+import { MyCalendarComponent } from './components/my-calendar/my-calendar.component';
+import { DashboardHeaderComponent } from './components/dashboard-header/dashboard-header.component';
 
 export const ROUTES: Routes = [
   {
@@ -17,12 +19,16 @@ export const ROUTES: Routes = [
         component: NewsFeedComponent,
       },
       {
-        path: 'news',
+        path: 'news-feed',
         component: NewsFeedComponent,
       },
       {
-        path: 'mygroups',
+        path: 'my-groups',
         component: MyGroupsComponent,
+      },
+      {
+        path: 'my-calendar',
+        component: MyCalendarComponent,
       },
     ],
   },
@@ -38,6 +44,8 @@ export const ROUTES: Routes = [
     MainAsideComponent,
     NewsFeedComponent,
     MyGroupsComponent,
+    MyCalendarComponent,
+    DashboardHeaderComponent,
   ],
   imports: [CommonModule, RouterModule.forChild(ROUTES)],
   exports: [],

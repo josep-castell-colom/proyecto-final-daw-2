@@ -15,14 +15,14 @@ import { User } from 'src/app/models/User.interface';
   `,
 })
 export class MainHeaderComponent implements OnInit {
-  // user: User = {
-  //   id: 1,
-  //   name: 'Josep',
-  //   lastname: 'Castell',
-  //   email: 'josep@hola.com',
-  //   password: 'hola',
-  // };
-  user: User;
+  user: User = {
+    id: 1,
+    name: 'Josep',
+    lastname: 'Castell',
+    email: 'josep@hola.com',
+    password: 'hola',
+  };
+  // user: User;
 
   constructor() {}
 

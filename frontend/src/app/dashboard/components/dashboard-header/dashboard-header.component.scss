@@ -1,0 +1,25 @@
+@import "variables";
+
+:host > div {
+  border-bottom: solid 1px $blue-gray-400;
+}
+
+a:hover {
+  text-decoration: none;
+  color: $blue-gray-400;
+}
+
+.breadcrumbs {
+  margin: 0.7rem;
+  font-size: 0.85rem;
+  text-transform: capitalize;
+}
+
+.title {
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.active {
+  color: $blue-gray-500;
+}
