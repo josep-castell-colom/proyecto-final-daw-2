@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
+import { FullCalendarModule } from '@fullcalendar/angular';
+
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { MainAsideComponent } from './components/main-aside/main-aside.component';
 import { NewsFeedComponent } from './components/news-feed/news-feed.component';
@@ -47,7 +49,7 @@ export const ROUTES: Routes = [
     MyCalendarComponent,
     DashboardHeaderComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(ROUTES)],
+  imports: [CommonModule, RouterModule.forChild(ROUTES), FullCalendarModule],
   exports: [],
   providers: [],
 })

@@ -20,3 +20,37 @@ a {
     text-decoration: underline;
   }
 }
+
+// FULL CALENDAR STYLES
+
+.fc-toolbar-title {
+  font-size: 1.5rem !important;
+  text-align: center;
+}
+
+.fc-button-primary {
+  background-color: lighten($mid-blue, 20) !important;
+  color: $black !important;
+  border-color: darken($blue-gray-400, 0) !important;
+  &:disabled {
+    background-color: lighten($mid-blue, 22) !important;
+  }
+}
+
+.fc-day-today {
+  background-color: lighten($green-blue, 10) !important;
+}
+
+.fc-event-main {
+  background-color: $main-blue !important;
+  color: $black !important;
+}
+
+.fc-event-title {
+  font-weight: bold;
+}
+
+.fc-daygrid-event-dot,
+.fc-list-event-dot {
+  border-color: darken($main-blue, 30) !important;
+}

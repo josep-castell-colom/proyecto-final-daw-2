@@ -21,12 +21,12 @@ li {
   &:hover {
     // transform: translateX(10px);
     padding-left: 2rem;
-    background-color: $white;
+    background-color: $green-blue;
     // color: $blue-gray-500;
   }
 }
 
 .active {
   font-weight: bold;
-  background-color: $blue-gray-300;
+  background-color: $mid-blue;
 }
