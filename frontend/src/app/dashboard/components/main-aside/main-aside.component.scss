@@ -2,10 +2,10 @@
 
 :host > div {
   height: calc(100vh - 50px);
-  width: fit-content;
-  background-color: $white;
-  border-right: solid 1px $black;
-  border-top: solid 1px $black;
+  width: 300px;
+  background-color: $blue-gray-100;
+  border-right: solid 1px $blue-gray-400;
+  border-top: solid 1px $blue-gray-400;
 }
 
 ul {
@@ -15,11 +15,18 @@ ul {
 }
 
 li {
-  padding: 0.5rem 1rem;
-  border-bottom: solid 1px $black;
+  padding: 0.7rem 1.7rem;
+  border-bottom: solid 1px $blue-gray-400;
+  cursor: pointer;
+  &:hover {
+    // transform: translateX(10px);
+    padding-left: 2rem;
+    background-color: $white;
+    // color: $blue-gray-500;
+  }
 }
 
 .active {
   font-weight: bold;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: $blue-gray-300;
 }

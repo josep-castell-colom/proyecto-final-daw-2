@@ -4,7 +4,7 @@
   .error {
     color: $error;
     background: $white;
-    border: 1px solid #e4b3b3;
+    border: 1px solid $error-light;
     border-radius: 2px;
     padding: 8px;
     font-size: 14px;
@@ -41,16 +41,16 @@
   a {
     display: block;
     text-align: center;
-    color: #5e7386;
+    color: $blue-gray-500;
     font-size: 14px;
   }
 }
 
 .auth-form {
   background: #fff;
-  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 4px $shadow-black;
   border-radius: 3px;
-  border: 1px solid #c1cedb;
+  border: 1px solid $blue-gray-400;
   width: 400px;
   margin: 50px auto;
   padding: 30px;
@@ -59,8 +59,8 @@
   }
   &__toggle {
     border-radius: 0 0 3px 3px;
-    border-top: 1px solid #c1cedb;
-    background: #f8fafc;
+    border-top: 1px solid $blue-gray-400;
+    background: $blue-gray-200;
     padding: 10px;
     margin: 0 -30px -30px;
   }
@@ -74,12 +74,12 @@
     padding: 10px 15px;
     margin: 0;
     width: 100%;
-    background: #fafcfd;
-    color: #5777a8;
-    border: 1px solid #d1deeb;
+    background: $blue-gray-100;
+    color: $blue-gray-600;
+    border: 1px solid $blue-gray-300;
     text-align: center;
     &::-webkit-input-placeholder {
-      color: #5777a8;
+      color: $blue-gray-600;
     }
     &[type="email"] {
       border-radius: 3px 3px 0 0;

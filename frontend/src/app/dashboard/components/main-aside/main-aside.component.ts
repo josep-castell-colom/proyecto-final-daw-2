@@ -5,9 +5,11 @@ import { Component } from '@angular/core';
   styleUrls: ['main-aside.component.scss'],
   template: ` <div>
     <ul>
-      <li [routerLink]="['news']" routerLinkActive="active">News feed</li>
-      <li [routerLink]="['mygroups']" routerLinkActive="active">My groups</li>
-      <li>My calendar</li>
+      <li [routerLink]="['news-feed']" routerLinkActive="active">News feed</li>
+      <li [routerLink]="['my-groups']" routerLinkActive="active">My groups</li>
+      <li [routerLink]="['my-calendar']" routerLinkActive="active">
+        My calendar
+      </li>
     </ul>
   </div>`,
 })

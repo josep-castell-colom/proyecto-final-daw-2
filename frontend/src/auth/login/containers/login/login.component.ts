@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   loginUser(event: FormGroup) {
     this.authService
       .logIn(event.value.email, event.value.password)
-      .pipe(map((e: User) => console.log(e.name)))
+      .pipe(map((e) => console.log(e)))
       .subscribe();
   }
   ngOnInit() {}
