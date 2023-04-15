@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostResource extends JsonResource
+class GroupResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,14 @@ class PostResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'body' => $this->body,
+            'name' => $this->name,
+            'description' => $this->description,
             'image' => $this->image,
-            'section' => $this->section,
-            'user' => $this->user,
-            'comments' => $this->comments,
+            'isPublic' => $this->isPublic,
+            'users' => $this->users,
+            'sections' => $this->sections,
+            'styles' => $this->styles,
+            'timeframes' => $this->timeframes,
         ];
     }
 }

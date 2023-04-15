@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PostCollection;
-use App\Models\Post;
+use App\Http\Resources\SectionCollection;
+use App\Models\Section;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class SectionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return PostCollection::make(Post::all());
+        return SectionCollection::make(Section::all());
     }
 
     /**

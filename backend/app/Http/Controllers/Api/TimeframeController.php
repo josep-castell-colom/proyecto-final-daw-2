@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PostCollection;
-use App\Models\Post;
+use App\Http\Resources\TimeframeCollection;
+use App\Models\Timeframe;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class TimeframeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return PostCollection::make(Post::all());
+        return TimeframeCollection::make(Timeframe::all());
     }
 
     /**

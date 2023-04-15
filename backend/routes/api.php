@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\CommentController;
+use App\Http\Controllers\Api\GroupController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Resources\{
@@ -7,6 +9,12 @@ use App\Http\Resources\{
 };
 use App\Models\User;
 use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\InstrumentController;
+use App\Http\Controllers\Api\MusicianroleController;
+use App\Http\Controllers\Api\SectionController;
+use App\Http\Controllers\Api\StyleController;
+use App\Http\Controllers\Api\TimeframeController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,4 +36,11 @@ Route::get('users', function () {
 
 Route::apiResources([
     'posts' => PostController::class,
+    'instruments' => InstrumentController::class,
+    'musicianroles' => MusicianroleController::class,
+    'groups' => GroupController::class,
+    'sections' => SectionController::class,
+    'styles' => StyleController::class,
+    'comments' => CommentController::class,
+    'timeframes' => TimeframeController::class,
 ]);
