@@ -17,9 +17,9 @@ class GroupResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'city' => $this->city,
             'description' => $this->description,
             'image' => $this->image,
-            'isPublic' => $this->isPublic,
             'users' => $this->users,
             'sections' => $this->sections,
             'styles' => $this->styles,

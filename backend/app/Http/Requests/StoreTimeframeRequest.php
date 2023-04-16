@@ -22,7 +22,9 @@ class StoreTimeframeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'dayofweek' => 'integer|required',
+            'start' => 'integer|required',
+            'end' => 'integer|required',
         ];
     }
 }

@@ -11,7 +11,7 @@ class StoreSectionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class StoreSectionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'string|required|max:255',
+            'description' => 'string|max:255',
+            'image' => 'string|max:255',
+            'isPublic' => 'boolean|required',
+            'group_id' => 'integer|required',
         ];
     }
 }
