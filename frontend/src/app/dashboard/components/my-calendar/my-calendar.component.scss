@@ -1,14 +1,13 @@
 @import "variables";
 
 :host > div {
-  width: calc(100vw - 300px);
+  //
 }
 
 footer {
   position: absolute;
   bottom: -0.8rem;
   width: inherit;
-  // text-align: center;
   font-size: 0.5rem;
   a {
     font-style: italic;

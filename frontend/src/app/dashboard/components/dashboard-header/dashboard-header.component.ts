@@ -1,5 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChange,
+  SimpleChanges,
+} from '@angular/core';
+import { Router, RouterEvent } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'dashboard-header',
@@ -22,21 +30,31 @@ import { Router } from '@angular/router';
   </div>`,
 })
 export class DashboardHeaderComponent implements OnInit {
-  @Input()
+  url: string;
+
   title: string;
 
   breadcrumbs: { name: string; url: string }[];
 
-  constructor(private route: Router) {}
+  constructor(private router: Router) {
+    this.router.events
+      .pipe(filter((e) => e instanceof RouterEvent))
+      .subscribe((e: any) => this.urlChangesHanler(e.url));
+  }
 
   ngOnInit() {
+    // this.breadcrumbs = this.getBreadcrumbs();
+    // this.title = this.breadcrumbs[this.breadcrumbs.length - 1].name;
+  }
+
+  urlChangesHanler(url: string) {
+    this.url = url;
     this.breadcrumbs = this.getBreadcrumbs();
     this.title = this.breadcrumbs[this.breadcrumbs.length - 1].name;
   }
 
   getBreadcrumbs() {
-    const url = this.route.url;
-    const urlArray = url
+    const urlArray = this.url
       .split('/')
       .filter((string: string) => string !== '')
       .map((string: string) => {

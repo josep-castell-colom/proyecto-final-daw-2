@@ -3,13 +3,19 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+// import { MyGroupsModule } from './containers/my-groups/my-groups.module';
 
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { MainAsideComponent } from './components/main-aside/main-aside.component';
 import { NewsFeedComponent } from './components/news-feed/news-feed.component';
-import { MyGroupsComponent } from './components/my-groups/my-groups.component';
+import { MyGroupsComponent } from './containers/my-groups/my-groups.component';
 import { MyCalendarComponent } from './components/my-calendar/my-calendar.component';
 import { DashboardHeaderComponent } from './components/dashboard-header/dashboard-header.component';
+import { PostsViewComponent } from './containers/posts-view/posts-view.component';
+import { PostDetailComponent } from './components/post-detail/post-detail.component';
+import { GroupViewComponent } from './components/group-view/group-view.component';
 
 export const ROUTES: Routes = [
   {
@@ -29,15 +35,25 @@ export const ROUTES: Routes = [
         component: MyGroupsComponent,
       },
       {
+        path: 'view',
+        component: GroupViewComponent,
+        outlet: 'group',
+      },
+      {
         path: 'my-calendar',
         component: MyCalendarComponent,
       },
+      {
+        path: 'group/:id',
+        component: GroupViewComponent,
+        outlet: 'group',
+      },
     ],
   },
-  {
-    path: 'dashboard/**',
-    redirectTo: 'dashboard/news',
-  },
+  // {
+  //   path: '**',
+  //   redirectTo: 'dashboard/news-feed',
+  // },
 ];
 
 @NgModule({
@@ -45,12 +61,21 @@ export const ROUTES: Routes = [
     DashboardComponent,
     MainAsideComponent,
     NewsFeedComponent,
-    MyGroupsComponent,
     MyCalendarComponent,
     DashboardHeaderComponent,
+    PostsViewComponent,
+    PostDetailComponent,
+    MyGroupsComponent,
+    GroupViewComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(ROUTES), FullCalendarModule],
-  exports: [],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(ROUTES),
+    FullCalendarModule,
+    // MyGroupsModule,
+    FontAwesomeModule,
+  ],
+  exports: [DashboardHeaderComponent],
   providers: [],
 })
 export class DashboardModule {}

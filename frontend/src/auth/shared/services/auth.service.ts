@@ -1,26 +1,73 @@
 import { Injectable } from '@angular/core';
+import { env } from 'src/env';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { User } from 'src/app/models/User.interface';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
-const API_URL: string = 'http://localhost:3000';
+import { BehaviorSubject, of, tap } from 'rxjs';
+
+import * as bcrypt from 'bcryptjs';
+
+import { Store } from 'store';
+
+import { User } from 'src/app/models/user.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  private users: User[];
+  // private _currentUser$ = new BehaviorSubject<User | null>(null);
+  // currentUser$ = of(this._currentUser$);
 
-  getUsers() {
-    return this.http.get<User[]>(`${API_URL}/users`);
+  private _login$ = new BehaviorSubject<boolean>(false);
+  login$ = this._login$.asObservable();
+
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private store: Store
+  ) {
+    this.fetchUsers();
   }
 
-  logIn(email: string, password: string) {
-    let params = new HttpParams();
-    params = params.append('email', email);
-    params = params.append('password', password);
-    return this.http.get(`${API_URL}/users`, {
-      params: params,
-    }) as Observable<User>;
+  // DB_password:    $2y$10$r33WYvjgueWhqyQvnPWzR.BWHRREIGMF1F16P/3xbmLpsvqqtTtha
+
+  fetchUsers() {
+    this.http
+      .get<User[]>(`${env.API_URL}/users`)
+      .subscribe((users: any) => (this.users = users.data as User[]));
+  }
+
+  logIn(currentEmail: string, password: string): boolean {
+    // let salt = bcrypt.genSaltSync(10);
+    // let hash = bcrypt.hashSync(password, salt);
+    // console.log(currentEmail, hash);
+    // console.log('users:::', this.users);
+    const currentUser: User | undefined = this.users.find(
+      ({ email }: User) => currentEmail === email
+    );
+    if (currentUser) {
+      this._login$.next(true);
+      sessionStorage.setItem('current_user', JSON.stringify(currentUser));
+      this.store.set('user', currentUser);
+      return true;
+    }
+    return false;
+  }
+
+  logOut() {
+    this._login$.next(false);
+    this.store.set('user', null);
+    localStorage.removeItem('current_user');
+    this.router.navigate(['']);
+  }
+
+  checkAuthUser() {
+    const userAttempt = sessionStorage.getItem('current_user');
+    if (userAttempt) {
+      this.store.set('user', JSON.parse(userAttempt));
+    } else {
+      this.store.set('user', null);
+    }
   }
 }

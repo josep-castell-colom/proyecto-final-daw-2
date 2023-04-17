@@ -1,11 +1,14 @@
 @import "variables";
 
 :host > div {
+  position: relative;
   height: calc(100vh - 50px);
-  width: 300px;
+  width: 50px;
+  overflow: hidden;
   background-color: $blue-gray-100;
   border-right: solid 1px $blue-gray-400;
   border-top: solid 1px $blue-gray-400;
+  transition: 1s;
 }
 
 ul {
@@ -15,18 +18,120 @@ ul {
 }
 
 li {
-  padding: 0.7rem 1.7rem;
+  display: flex;
+  height: 50px;
+  padding: 0.7rem;
   border-bottom: solid 1px $blue-gray-400;
   cursor: pointer;
+  transition: background-color 0.3s, padding 0.3s;
+  span {
+    opacity: 0;
+    transition-duration: 0.3s;
+    transition-property: opacity;
+    transition-delay: 0s;
+  }
+  fa-icon {
+    margin-right: 0.5rem;
+  }
   &:hover {
-    // transform: translateX(10px);
-    padding-left: 2rem;
-    background-color: $green-blue;
-    // color: $blue-gray-500;
+    background-color: lighten($green-blue, 25);
+    .gear {
+      opacity: 0.3;
+    }
+    fa-icon {
+      color: $black;
+    }
+  }
+}
+
+.main-icon {
+  color: $blue-gray-500;
+  transition: color 0.3s;
+}
+
+.groups {
+  padding-left: 1rem;
+  border-bottom: solid 1px $blue-gray-400;
+  font-size: 0.95rem;
+  &.hidden {
+    display: none;
+  }
+  li {
+    border-left: solid 1px $blue-gray-400;
+  }
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  li {
+    border-top: solid 1px $blue-gray-400;
+  }
+}
+
+.arrow {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: fit-content;
+  padding: 0.5rem;
+  color: $blue-gray-500;
+  cursor: pointer;
+  transition: color 0.3s;
+  &:hover {
+    color: $black;
+  }
+}
+
+.gear {
+  position: absolute;
+  display: flex;
+  right: 0;
+  opacity: 0;
+  transition: opacity 0.3s, transform 1s;
+  &:hover {
+    opacity: 0.8 !important;
+    transform: rotate(180deg);
   }
 }
 
 .active {
   font-weight: bold;
-  background-color: $mid-blue;
+  background-color: lighten($green-blue, 20);
+  fa-icon {
+    color: $black;
+  }
+  &:hover {
+    background-color: lighten($green-blue, 20);
+  }
+}
+
+.spanHidden {
+  width: 50px !important;
+  li {
+    padding: 0.7rem;
+  }
+  span {
+    opacity: 0;
+    transition-delay: 0s;
+  }
+}
+
+@media (min-width: $breakpoint-tablet) {
+  :host > div {
+    width: 300px;
+  }
+  li {
+    padding: 0.7rem 1.7rem;
+  }
+  li > span {
+    transition-delay: 0.5s;
+    opacity: 1;
+  }
+  .arrow {
+    display: block;
+  }
 }

@@ -16,7 +16,6 @@ import esLocale from '@fullcalendar/core/locales/es';
   selector: 'my-calendar',
   styleUrls: ['my-calendar.component.scss'],
   template: ` <div>
-    <dashboard-header>My Calendar</dashboard-header>
     <div class="pane">
       <div class="calendar">
         <full-calendar [options]="calendarOptions"></full-calendar>

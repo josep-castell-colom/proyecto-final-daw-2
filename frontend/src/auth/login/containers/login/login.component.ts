@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
-import { map } from 'rxjs';
-import { User } from 'src/app/models/User.interface';
 import { AuthService } from 'src/auth/shared/services/auth.service';
 
 @Component({
@@ -16,14 +15,12 @@ import { AuthService } from 'src/auth/shared/services/auth.service';
     </div>
   `,
 })
-export class LoginComponent implements OnInit {
-  users: User[];
-  constructor(private authService: AuthService) {}
+export class LoginComponent {
+  constructor(private authService: AuthService, private router: Router) {}
+
   loginUser(event: FormGroup) {
-    this.authService
-      .logIn(event.value.email, event.value.password)
-      .pipe(map((e) => console.log(e)))
-      .subscribe();
+    if (this.authService.logIn(event.value.email, event.value.password)) {
+      this.router.navigate(['dashboard']);
+    }
   }
-  ngOnInit() {}
 }

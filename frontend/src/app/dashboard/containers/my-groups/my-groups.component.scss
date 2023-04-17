@@ -1,0 +1,26 @@
+@import "variables";
+
+:host > div {
+  // width: calc(100vw - 300px);
+  // height: calc(100vh - 170px);
+  overflow-y: scroll;
+}
+
+.group-selector {
+  border-bottom: solid 1px $blue-gray-400;
+  div {
+    width: fit-content;
+    padding: 0.37rem 0.5rem;
+    border-right: solid 1px $blue-gray-400;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    &:hover {
+      background-color: lighten($green-blue, 25);
+    }
+  }
+}
+
+.active {
+  font-weight: bold;
+  background-color: lighten($green-blue, 20);
+}

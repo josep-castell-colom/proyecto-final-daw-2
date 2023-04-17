@@ -5,28 +5,64 @@
       "name": "Josep",
       "lastname": "Castell Colom",
       "email": "josep@hola.com",
-      "password": "hola"
+      "password": "hola",
+      "groups": [
+        {
+          "id": 1,
+          "name": "Es foradats"
+        },
+        {
+          "id": 2,
+          "name": "Xanguito"
+        },
+        {
+          "id": 3,
+          "name": "Rumba Bros"
+        }
+      ]
     },
     {
       "id": 2,
       "name": "Rafa",
       "lastname": "Ivorra Llodrà",
       "email": "rafa@hola.com",
-      "password": "hola"
+      "password": "hola",
+      "groups": [
+        {
+          "id": 1,
+          "name": "Es foradats"
+        }
+      ]
     },
     {
       "id": 3,
-      "name": "Josshi",
-      "lastname": "MacGhi",
-      "email": "josshi@hola.com",
-      "password": "adeu"
+      "name": "Joan",
+      "lastname": "Muntaner Pericàs",
+      "email": "joan@hola.com",
+      "password": "hola",
+      "groups": [
+        {
+          "id": 2,
+          "name": "Xanguito"
+        },
+        {
+          "id": 3,
+          "name": "Rumba Bros"
+        }
+      ]
     },
     {
       "id": 4,
       "name": "Toni",
-      "lastname": "Mateu Colom",
+      "lastname": "Barbosa",
       "email": "toni@hola.com",
-      "password": "adeu"
+      "password": "hola",
+      "groups": [
+        {
+          "id": 4,
+          "name": "Pirates Pirats"
+        }
+      ]
     }
   ],
   "instruments": [
@@ -41,8 +77,237 @@
     {
       "id": 3,
       "name": "drums"
+    },
+    {
+      "id": 4,
+      "name": "voice"
     }
   ],
-  "groups": [],
-  "posts": []
+  "groups": [
+    {
+      "id": 1,
+      "name": "Es foradats",
+      "description": "Quatre arreplegats",
+      "sections": [
+        {
+          "id": 1,
+          "name": "Anuncis",
+          "isPublic": true
+        },
+        {
+          "id": 2,
+          "name": "Coses nostres",
+          "isPublic": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Xanguito",
+      "city": "Bunyola",
+      "description": "Mola molt, cançons pròpies",
+      "sections": [
+        {
+          "id": 3,
+          "name": "Anuncis",
+          "isPublic": true
+        },
+        {
+          "id": 4,
+          "name": "Coses nostres",
+          "isPublic": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Rumba Bros",
+      "description": "Rumba. Bodas, bautizos y comuniones",
+      "sections": [
+        {
+          "id": 5,
+          "name": "Anuncis",
+          "isPublic": true
+        },
+        {
+          "id": 6,
+          "name": "Coses nostres",
+          "isPublic": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Pirates Pirats",
+      "description": "Som pirates i estam pirats",
+      "sections": [
+        {
+          "id": 7,
+          "name": "Anuncis",
+          "isPublic": true
+        },
+        {
+          "id": 8,
+          "name": "Coses nostres",
+          "isPublic": false
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": 1,
+      "name": "Anuncis",
+      "isPublic": true,
+      "posts": [
+        {
+          "id": 1,
+          "title": "Tocam a Manhattan",
+          "body": "Madison Square Garden",
+          "user": { "id": 1, "name": "Josep" },
+          "comments": [
+            {
+              "id": 1,
+              "body": "Quina passada!",
+              "user": { "id": 3, "name": "Joan" }
+            },
+            {
+              "id": 2,
+              "body": "Estau a tope",
+              "user": { "id": 4, "name": "Toni" }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Coses nostres",
+      "isPublic": false,
+      "posts": [
+        {
+          "id": 2,
+          "title": "Hem de comprar es billets",
+          "body": "No mos hem de dormir que seran cars si no",
+          "user": { "id": 2, "name": "Rafa" },
+          "comments": [
+            {
+              "id": 3,
+              "body": "Sisi, demà m'hi pos",
+              "user": { "id": 1, "name": "Josep" }
+            },
+            {
+              "id": 4,
+              "body": ";)",
+              "user": { "id": 2, "name": "Rafa" }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Xanguito Oficial",
+      "isPublic": true,
+      "posts": [
+        {
+          "id": 3,
+          "title": "Nou single!!",
+          "body": "Aquest mes treim nou single! OOOOoooOOOooOOoOO!",
+          "user": { "id": 3, "name": "Joan" },
+          "comments": [
+            {
+              "id": 5,
+              "body": "Vamossss!",
+              "user": { "id": 1, "name": "Josep" }
+            },
+            {
+              "id": 6,
+              "body": "Cracks!",
+              "user": { "id": 2, "name": "Rafa" }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "XG Assajos",
+      "isPublic": false,
+      "posts": [
+        {
+          "id": 4,
+          "title": "Assajos abril",
+          "body": "Hauriem d'assajar aquest mes",
+          "user": { "id": 3, "name": "Joan" },
+          "comments": [
+            {
+              "id": 7,
+              "body": "Jo tenc pràctiques",
+              "user": { "id": 1, "name": "Josep" }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "RumbaBros",
+      "isPublic": true,
+      "posts": [
+        {
+          "id": 5,
+          "title": "Best rumba band in Mallorca",
+          "body": "If you want to have the best time in your wedding, contact us!",
+          "user": { "id": 3, "name": "Joan" },
+          "comments": []
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "RB Quartet",
+      "isPublic": false,
+      "posts": [
+        {
+          "id": 6,
+          "title": "Divendres bolo",
+          "body": "Pensau que es pròxim divendres tenim bolo!",
+          "user": { "id": 3, "name": "Joan" },
+          "comments": [
+            {
+              "id": 8,
+              "body": "Ja no hi pensava!",
+              "user": { "id": 1, "name": "Josep" }
+            },
+            {
+              "id": 9,
+              "body": "Abn!",
+              "user": { "id": 3, "name": "Joan" }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "PiratesPirats public",
+      "isPublic": true,
+      "posts": [
+        {
+          "id": 7,
+          "title": "Comencen ses verbenes!!",
+          "body": "Pirates pirats a totes ses verbenes!",
+          "user": { "id": 4, "name": "Toni" },
+          "comments": []
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Assajos Pirates",
+      "isPublic": false,
+      "posts": []
+    }
+  ]
 }

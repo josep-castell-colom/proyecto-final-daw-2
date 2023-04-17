@@ -1,3 +1,5 @@
+@import "variables";
+
 :host > div {
   display: flex;
   height: 100%;
@@ -5,5 +7,15 @@
   margin-left: 1rem;
   * {
     margin-right: 1rem;
+  }
+}
+
+#username {
+  display: none;
+}
+
+@media (min-width: $breakpoint-tablet) {
+  #username {
+    display: block;
   }
 }

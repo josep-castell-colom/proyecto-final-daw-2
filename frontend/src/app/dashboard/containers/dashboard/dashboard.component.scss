@@ -4,3 +4,19 @@
   display: flex;
   background-color: $blue-gray-100;
 }
+
+.pane {
+  width: calc(100vw - 50px);
+  transition: width 1s;
+}
+
+.collapsedAside {
+  width: calc(100vw - 50px) !important;
+}
+
+@media (min-width: $breakpoint-tablet) {
+  .pane {
+    transition-delay: 0;
+    width: calc(100vw - 300px);
+  }
+}

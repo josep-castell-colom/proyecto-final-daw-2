@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/User.interface';
+import { Component, OnInit, Input } from '@angular/core';
+import { User } from 'src/app/models/user.interface';
+import { AuthService } from 'src/auth/shared/services/auth.service';
 
 @Component({
   selector: 'main-header',
@@ -15,16 +16,12 @@ import { User } from 'src/app/models/User.interface';
   `,
 })
 export class MainHeaderComponent implements OnInit {
-  user: User = {
-    id: 1,
-    name: 'Josep',
-    lastname: 'Castell',
-    email: 'josep@hola.com',
-    password: 'hola',
-  };
-  // user: User;
+  @Input()
+  user: User | null;
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.authService.currentUser$.subscribe((user) => (this.user = user.value));
+  }
 }

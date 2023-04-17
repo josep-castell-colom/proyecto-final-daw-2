@@ -2,6 +2,8 @@
 
 :host > div {
   border-bottom: solid 1px $blue-gray-400;
+  height: 120px;
+  overflow: hidden;
 }
 
 a:hover {
