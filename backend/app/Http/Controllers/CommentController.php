@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
+use App\Http\Resources\CommentCollection;
 use App\Models\Comment;
 
 class CommentController extends Controller
@@ -13,7 +14,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        return CommentCollection::make(Comment::all());
     }
 
     /**

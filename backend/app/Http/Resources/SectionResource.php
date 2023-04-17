@@ -21,7 +21,7 @@ class SectionResource extends JsonResource
             'image' => $this->image,
             'isPublic' => $this->isPublic,
             'group' => $this->group,
-            'posts' => $this->posts,
+            'posts' => PostCollection::make($this->posts),
         ];
     }
 }

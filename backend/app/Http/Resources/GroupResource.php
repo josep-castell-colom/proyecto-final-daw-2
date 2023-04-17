@@ -21,7 +21,7 @@ class GroupResource extends JsonResource
             'description' => $this->description,
             'image' => $this->image,
             'users' => $this->users,
-            'sections' => $this->sections,
+            'sections' => SectionCollection::make($this->sections),
             'styles' => $this->styles,
             'timeframes' => $this->timeframes,
         ];

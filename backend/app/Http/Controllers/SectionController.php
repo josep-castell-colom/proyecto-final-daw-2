@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSectionRequest;
 use App\Http\Requests\UpdateSectionRequest;
+use App\Http\Resources\SectionCollection;
+use App\Http\Resources\SectionResource;
 use App\Models\Section;
 
 class SectionController extends Controller
@@ -13,7 +15,7 @@ class SectionController extends Controller
      */
     public function index()
     {
-        //
+        return SectionCollection::make(Section::all());
     }
 
     /**
