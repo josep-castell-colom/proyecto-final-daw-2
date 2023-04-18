@@ -3,7 +3,7 @@ import { Group } from 'src/app/models/group.interface';
 import { GroupsService } from './groups.service';
 import { Store } from 'store';
 import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { User } from 'src/app/models/user.interface';
 
 @Component({
@@ -39,6 +39,7 @@ export class MyGroupsComponent implements OnInit, OnDestroy {
     this.user$ = this.store.select('user');
 
     this.authUserGroups$ = this.user$.pipe(
+      tap(console.log),
       map((user: User) => user?.groups as Group[])
     );
 

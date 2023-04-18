@@ -8,12 +8,14 @@ import { Group } from './app/models/group.interface';
 export interface State {
   user: User | null;
   groups: Group[] | null;
+  authToken: string | undefined;
   [key: string]: any;
 }
 
 const state: State = {
   user: null,
   groups: null,
+  authToken: undefined,
 };
 
 export class Store {
