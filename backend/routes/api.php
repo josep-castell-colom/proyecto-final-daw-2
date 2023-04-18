@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\GroupController;
 use Illuminate\Http\Request;
@@ -26,13 +27,15 @@ use App\Http\Controllers\Api\TimeframeController;
 |
 */
 
+Route::post('login', AuthController::class)->name('api.login');
+
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::get('users', function () {
     return UserResource::collection(User::all());
-});
+})->middleware(['auth:sanctum']);
 
 Route::apiResources([
     'posts' => PostController::class,
