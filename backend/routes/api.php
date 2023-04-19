@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\MusicianroleController;
 use App\Http\Controllers\Api\SectionController;
 use App\Http\Controllers\Api\StyleController;
 use App\Http\Controllers\Api\TimeframeController;
+use App\Http\Controllers\Api\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,20 +31,17 @@ use App\Http\Controllers\Api\TimeframeController;
 Route::post('login', AuthController::class)->name('api.login');
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
+    return UserResource::make($request->user());
 });
 
-Route::get('users', function () {
-    return UserResource::collection(User::all());
-})->middleware(['auth:sanctum']);
-
-Route::apiResources([
-    'posts' => PostController::class,
-    'instruments' => InstrumentController::class,
-    'musicianroles' => MusicianroleController::class,
-    'groups' => GroupController::class,
-    'sections' => SectionController::class,
-    'styles' => StyleController::class,
-    'comments' => CommentController::class,
-    'timeframes' => TimeframeController::class,
-]);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('posts', PostController::class);
+    Route::apiResource('instruments', InstrumentController::class);
+    Route::apiResource('musicianroles', MusicianroleController::class);
+    Route::apiResource('groups', GroupController::class);
+    Route::apiResource('sections', SectionController::class);
+    Route::apiResource('styles', StyleController::class);
+    Route::apiResource('comments', CommentController::class);
+    Route::apiResource('timeframes', TimeframeController::class);
+    Route::apiResource('users', UserController::class);
+});
