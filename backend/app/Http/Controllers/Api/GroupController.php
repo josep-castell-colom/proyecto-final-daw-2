@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreGroupRequest;
 use App\Http\Resources\GroupCollection;
 use App\Http\Resources\GroupResource;
 use App\Models\Group;
@@ -21,9 +22,12 @@ class GroupController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreGroupRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $group = Group::create($validated);
+
+        return GroupResource::make($group);
     }
 
     /**
@@ -39,7 +43,16 @@ class GroupController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => ['string', 'required', 'max:255'],
+            'city' => ['string', 'max:255'],
+            'description' => ['string', 'max:2500'],
+            'image' => ['string', 'max:255'],
+        ]);
+
+        $group = Group::findOrFail($id)->update($validated);
+
+        return GroupResource::make($group);
     }
 
     /**
@@ -47,6 +60,7 @@ class GroupController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Group::findOrFail($id)->delete();
+        return response()->noContent();
     }
 }
