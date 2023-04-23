@@ -10,9 +10,10 @@ import {
   faGear,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { AuthService } from 'src/auth/shared/services/auth.service';
+import * as authStore from 'src/auth/store';
 
 import { User } from 'src/app/models/user.interface';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'main-aside',
@@ -20,7 +21,10 @@ import { User } from 'src/app/models/user.interface';
   template: ` <div [class.spanHidden]="spanHidden">
     <ul>
       <li
-        [routerLink]="['news-feed', { outlets: { group: null } }]"
+        [routerLink]="[
+          '/dashboard',
+          { outlets: { primary: 'news-feed', group: null } }
+        ]"
         routerLinkActive="active"
         (click)="hideGroups()"
       >
@@ -29,7 +33,10 @@ import { User } from 'src/app/models/user.interface';
         <fa-icon [icon]="faGear" class="gear"></fa-icon>
       </li>
       <li
-        [routerLink]="['my-groups']"
+        [routerLink]="[
+          '/dashboard',
+          { outlets: { primary: 'my-groups', group: null } }
+        ]"
         (click)="showGroups()"
         routerLinkActive="active"
       >
@@ -50,7 +57,10 @@ import { User } from 'src/app/models/user.interface';
         </li>
       </ul>
       <li
-        [routerLink]="['my-calendar']"
+        [routerLink]="[
+          '/dashboard',
+          { outlets: { primary: 'my-calendar', group: null } }
+        ]"
         routerLinkActive="active"
         (click)="hideGroups()"
       >
@@ -83,15 +93,15 @@ export class MainAsideComponent {
   groupsListHidden: boolean = true;
 
   @Input()
-  user: User | null;
+  user: User | null | undefined;
 
   @Output()
   collapse = new EventEmitter();
 
-  constructor(private authService: AuthService) {}
+  constructor(private store: Store) {}
 
   logOutHandler() {
-    this.authService.logOut();
+    this.store.dispatch(authStore.LogOut());
   }
 
   showGroups() {

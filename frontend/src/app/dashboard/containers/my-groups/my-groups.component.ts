@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Group } from 'src/app/models/group.interface';
-import { GroupsService } from './groups.service';
+import { GroupsService } from '../../services/groups.service';
 import { Store } from 'store';
 import { Observable } from 'rxjs/internal/Observable';
-import { map, tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { User } from 'src/app/models/user.interface';
 
 @Component({
@@ -12,7 +12,7 @@ import { User } from 'src/app/models/user.interface';
   template: `<div>
     <div class="group-selector">
       <div
-        *ngFor="let group of authUserGroups"
+        *ngFor="let group of authUserGroups$ | async"
         [routerLink]="[
           '/dashboard',
           { outlets: { group: ['group', group.id] } }
@@ -36,20 +36,22 @@ export class MyGroupsComponent implements OnInit, OnDestroy {
   constructor(private groupsService: GroupsService, private store: Store) {}
 
   ngOnInit(): void {
-    this.user$ = this.store.select('user');
+    // this.user$ = this.store.select('user');
 
-    this.authUserGroups$ = this.user$.pipe(
-      tap(console.log),
-      map((user: User) => user?.groups as Group[])
-    );
+    // this.authUserGroups$ = this.user$.pipe(
+    //   filter((user) => !!user),
+    //   map((user: any) => user?.data.groups as Group[])
+    // );
 
-    this.authUserGroups$.subscribe((groups: Group[]) =>
+    this.authUserGroups$ = this.groupsService.getAuthUserGroups();
+
+    this.authUserGroups$.subscribe((groups: any) =>
       groups.map((group: Group) => this.authUserGroups.push(group))
     );
 
-    this.groupSelected$ = this.groupsService.get(this.authUserGroups[0].id);
+    // this.groupSelected$ = this.groupsService.get(this.authUserGroups[0].id);
 
-    this.groupSelected$.subscribe(console.log);
+    // this.groupSelected$.subscribe(console.log);
 
     // this.groupsService.fetchGroups();
 

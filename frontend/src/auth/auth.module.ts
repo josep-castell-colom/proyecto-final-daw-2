@@ -6,6 +6,15 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { SharedModule } from './shared/shared.module';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+import { effects } from './store';
+import { initialState } from './store/auth.state';
+import { reducer } from './store/auth.reducer';
+import { FEATURE_KEY } from './store';
+
 export const ROUTES: Routes = [
   {
     path: 'auth',
@@ -38,6 +47,9 @@ export const ROUTES: Routes = [
     RouterModule.forChild(ROUTES),
     SharedModule,
     HttpClientModule,
+    StoreModule.forFeature(FEATURE_KEY, reducer),
+    EffectsModule.forFeature(effects),
+    StoreDevtoolsModule,
   ],
   exports: [],
   providers: [HttpClientModule],

@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
 import { User } from 'src/app/models/user.interface';
-import { AuthService } from 'src/auth/shared/services/auth.service';
 
 @Component({
   selector: 'main-header',
@@ -10,18 +10,12 @@ import { AuthService } from 'src/auth/shared/services/auth.service';
       <h1 class="logo" [routerLink]="['/']">AppName</h1>
       <div class="tools">
         <input type="text" placeholder="Search..." />
-        <user-nav [user]="user"></user-nav>
+        <user-nav [user$]="user$ | async"></user-nav>
       </div>
     </div>
   `,
 })
-export class MainHeaderComponent implements OnInit {
+export class MainHeaderComponent {
   @Input()
-  user: User | null;
-
-  constructor(private authService: AuthService) {}
-
-  ngOnInit(): void {
-    // this.authService.currentUser$.subscribe((user) => (this.user = user.value));
-  }
+  user$: Observable<User | null | undefined>;
 }

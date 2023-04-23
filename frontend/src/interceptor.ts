@@ -6,23 +6,19 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Store } from 'store';
 
 @Injectable({ providedIn: 'root' })
 export class Interceptor implements HttpInterceptor {
-  token: string | undefined;
+  token: string | null;
 
-  constructor(private store: Store) {
-    this.store
-      .select('authToken')
-      .subscribe((token: any) => (this.token = token));
-  }
+  constructor() {}
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     let headersConfig;
+    this.token = sessionStorage.getItem('authToken');
 
     if (this.token) {
       headersConfig = {

@@ -7,6 +7,7 @@ import { Group } from './app/models/group.interface';
 
 export interface State {
   user: User | null;
+  userGroups: Group[] | null;
   groups: Group[] | null;
   authToken: string | undefined;
   [key: string]: any;
@@ -14,6 +15,7 @@ export interface State {
 
 const state: State = {
   user: null,
+  userGroups: null,
   groups: null,
   authToken: undefined,
 };

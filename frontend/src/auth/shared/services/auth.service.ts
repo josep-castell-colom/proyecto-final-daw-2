@@ -1,87 +1,74 @@
 import { Injectable } from '@angular/core';
 import { env } from 'src/env';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import {
-  BehaviorSubject,
-  ObservableInput,
-  of,
-  pipe,
-  switchMap,
-  tap,
-} from 'rxjs';
+import { Observable, map, of, switchMap } from 'rxjs';
 
-import { Store } from 'store';
+import { Store } from '@ngrx/store';
+import * as authStore from '../../store';
 
 import { User } from 'src/app/models/user.interface';
+
+export interface TokenResponse {
+  token: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private users: User[];
-
-  private _login$ = new BehaviorSubject<boolean>(false);
-  login$ = this._login$.asObservable();
-
   constructor(
     private http: HttpClient,
     private router: Router,
     private store: Store
   ) {}
 
-  fetchUsers() {
-    this.http
-      .get<User[]>(`${env.API_URL}/users`)
-      .subscribe((users: any) => (this.users = users.data as User[]));
+  // fetchUsers() {
+  //   this.http
+  //     .get<User[]>(`${env.API_URL}/users`)
+  //     .subscribe((users: any) => (this.users = users.data as User[]));
+  // }
+
+  logIn(currentEmail: string, password: string): Observable<TokenResponse> {
+    return this.http.get(`http://localhost/sanctum/csrf-cookie`).pipe(
+      switchMap(() => {
+        return this.http.post(
+          `http://localhost/api/login`,
+          JSON.stringify({
+            email: currentEmail,
+            password: password,
+          })
+        );
+      }),
+      switchMap((response: any) =>
+        of({ token: response['plain-text-token'] as string })
+      )
+    );
   }
 
-  logIn(currentEmail: string, password: string): boolean {
-    let token: string;
-    this.http
-      .get(`http://localhost/sanctum/csrf-cookie`)
-      .pipe(
-        switchMap(() => {
-          return this.http.post(
-            `http://localhost/api/login`,
-            JSON.stringify({
-              email: currentEmail,
-              password: password,
-            })
-          );
-        }),
-        tap((response: any) => {
-          token = response['plain-text-token'];
+  setToken(token: string) {
+    sessionStorage.setItem('authToken', token);
+  }
 
-          this.store.set('authToken', token);
-          sessionStorage.setItem('authToken', token);
-        })
-      )
-      .subscribe(() => {
-        this.http
-          .get<User>(`${env.API_URL}/user`)
-          .subscribe((user) => this.store.set('user', user));
-      });
-    return false;
+  getAuthUser(): Observable<User> {
+    return this.http.get(`${env.API_URL}/user`).pipe(map((user: any) => user));
   }
 
   logOut() {
-    this._login$.next(false);
-    this.store.set('user', null);
-    localStorage.removeItem('current_user');
-    this.router.navigate(['']);
+    sessionStorage.removeItem('authToken');
   }
 
   checkAuthUser() {
     const token = sessionStorage.getItem('authToken');
     if (token) {
-      this.store.set('authToken', token);
-      this.http
-        .get<User>(`${env.API_URL}/user`)
-        .subscribe((user) => this.store.set('user', user));
+      // this.store.set('authToken', token);
+      // this.http
+      //   .get<User>(`${env.API_URL}/user`)
+      //   .subscribe((user) => this.store.set('user', user));
+      this.store.dispatch(authStore.SetAuthToken({ token }));
     } else {
-      this.store.set('authToken', null);
+      // this.store.set('authToken', null);
     }
   }
 }

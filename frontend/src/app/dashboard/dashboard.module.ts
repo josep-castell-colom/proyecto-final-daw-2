@@ -2,6 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+import { reducers, effects } from './store';
+
+import { GROUPS_FEATURE_KEY, GroupsReducer } from './store';
+
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -71,9 +78,12 @@ export const ROUTES: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(ROUTES),
+    StoreModule.forFeature('dashboard', reducers),
+    StoreModule.forFeature(GROUPS_FEATURE_KEY, GroupsReducer),
     FullCalendarModule,
     // MyGroupsModule,
     FontAwesomeModule,
+    EffectsModule.forFeature(effects),
   ],
   exports: [DashboardHeaderComponent],
   providers: [],

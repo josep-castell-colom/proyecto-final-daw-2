@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 import { Store } from 'store';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from 'src/interceptor';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +27,8 @@ import { Interceptor } from 'src/interceptor';
     AuthModule,
     FullCalendarModule,
     FontAwesomeModule,
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
   ],
   providers: [
     Store,
