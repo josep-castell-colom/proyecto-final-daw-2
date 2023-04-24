@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Resources\{
     UserResource,
 };
-use App\Models\User;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\InstrumentController;
 use App\Http\Controllers\Api\MusicianroleController;
@@ -28,7 +27,8 @@ use App\Http\Controllers\Api\UserController;
 |
 */
 
-Route::post('login', AuthController::class)->name('api.login');
+Route::post('login', [AuthController::class, 'login']);
+Route::post('register', [AuthController::class, 'register']);
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return UserResource::make($request->user());

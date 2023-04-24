@@ -11,6 +11,13 @@ class Group extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'city',
+        'description',
+        'image',
+    ];
+
     /**
      * The users that belong to the groups
      */

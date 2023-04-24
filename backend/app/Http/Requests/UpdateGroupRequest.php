@@ -11,7 +11,7 @@ class UpdateGroupRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,11 @@ class UpdateGroupRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+            return [
+                'name' => 'string|required|max:255',
+                'city' => 'string|nullable|max:255',
+                'description' => 'string|nullable|max:2500',
+                'image' => 'string|nullable|max:255',
+            ];
     }
 }
