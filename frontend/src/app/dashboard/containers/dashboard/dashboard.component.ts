@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.user$ = this.store.select(fromAuthStore.getAuthUser);
     this.url = this.router.url;
-    this.store.dispatch(fromDashboardStore.LoadGroups());
+    this.store.dispatch(fromDashboardStore.LoadAllGroups());
     this.groups$ = this.store.select(fromDashboardStore.getAllGroups);
   }
 

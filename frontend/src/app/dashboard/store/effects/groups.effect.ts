@@ -16,15 +16,15 @@ export class GroupsEffects {
 
   loadGroups$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(groupsActions.LOAD_GROUPS),
+      ofType(groupsActions.LOAD_ALL_GROUPS),
       exhaustMap(() =>
         this.groupsService.getGroups().pipe(
           map((groups) => ({
-            type: groupsActions.LOAD_GROUPS_SUCCESS,
+            type: groupsActions.LOAD_ALL_GROUPS_SUCCESS,
             groups,
           })),
           catchError((error) =>
-            of({ type: groupsActions.LOAD_GROUPS_FAIL, payload: error })
+            of({ type: groupsActions.LOAD_ALL_GROUPS_FAIL, payload: error })
           )
         )
       )

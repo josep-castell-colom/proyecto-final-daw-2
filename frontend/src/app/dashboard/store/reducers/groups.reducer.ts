@@ -4,13 +4,13 @@ import * as actions from '../actions/groups.action';
 
 export const reducer = createReducer(
   initialState,
-  on(actions.LoadGroups, (state: GroupState) => {
+  on(actions.LoadAllGroups, (state: GroupState) => {
     return {
       ...state,
       loading: true,
     };
   }),
-  on(actions.LoadGroupsSuccess, (state: GroupState, { groups }) => {
+  on(actions.LoadAllGroupsSuccess, (state: GroupState, { groups }) => {
     return {
       ...state,
       loading: false,
@@ -18,7 +18,7 @@ export const reducer = createReducer(
       groups,
     };
   }),
-  on(actions.LoadGroupsFail, (state: GroupState) => {
+  on(actions.LoadAllGroupsFail, (state: GroupState) => {
     return {
       ...state,
       loading: false,
