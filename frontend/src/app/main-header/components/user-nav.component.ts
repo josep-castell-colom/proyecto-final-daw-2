@@ -20,12 +20,5 @@ import { User } from 'src/app/models/user.interface';
 })
 export class UserNavComponent {
   @Input()
-  user$: User | null | undefined;
   user: User | null | undefined;
-
-  ngOnChanges(): void {
-    if (this.user$) {
-      this.user = (this.user$ as any).data;
-    }
-  }
 }

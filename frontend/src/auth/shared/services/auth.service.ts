@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { env } from 'src/env';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 
 import { Observable, map, of, switchMap } from 'rxjs';
 
@@ -18,17 +17,7 @@ export interface TokenResponse {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private store: Store
-  ) {}
-
-  // fetchUsers() {
-  //   this.http
-  //     .get<User[]>(`${env.API_URL}/users`)
-  //     .subscribe((users: any) => (this.users = users.data as User[]));
-  // }
+  constructor(private http: HttpClient, private store: Store) {}
 
   logIn(currentEmail: string, password: string): Observable<TokenResponse> {
     return this.http.get(`http://localhost/sanctum/csrf-cookie`).pipe(
@@ -52,7 +41,9 @@ export class AuthService {
   }
 
   getAuthUser(): Observable<User> {
-    return this.http.get(`${env.API_URL}/user`).pipe(map((user: any) => user));
+    return this.http
+      .get(`${env.API_URL}/user`)
+      .pipe(map((response: any) => response.data));
   }
 
   logOut() {
@@ -62,13 +53,7 @@ export class AuthService {
   checkAuthUser() {
     const token = sessionStorage.getItem('authToken');
     if (token) {
-      // this.store.set('authToken', token);
-      // this.http
-      //   .get<User>(`${env.API_URL}/user`)
-      //   .subscribe((user) => this.store.set('user', user));
       this.store.dispatch(authStore.SetAuthToken({ token }));
-    } else {
-      // this.store.set('authToken', null);
     }
   }
 }

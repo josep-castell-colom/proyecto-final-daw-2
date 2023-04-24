@@ -7,14 +7,13 @@ import * as authStore from '../auth/store';
 import { AuthService } from 'src/auth/shared/services/auth.service';
 
 import { User } from './models/user.interface';
-import { AuthState } from 'src/auth/store/auth.state';
 
 @Component({
   selector: 'app-root',
   styleUrls: ['./app.component.scss'],
   template: `
     <div>
-      <main-header [user$]="user$"></main-header>
+      <main-header [user]="user$ | async"></main-header>
       <router-outlet></router-outlet>
     </div>
   `,
