@@ -24,6 +24,28 @@ export const reducer = createReducer(
       loading: false,
       loaded: false,
     };
+  }),
+  on(actions.LoadAuthUserGroups, (state: GroupState) => {
+    return {
+      ...state,
+      loading: true,
+      loaded: false,
+    };
+  }),
+  on(actions.LoadAuthUserGroupsSuccess, (state: GroupState, { groups }) => {
+    return {
+      ...state,
+      loading: false,
+      loaded: true,
+      authUserGroups: groups,
+    };
+  }),
+  on(actions.LoadAuthUserGroupsFail, (state: GroupState) => {
+    return {
+      ...state,
+      loading: false,
+      loaded: false,
+    };
   })
 );
 

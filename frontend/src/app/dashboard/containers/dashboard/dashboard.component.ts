@@ -20,7 +20,6 @@ import { Group } from 'src/app/models/group.interface';
       <dashboard-header></dashboard-header>
       <router-outlet></router-outlet>
       <router-outlet name="group"></router-outlet>
-      <p *ngFor="let group of groups$ | async">{{ group.name }}</p>
     </div>
   </div>`,
 })

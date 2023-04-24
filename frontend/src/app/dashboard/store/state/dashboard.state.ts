@@ -8,3 +8,5 @@ export interface DashboardState {
 }
 
 export const getGroupState = (state: DashboardState) => state.groups;
+export const getAuthGroupsState = (state: DashboardState) =>
+  state.authUserGroups;

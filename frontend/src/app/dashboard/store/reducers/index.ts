@@ -36,4 +36,14 @@ export const getGroupsLoaded = createSelector(
   fromState.getGroupsLoadedState
 );
 
+export const getAuthUserGroupsState = createSelector(
+  getDashboardState,
+  fromState.getAuthGroupsState
+);
+
+export const getAuthUserGroups = createSelector(
+  getAuthUserGroupsState,
+  fromState.getAllGroupsState
+);
+
 export * from './groups.reducer';

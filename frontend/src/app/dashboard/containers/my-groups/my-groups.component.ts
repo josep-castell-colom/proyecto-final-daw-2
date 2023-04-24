@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Group } from 'src/app/models/group.interface';
 import { Observable } from 'rxjs/internal/Observable';
-import { User } from 'src/app/models/user.interface';
+import { Store } from '@ngrx/store';
+
+import * as dashboardStore from '../../store';
 
 @Component({
   selector: 'my-groups',
@@ -22,15 +24,14 @@ import { User } from 'src/app/models/user.interface';
   </div>`,
 })
 export class MyGroupsComponent implements OnInit {
-  user$: Observable<User>;
-  groups$: Observable<Group[]>;
-
   authUserGroups$: Observable<Group[]>;
-  authUserGroups: Group[] = [];
 
   groupSelected$: Observable<Group>;
 
-  constructor() {}
+  constructor(private store: Store) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.store.dispatch(dashboardStore.LoadAuthUserGroups());
+    this.authUserGroups$ = this.store.select(dashboardStore.getAuthUserGroups);
+  }
 }
