@@ -1,48 +1,39 @@
 import {
-  Action,
   ActionReducerMap,
   createFeatureSelector,
   createSelector,
 } from '@ngrx/store';
 
+import * as fromState from '../state/';
 import * as fromGroups from './groups.reducer';
 
-export const FEATURE_KEY = 'dashboard';
-
-export interface DashboardState {
-  groups: fromGroups.GroupState;
-}
-
-export const reducers: ActionReducerMap<DashboardState> = {
+export const reducers: ActionReducerMap<fromState.DashboardState> = {
   groups: fromGroups.reducer,
+  authUserGroups: fromGroups.reducer,
 };
 
 export const getDashboardState =
-  createFeatureSelector<DashboardState>(FEATURE_KEY);
+  createFeatureSelector<fromState.DashboardState>(fromState.FEATURE_KEY);
 
 // groups state
 export const getGroupsState = createSelector(
   getDashboardState,
-  (state: DashboardState) => state.groups
+  fromState.getGroupState
 );
 
 export const getGroupsLoading = createSelector(
   getGroupsState,
-  (state: fromGroups.GroupState) => state.loading
+  fromState.getGroupsLoadingState
 );
 
-export const getGroups = createSelector(
+export const getAllGroups = createSelector(
   getGroupsState,
-  (state: fromGroups.GroupState) => state.data
+  fromState.getAllGroupsState
 );
 
 export const getGroupsLoaded = createSelector(
   getGroupsState,
-  (state: fromGroups.GroupState) => state.loaded
+  fromState.getGroupsLoadedState
 );
-
-// export function DashboardReducer(state: DashboardState, action: Action) {
-//   return fromGroups.reducer()
-// }
 
 export * from './groups.reducer';

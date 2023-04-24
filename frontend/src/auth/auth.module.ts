@@ -11,7 +11,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { effects } from './store';
-import { initialState } from './store/auth.state';
 import { reducer } from './store/auth.reducer';
 import { FEATURE_KEY } from './store';
 

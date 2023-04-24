@@ -7,7 +7,8 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { reducers, effects } from './store';
 
-import { GROUPS_FEATURE_KEY, GroupsReducer } from './store';
+import { GroupsReducer } from './store';
+import { GROUPS_FEATURE_KEY } from './store/state/groups.state';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';

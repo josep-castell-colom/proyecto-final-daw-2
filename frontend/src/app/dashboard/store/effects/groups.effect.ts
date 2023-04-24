@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { exhaustMap, of } from 'rxjs';
+import { exhaustMap, of, tap } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs';
 
 import * as groupsActions from '../actions/groups.action';
@@ -17,11 +17,11 @@ export class GroupsEffects {
   loadGroups$ = createEffect(() =>
     this.actions$.pipe(
       ofType(groupsActions.LOAD_GROUPS),
-      switchMap(() =>
+      exhaustMap(() =>
         this.groupsService.getGroups().pipe(
           map((groups) => ({
             type: groupsActions.LOAD_GROUPS_SUCCESS,
-            payload: groups,
+            groups,
           })),
           catchError((error) =>
             of({ type: groupsActions.LOAD_GROUPS_FAIL, payload: error })
@@ -30,4 +30,11 @@ export class GroupsEffects {
       )
     )
   );
+
+  // loadGroupsSuccess$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(groupsActions.LOAD_GROUPS_SUCCESS),
+  //     exhaustMap((action) => )
+  //   )
+  // )
 }

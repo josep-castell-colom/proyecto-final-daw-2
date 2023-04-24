@@ -44,6 +44,6 @@ export const reducer = createReducer(
   })
 );
 
-export function GroupsReducer(state: state.AuthState, action: Action) {
+export function AuthReducer(state: state.AuthState, action: Action) {
   return reducer(state, action);
 }

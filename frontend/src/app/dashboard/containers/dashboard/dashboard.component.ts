@@ -1,11 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router, RouterEvent } from '@angular/router';
-import { Observable, filter } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.interface';
-// import { Store } from 'store';
 import { Store } from '@ngrx/store';
 
-import * as fromGroupsStore from '../../store';
+import * as fromDashboardStore from '../../store';
 import * as fromAuthStore from '../../../../auth/store';
 import { Group } from 'src/app/models/group.interface';
 
@@ -33,16 +32,15 @@ export class DashboardComponent implements OnInit {
   collapsedAside: boolean = false;
 
   constructor(
-    private store: Store<fromGroupsStore.DashboardState>,
+    private store: Store<fromDashboardStore.DashboardState>,
     private router: Router
   ) {}
 
   ngOnInit() {
-    // this.user$ = this.store.select('user').pipe(filter((user: any) => !!user));
     this.user$ = this.store.select(fromAuthStore.getAuthUser);
     this.url = this.router.url;
-    this.groups$ = this.store.select(fromGroupsStore.getGroups);
-    this.store.dispatch(fromGroupsStore.LoadGroups());
+    this.store.dispatch(fromDashboardStore.LoadGroups());
+    this.groups$ = this.store.select(fromDashboardStore.getAllGroups);
   }
 
   collapseAsideHandler() {
