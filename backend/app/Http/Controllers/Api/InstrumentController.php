@@ -8,7 +8,7 @@ use App\Http\Requests\UpdateInstrumentRequest;
 use App\Http\Resources\InstrumentCollection;
 use App\Http\Resources\InstrumentResource;
 use App\Models\Instrument;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class InstrumentController extends Controller
 {
@@ -33,7 +33,7 @@ class InstrumentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): InstrumentResource
     {
         return new InstrumentResource(Instrument::findOrFail($id));
     }
@@ -41,13 +41,13 @@ class InstrumentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateInstrumentRequest $request, string $id): JsonResponse
     {
-        // $validated = $request->validate([
-        //     'name' => ['string', 'required', 'max:255'],
-        // ]);
-        // $instrument = Instrument::findOrFail($id)->update($validated);
-        // return InstrumentResource::make($instrument);
+        $validated = $request->validated();
+        Instrument::findOrFail($id)->update($validated);
+        return response()->json([
+            'data' => new InstrumentResource(Instrument::findOrFail($id))
+        ], 200);
     }
 
     /**

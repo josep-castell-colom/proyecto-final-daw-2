@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGroupRequest;
+use App\Http\Requests\UpdateGroupRequest;
 use App\Http\Resources\GroupCollection;
 use App\Http\Resources\GroupResource;
 use App\Models\Group;
@@ -41,18 +42,13 @@ class GroupController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateGroupRequest $request, string $id)
     {
-        $validated = $request->validate([
-            'name' => ['string', 'required', 'max:255'],
-            'city' => ['string', 'max:255'],
-            'description' => ['string', 'max:2500'],
-            'image' => ['string', 'max:255'],
-        ]);
-
-        $group = Group::findOrFail($id)->update($validated);
-
-        return GroupResource::make($group);
+        $validated = $request->validated();
+        Group::findOrFail($id)->update($validated);
+        return response()->json([
+            'data' => new GroupResource(Group::findOrFail($id))
+        ], 200);
     }
 
     /**
