@@ -8,7 +8,6 @@ use App\Http\Requests\UpdateGroupRequest;
 use App\Http\Resources\GroupCollection;
 use App\Http\Resources\GroupResource;
 use App\Models\Group;
-use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
@@ -46,8 +45,9 @@ class GroupController extends Controller
     {
         $validated = $request->validated();
         Group::findOrFail($id)->update($validated);
+
         return response()->json([
-            'data' => new GroupResource(Group::findOrFail($id))
+            'data' => new GroupResource(Group::findOrFail($id)),
         ], 200);
     }
 
@@ -57,6 +57,7 @@ class GroupController extends Controller
     public function destroy(string $id)
     {
         Group::findOrFail($id)->delete();
+
         return response()->noContent();
     }
 }

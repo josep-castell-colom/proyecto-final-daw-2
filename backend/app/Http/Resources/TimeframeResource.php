@@ -20,7 +20,7 @@ class TimeframeResource extends JsonResource
             'start' => $this->start,
             'end' => $this->end,
             'users' => $this->users,
-            'groups' =>$this->groups,
+            'groups' => $this->groups,
         ];
     }
 }

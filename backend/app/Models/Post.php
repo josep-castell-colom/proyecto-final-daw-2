@@ -11,6 +11,14 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'body',
+        'image',
+        'section_id',
+        'user_id',
+    ];
+
     /**
      * The user that owns the posts
      */

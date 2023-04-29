@@ -27,6 +27,7 @@ class InstrumentController extends Controller
     {
         $validated = $request->validated();
         $instrument = Instrument::create($validated);
+
         return InstrumentResource::make($instrument);
     }
 
@@ -45,8 +46,9 @@ class InstrumentController extends Controller
     {
         $validated = $request->validated();
         Instrument::findOrFail($id)->update($validated);
+
         return response()->json([
-            'data' => new InstrumentResource(Instrument::findOrFail($id))
+            'data' => new InstrumentResource(Instrument::findOrFail($id)),
         ], 200);
     }
 
@@ -56,6 +58,7 @@ class InstrumentController extends Controller
     public function destroy(string $id)
     {
         Instrument::findOrFail($id)->delete();
-        return response()->noContent() ;
+
+        return response()->noContent();
     }
 }
