@@ -11,6 +11,17 @@ class Timeframe extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'dayofweek',
+        'start',
+        'end',
+    ];
+
+    /**
      * The users that belong to the timeframes
      */
     public function users(): BelongsToMany

@@ -11,6 +11,15 @@ class Style extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+    ];
+
+    /**
      * The groups that belong to the styles
      */
     public function groups(): BelongsToMany

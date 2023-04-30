@@ -11,6 +11,15 @@ class Musicianrole extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+    ];
+
+    /**
      * The users that belong to the musician roles
      */
     public function users(): BelongsToMany

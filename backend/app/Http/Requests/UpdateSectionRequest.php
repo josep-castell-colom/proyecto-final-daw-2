@@ -11,7 +11,7 @@ class UpdateSectionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class UpdateSectionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'string|required|max:255',
+            'description' => 'string|max:255|nullable',
+            'image' => 'string|max:255|nullable',
+            'isPublic' => 'boolean|required',
+            'group_id' => 'integer|required',
         ];
     }
 }

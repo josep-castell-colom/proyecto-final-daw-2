@@ -13,6 +13,19 @@ class Section extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'description',
+        'image',
+        'isPublic',
+        'group_id',
+    ];
+
+    /**
      * The group that owns the sections
      */
     public function group(): BelongsTo

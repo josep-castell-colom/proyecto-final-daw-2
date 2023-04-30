@@ -23,8 +23,8 @@ class StoreSectionRequest extends FormRequest
     {
         return [
             'name' => 'string|required|max:255',
-            'description' => 'string|max:255',
-            'image' => 'string|max:255',
+            'description' => 'string|max:255|nullable',
+            'image' => 'string|max:255|nullable',
             'isPublic' => 'boolean|required',
             'group_id' => 'integer|required',
         ];
