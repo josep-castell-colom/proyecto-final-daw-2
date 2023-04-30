@@ -29,5 +29,23 @@ class PostSeeder extends Seeder
             'section_id' => 1,
             'user_id' => 3,
         ]);
+
+        Post::factory()->create([
+            'id' => 3,
+            'title' => 'Burzum estàn bastant bé',
+            'body' => 'Encara que es tipo és un puto cap de fava.',
+            'image' => '/storage/img/1/burzum.jpg',
+            'section_id' => 3,
+            'user_id' => 5,
+        ]);
+
+        Post::factory()->create([
+            'id' => 4,
+            'title' => 'Això des facepaint com va?',
+            'body' => 'No sé com punyetes llevarme tota aquesta merda de sa cara.',
+            'image' => '/storage/img/1/facepaint.jpg',
+            'section_id' => 4,
+            'user_id' => 6,
+        ]);
     }
 }

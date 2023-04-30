@@ -24,5 +24,15 @@ class GroupSeeder extends Seeder
         $esforadats->styles()->attach(2);
         $esforadats->styles()->attach(3);
         $esforadats->styles()->attach(4);
+
+        $sesbledes = Group::factory()->create([
+            'id' => 2,
+            'name' => 'Ses Bledes',
+            'city' => 'Muro',
+            'description' => 'Cantam molt bé, som tope pros',
+            'image' => '/storage/img/1/sesbledes.jpg',
+        ]);
+
+        $sesbledes->styles()->attach(5);
     }
 }

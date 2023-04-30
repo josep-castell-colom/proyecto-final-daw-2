@@ -29,5 +29,23 @@ class SectionSeeder extends Seeder
             'isPublic' => 0,
             'group_id' => 1,
         ]);
+
+        Section::factory()->create([
+            'id' => 3,
+            'name' => 'Ses Blac Meeetal Nius',
+            'description' => 'Sentiràs es poder des metal fin ses banyes',
+            'image' => '/storage/img/1/sesblackmetalnius.jpg',
+            'isPublic' => 1,
+            'group_id' => 2,
+        ]);
+
+        Section::factory()->create([
+            'id' => 4,
+            'name' => 'Fil marró de coses privades',
+            'description' => 'El inner circle de Muro!',
+            'image' => '/storage/img/1/filmarrocosesprivades.jpg',
+            'isPublic' => 0,
+            'group_id' => 2,
+        ]);
     }
 }
