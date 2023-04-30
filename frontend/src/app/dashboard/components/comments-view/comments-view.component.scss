@@ -1,0 +1,49 @@
+@import "variables";
+
+:host > div,
+:host > div > div {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0.5rem 1rem 0 1rem;
+  font-size: 0.9rem;
+  background-color: $blue-gray-200;
+  border-radius: 20px;
+}
+
+.comment-wrapper {
+  width: 100%;
+}
+
+form {
+  align-self: center;
+}
+
+input,
+button {
+  padding: 0.3rem;
+  border: solid 1px $blue-gray-400;
+}
+
+input {
+  border-radius: 10px 0 0 10px;
+  &:focus {
+    outline: none;
+  }
+}
+
+button {
+  border-radius: 0 7px 7px 0;
+  border-left: none;
+}
+
+.show-comments {
+  display: inline-block;
+  color: $blue-gray-500;
+  cursor: default;
+  margin: 1rem auto;
+  &:hover {
+    color: $blue-gray-400;
+  }
+}

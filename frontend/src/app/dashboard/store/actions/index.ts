@@ -1,1 +1,2 @@
-export * from './groups.action';
+export * from './groups.actions';
+export * from './group.actions';

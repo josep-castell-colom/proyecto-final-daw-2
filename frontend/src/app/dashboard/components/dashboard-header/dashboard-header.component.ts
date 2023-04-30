@@ -1,13 +1,8 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChange,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { Breadcrumb } from 'src/app/models/breadcrumb.interface';
 
 @Component({
   selector: 'dashboard-header',
@@ -29,15 +24,17 @@ import { filter } from 'rxjs/operators';
     </div>
   </div>`,
 })
-export class DashboardHeaderComponent implements OnInit {
+export class DashboardHeaderComponent implements OnInit, OnDestroy {
   url: string;
+  subscription: Subscription;
 
+  @Input()
   title: string;
 
-  breadcrumbs: { name: string; url: string }[];
+  breadcrumbs: Breadcrumb[];
 
   constructor(private router: Router) {
-    this.router.events
+    this.subscription = this.router.events
       .pipe(filter((e) => e instanceof RouterEvent))
       .subscribe((e: any) => this.urlChangesHanler(e.url));
   }
@@ -47,15 +44,23 @@ export class DashboardHeaderComponent implements OnInit {
     // this.title = this.breadcrumbs[this.breadcrumbs.length - 1].name;
   }
 
-  urlChangesHanler(url: string) {
-    this.url = url;
-    this.breadcrumbs = this.getBreadcrumbs();
-    this.title = this.breadcrumbs[this.breadcrumbs.length - 1].name;
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
-  getBreadcrumbs() {
+  urlChangesHanler(url: string): void {
+    if (url !== '/') {
+      this.url = url;
+      this.breadcrumbs = this.getBreadcrumbs();
+      this.title = this.breadcrumbs[this.breadcrumbs.length - 1].name;
+    }
+  }
+
+  getBreadcrumbs(): Breadcrumb[] {
     const urlArray = this.url
       .split('/')
+      .map((string: string) => string.replace(/[:()]/, ''))
+      .map((string: string) => string.replace('groupgroup', ''))
       .filter((string: string) => string !== '')
       .map((string: string) => {
         let modString = '';

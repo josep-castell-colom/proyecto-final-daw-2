@@ -1,7 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
 import { Group } from 'src/app/models/group.interface';
-import { User } from 'src/app/models/user.interface';
 
 // all groups
 export const LOAD_ALL_GROUPS = '[Dashboard] Load groups';

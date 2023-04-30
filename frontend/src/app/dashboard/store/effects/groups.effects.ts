@@ -6,15 +6,16 @@ import { catchError, map, switchMap } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 
-import * as groupsActions from '../actions/groups.action';
+import * as groupsActions from '../actions/groups.actions';
 import * as authStore from '../../../../auth/store';
 import * as fromServices from '../../services';
+import { Group } from 'src/app/models/group.interface';
 
 @Injectable()
 export class GroupsEffects {
   constructor(
     private actions$: Actions,
-    private groupsService: fromServices.GroupsService,
+    private apiService: fromServices.ApiService,
     private store: Store
   ) {}
 
@@ -22,7 +23,7 @@ export class GroupsEffects {
     this.actions$.pipe(
       ofType(groupsActions.LOAD_ALL_GROUPS),
       exhaustMap(() =>
-        this.groupsService.getGroups().pipe(
+        this.apiService.getAll<Group>('groups').pipe(
           map((groups) => ({
             type: groupsActions.LOAD_ALL_GROUPS_SUCCESS,
             groups,

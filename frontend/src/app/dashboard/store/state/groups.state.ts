@@ -1,6 +1,6 @@
 import { Group } from 'src/app/models/group.interface';
 
-export interface GroupState {
+export interface GroupsState {
   groups: Group[];
   loaded: boolean;
   loading: boolean;
@@ -8,12 +8,8 @@ export interface GroupState {
 
 export const GROUPS_FEATURE_KEY = 'Groups';
 
-export const initialState: GroupState = {
+export const allGroupsInitialState: GroupsState = {
   groups: [],
   loaded: false,
   loading: false,
 };
-
-export const getGroupsLoadingState = (state: GroupState) => state.loading;
-export const getGroupsLoadedState = (state: GroupState) => state.loaded;
-export const getAllGroupsState = (state: GroupState) => state.groups;

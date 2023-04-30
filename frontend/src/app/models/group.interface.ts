@@ -1,4 +1,3 @@
-import { Post } from './post.interface';
 import { Section } from './section.interface';
 
 export interface Group {
@@ -8,5 +7,4 @@ export interface Group {
   description?: string;
   sections: Section[];
   image?: string;
-  posts?: Post[];
 }

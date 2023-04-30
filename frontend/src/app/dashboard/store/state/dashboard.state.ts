@@ -1,12 +1,10 @@
-import { GroupState } from './groups.state';
+import { GroupState } from './group.state';
+import { GroupsState } from './groups.state';
 
 export const FEATURE_KEY = 'dashboard';
 
 export interface DashboardState {
-  groups: GroupState;
-  authUserGroups: GroupState;
+  groups: GroupsState;
+  authUserGroups: GroupsState;
+  selectedGroup: GroupState;
 }
-
-export const getGroupState = (state: DashboardState) => state.groups;
-export const getAuthGroupsState = (state: DashboardState) =>
-  state.authUserGroups;

@@ -1,16 +1,16 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { initialState, GroupState } from '../state/groups.state';
-import * as actions from '../actions/groups.action';
+import { allGroupsInitialState, GroupsState } from '../state/groups.state';
+import * as actions from '../actions/groups.actions';
 
-export const reducer = createReducer(
-  initialState,
-  on(actions.LoadAllGroups, (state: GroupState) => {
+export const groupsReducer = createReducer(
+  allGroupsInitialState,
+  on(actions.LoadAllGroups, (state: GroupsState) => {
     return {
       ...state,
       loading: true,
     };
   }),
-  on(actions.LoadAllGroupsSuccess, (state: GroupState, { groups }) => {
+  on(actions.LoadAllGroupsSuccess, (state: GroupsState, { groups }) => {
     return {
       ...state,
       loading: false,
@@ -18,21 +18,21 @@ export const reducer = createReducer(
       groups,
     };
   }),
-  on(actions.LoadAllGroupsFail, (state: GroupState) => {
+  on(actions.LoadAllGroupsFail, (state: GroupsState) => {
     return {
       ...state,
       loading: false,
       loaded: false,
     };
   }),
-  on(actions.LoadAuthUserGroups, (state: GroupState) => {
+  on(actions.LoadAuthUserGroups, (state: GroupsState) => {
     return {
       ...state,
       loading: true,
       loaded: false,
     };
   }),
-  on(actions.LoadAuthUserGroupsSuccess, (state: GroupState, { groups }) => {
+  on(actions.LoadAuthUserGroupsSuccess, (state: GroupsState, { groups }) => {
     return {
       ...state,
       loading: false,
@@ -40,7 +40,7 @@ export const reducer = createReducer(
       authUserGroups: groups,
     };
   }),
-  on(actions.LoadAuthUserGroupsFail, (state: GroupState) => {
+  on(actions.LoadAuthUserGroupsFail, (state: GroupsState) => {
     return {
       ...state,
       loading: false,
@@ -49,6 +49,6 @@ export const reducer = createReducer(
   })
 );
 
-export function GroupsReducer(state: GroupState, action: Action) {
-  return reducer(state, action);
+export function GroupsReducer(state: GroupsState, action: Action) {
+  return groupsReducer(state, action);
 }

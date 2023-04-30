@@ -1,0 +1,24 @@
+@import "variables";
+
+.comment {
+  margin-bottom: 1rem;
+  text-align: left;
+  width: inherit;
+}
+
+.body {
+  display: flex;
+  width: inherit;
+}
+
+.user-info {
+  width: 25%;
+}
+
+.message {
+  width: 75%;
+}
+
+a {
+  color: $blue-gray-500;
+}

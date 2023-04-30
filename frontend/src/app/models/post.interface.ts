@@ -1,9 +1,11 @@
+import { PostComment } from './post-comment.interface';
 import { User } from './user.interface';
 
 export interface Post {
   id: number;
+  user: User;
   title: string;
   body: string;
-  user: User;
-  comments: Comment[];
+  image?: string;
+  comments: PostComment[];
 }

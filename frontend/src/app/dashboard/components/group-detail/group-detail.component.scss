@@ -1,15 +1,17 @@
 @import "variables";
 
 :host > div {
-  height: 40px;
-  overflow-y: scroll;
+  position: relative;
 }
 
-.group-selector {
+.section-selector {
+  position: sticky;
+  top: 0;
+  width: 100%;
   display: flex;
   border-bottom: solid 1px $blue-gray-400;
   background-color: $blue-gray-200;
-  div {
+  & > div {
     width: fit-content;
     padding: 0.37rem 0.5rem;
     border-right: solid 1px $blue-gray-400;

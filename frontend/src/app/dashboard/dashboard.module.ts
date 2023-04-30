@@ -5,10 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { reducers, effects } from './store';
-
-import { GroupsReducer } from './store';
-import { GROUPS_FEATURE_KEY } from './store/state/groups.state';
+import * as fromStore from './store';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -21,9 +18,13 @@ import { NewsFeedComponent } from './components/news-feed/news-feed.component';
 import { MyGroupsComponent } from './containers/my-groups/my-groups.component';
 import { MyCalendarComponent } from './components/my-calendar/my-calendar.component';
 import { DashboardHeaderComponent } from './components/dashboard-header/dashboard-header.component';
-import { PostsViewComponent } from './containers/posts-view/posts-view.component';
+import { PostsViewComponent } from './components/posts-view/posts-view.component';
 import { PostDetailComponent } from './components/post-detail/post-detail.component';
-import { GroupViewComponent } from './components/group-view/group-view.component';
+import { GroupViewComponent } from './containers/group-view/group-view.component';
+import { GroupDetailComponent } from './components/group-detail/group-detail.component';
+import { PostCommentsViewComponent } from './components/comments-view/comments-view.component';
+import { PostCommentDetailComponent } from './components/comment-detail/post-comment-detail.component';
+import { FormsModule } from '@angular/forms';
 
 export const ROUTES: Routes = [
   {
@@ -75,16 +76,24 @@ export const ROUTES: Routes = [
     PostDetailComponent,
     MyGroupsComponent,
     GroupViewComponent,
+    GroupDetailComponent,
+    PostCommentsViewComponent,
+    PostCommentDetailComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild(ROUTES),
-    StoreModule.forFeature('dashboard', reducers),
-    StoreModule.forFeature(GROUPS_FEATURE_KEY, GroupsReducer),
+    StoreModule.forFeature('dashboard', fromStore.reducers),
+    StoreModule.forFeature(
+      fromStore.GROUPS_FEATURE_KEY,
+      fromStore.GroupsReducer
+    ),
+    StoreModule.forFeature(fromStore.GROUP_FEATURE_KEY, fromStore.GroupReducer),
     FullCalendarModule,
     // MyGroupsModule,
     FontAwesomeModule,
-    EffectsModule.forFeature(effects),
+    EffectsModule.forFeature(fromStore.effects),
   ],
   exports: [DashboardHeaderComponent],
   providers: [],

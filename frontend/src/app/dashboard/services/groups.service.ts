@@ -18,6 +18,8 @@ export class GroupsService {
   }
 
   get(groupId: number): Observable<Group> {
-    return this.http.get<Group>(`${env.API_URL}/groups/${groupId}`);
+    return this.http
+      .get<Group>(`${env.API_URL}/groups/${groupId}`)
+      .pipe(map((response: any) => response.data));
   }
 }

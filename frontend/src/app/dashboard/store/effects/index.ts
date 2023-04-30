@@ -1,5 +1,6 @@
-import { GroupsEffects } from './groups.effect';
+import { GroupEffects } from './group.effects';
+import { GroupsEffects } from './groups.effects';
 
-export const effects: any[] = [GroupsEffects];
+export const effects: any[] = [GroupsEffects, GroupEffects];
 
-export * from './groups.effect';
+export * from './groups.effects';
