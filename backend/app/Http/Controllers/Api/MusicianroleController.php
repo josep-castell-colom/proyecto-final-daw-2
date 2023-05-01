@@ -7,7 +7,6 @@ use App\Http\Requests\StoreMusicianroleRequest;
 use App\Http\Requests\UpdateMusicianroleRequest;
 use App\Http\Resources\MusicianRoleCollection;
 use App\Http\Resources\MusicianRoleResource;
-use App\Models\Comment;
 use App\Models\Musicianrole;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
