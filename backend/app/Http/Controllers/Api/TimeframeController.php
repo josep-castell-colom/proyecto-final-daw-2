@@ -49,7 +49,7 @@ class TimeframeController extends Controller
         Timeframe::findOrFail($id)->update($validated);
 
         return response()->json([
-            'data' => new TimeframeResource(Timeframe::findOrFail($id))
+            'data' => new TimeframeResource(Timeframe::findOrFail($id)),
         ], 200);
     }
 

@@ -8,13 +8,15 @@ use App\Http\Requests\UpdateGroupRequest;
 use App\Http\Resources\GroupCollection;
 use App\Http\Resources\GroupResource;
 use App\Models\Group;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 class GroupController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): GroupCollection
     {
         return GroupCollection::make(Group::all());
     }
@@ -22,7 +24,7 @@ class GroupController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreGroupRequest $request)
+    public function store(StoreGroupRequest $request): GroupResource
     {
         $validated = $request->validated();
         $group = Group::create($validated);
@@ -33,7 +35,7 @@ class GroupController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): GroupResource
     {
         return new GroupResource(Group::findOrFail($id));
     }
@@ -41,7 +43,7 @@ class GroupController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateGroupRequest $request, string $id)
+    public function update(UpdateGroupRequest $request, string $id): JsonResponse
     {
         $validated = $request->validated();
         Group::findOrFail($id)->update($validated);
@@ -54,7 +56,7 @@ class GroupController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): Response
     {
         Group::findOrFail($id)->delete();
 

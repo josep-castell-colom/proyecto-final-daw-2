@@ -9,6 +9,7 @@ use App\Http\Resources\InstrumentCollection;
 use App\Http\Resources\InstrumentResource;
 use App\Models\Instrument;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 class InstrumentController extends Controller
 {
@@ -55,7 +56,7 @@ class InstrumentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): Response
     {
         Instrument::findOrFail($id)->delete();
 
