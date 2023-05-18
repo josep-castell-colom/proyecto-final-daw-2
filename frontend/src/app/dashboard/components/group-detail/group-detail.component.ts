@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Group } from 'src/app/models/group.interface';
 import { Section } from 'src/app/models/section.interface';
 
@@ -12,13 +12,18 @@ import { Section } from 'src/app/models/section.interface';
       </div>
     </div>
     <div *ngIf="selectedSection" class="selected-section">
-      <posts-view [posts]="selectedSection.posts"></posts-view>
+      <posts-view
+        [posts]="selectedSection.posts"
+        (commentSubmitted)="onCommentSubmitted($event)"
+      ></posts-view>
     </div>
   </div>`,
 })
 export class GroupDetailComponent {
   @Input() group: Group | null;
   selectedSection: Section;
+
+  @Output() commentSubmitted = new EventEmitter();
 
   ngOnInit(): void {
     if (this.group?.sections) {
@@ -28,5 +33,9 @@ export class GroupDetailComponent {
 
   selectSection(section: Section): void {
     this.selectedSection = section;
+  }
+
+  onCommentSubmitted(comment: any): void {
+    this.commentSubmitted.emit(comment);
   }
 }

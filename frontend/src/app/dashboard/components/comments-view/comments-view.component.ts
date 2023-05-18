@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { PostComment } from 'src/app/models/post-comment.interface';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ResponseComment } from 'src/app/models';
 
 @Component({
   selector: 'post-comments-view',
@@ -10,7 +10,7 @@ import { PostComment } from 'src/app/models/post-comment.interface';
         <div *ngFor="let comment of comments" class="comment-wrapper">
           <post-comment-detail [comment]="comment"></post-comment-detail>
         </div>
-        <form>
+        <form (ngSubmit)="onSubmit()">
           <input
             type="text"
             name="message"
@@ -27,9 +27,11 @@ import { PostComment } from 'src/app/models/post-comment.interface';
   `,
 })
 export class PostCommentsViewComponent {
-  @Input() comments: PostComment[];
-  message: string;
+  @Input() comments: ResponseComment[];
 
+  @Output() submitted = new EventEmitter<string>();
+
+  message: string;
   showComments = false;
   showCommentsMessage = 'Show comments...';
 
@@ -38,5 +40,9 @@ export class PostCommentsViewComponent {
     this.showCommentsMessage = !this.showComments
       ? 'Show comments...'
       : 'Hide comments';
+  }
+
+  onSubmit(): void {
+    this.submitted.emit(this.message);
   }
 }

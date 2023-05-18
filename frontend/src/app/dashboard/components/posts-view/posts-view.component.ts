@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Post } from 'src/app/models/post.interface';
 
 @Component({
@@ -7,11 +7,20 @@ import { Post } from 'src/app/models/post.interface';
   template: `
     <div>
       <div *ngFor="let post of posts">
-        <post-detail [post]="post"></post-detail>
+        <post-detail
+          [post]="post"
+          (commentSubmitted)="onCommentSubmitted($event)"
+        ></post-detail>
       </div>
     </div>
   `,
 })
 export class PostsViewComponent {
   @Input() posts: Post[];
+
+  @Output() commentSubmitted = new EventEmitter();
+
+  onCommentSubmitted(comment: any): void {
+    this.commentSubmitted.emit(comment);
+  }
 }
