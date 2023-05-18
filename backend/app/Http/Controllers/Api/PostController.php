@@ -8,7 +8,6 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response as HttpResponse;
 
@@ -47,9 +46,7 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request, string $id): JsonResponse
     {
         $post = Post::findOrFail($id);
-        if ($request->user()->cannot('update', $post)) {
-            abort(403);
-        }
+        $this->authorize('update', $post);
         $validated = $request->validated();
         $post->update($validated);
 
@@ -64,11 +61,7 @@ class PostController extends Controller
     public function destroy(string $id): HttpResponse
     {
         $post = Post::findOrFail($id);
-        $user = auth()->user();
         $this->authorize('delete', $post);
-        // if ($user->cannot('delete', $post)) {
-        //     abort(403);
-        // }
         $post->delete();
 
         return response()->noContent();

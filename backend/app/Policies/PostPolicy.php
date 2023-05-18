@@ -21,7 +21,7 @@ class PostPolicy
      */
     // public function view(User $user, Post $post): bool
     // {
-    //
+        
     // }
 
     /**
@@ -39,7 +39,7 @@ class PostPolicy
     {
         return $user->id === $post->user_id
         ? Response::allow()
-        : Response::deny('No tiene permisos para acceder a este post.');
+        : Response::deny('No tiene permisos para actualizar este post.');
     }
 
     /**

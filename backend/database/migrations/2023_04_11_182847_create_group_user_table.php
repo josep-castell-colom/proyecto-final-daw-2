@@ -21,6 +21,7 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->boolean('isAdmin')->default(0);
+            $table->boolean('isMember')->default(0);
             $table->timestamps();
         });
     }
