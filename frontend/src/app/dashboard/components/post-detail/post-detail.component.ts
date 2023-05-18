@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Post } from 'src/app/models/post.interface';
 
 @Component({
@@ -23,11 +23,23 @@ import { Post } from 'src/app/models/post.interface';
         </div>
       </div>
       <div class="comments">
-        <post-comments-view [comments]="post.comments"></post-comments-view>
+        <post-comments-view
+          [comments]="post.comments"
+          (submitted)="onCommentSubmitted($event)"
+        ></post-comments-view>
       </div>
     </div>
   `,
 })
 export class PostDetailComponent {
   @Input() post: Post;
+
+  @Output() commentSubmitted = new EventEmitter();
+
+  onCommentSubmitted(body: string): void {
+    this.commentSubmitted.emit({
+      body,
+      post: this.post,
+    });
+  }
 }

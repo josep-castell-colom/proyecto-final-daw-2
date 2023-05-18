@@ -21,9 +21,9 @@ export class ApiService {
       .pipe(map((response: any) => response.data));
   }
 
-  post<T>(collection: string, body: T): Observable<T> {
+  post(collection: string, body: object): Observable<any> {
     return this.http
-      .post<T>(`${env.API_URL}/${collection}`, JSON.stringify(body))
+      .post(`${env.API_URL}/${collection}`, JSON.stringify(body))
       .pipe(map((response: any) => response.data));
   }
 }

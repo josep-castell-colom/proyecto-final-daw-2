@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PostComment } from 'src/app/models/post-comment.interface';
+import { ResponseComment } from 'src/app/models';
 
 @Component({
   selector: 'post-comment-detail',
@@ -23,5 +23,5 @@ import { PostComment } from 'src/app/models/post-comment.interface';
   `,
 })
 export class PostCommentDetailComponent {
-  @Input() comment: PostComment;
+  @Input() comment: ResponseComment;
 }

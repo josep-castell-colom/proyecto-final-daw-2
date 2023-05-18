@@ -2,8 +2,10 @@
 
 .comment {
   margin-bottom: 1rem;
+  padding-bottom: 1rem;
   text-align: left;
   width: inherit;
+  border-bottom: solid 1px grey;
 }
 
 .body {
@@ -17,6 +19,7 @@
 
 .message {
   width: 75%;
+  margin-left: 1rem;
 }
 
 a {
