@@ -6,5 +6,4 @@ export const FEATURE_KEY = 'dashboard';
 export interface DashboardState {
   groups: GroupsState;
   authUserGroups: GroupsState;
-  selectedGroup: GroupState;
 }

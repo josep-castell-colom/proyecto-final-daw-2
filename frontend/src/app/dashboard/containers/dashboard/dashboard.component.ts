@@ -17,9 +17,8 @@ import { Group } from 'src/app/models/group.interface';
       (collapse)="collapseAsideHandler()"
     ></main-aside>
     <div class="pane" [class.collapsedAside]="collapsedAside">
-      <dashboard-header></dashboard-header>
+      <dashboard-header [group]="selectedGroup"></dashboard-header>
       <router-outlet></router-outlet>
-      <router-outlet name="group"></router-outlet>
     </div>
   </div>`,
 })
@@ -27,6 +26,7 @@ export class DashboardComponent implements OnInit {
   user$: Observable<User | undefined>;
   url: string;
   groups$: Observable<Group[]>;
+  selectedGroup!: Group;
 
   collapsedAside: boolean = false;
 
@@ -40,6 +40,9 @@ export class DashboardComponent implements OnInit {
     this.url = this.router.url;
     this.store.dispatch(fromDashboardStore.LoadAllGroups());
     this.groups$ = this.store.select(fromDashboardStore.getAllGroups);
+    this.store
+      .select(fromDashboardStore.getSelectedGroup)
+      .subscribe((group) => (this.selectedGroup = group));
   }
 
   collapseAsideHandler() {

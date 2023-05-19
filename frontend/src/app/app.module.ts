@@ -11,11 +11,14 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { Store } from 'store';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Interceptor } from 'src/interceptor';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+
+import { CustomSerializer, reducers } from './store';
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Interceptor } from 'src/interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,11 +30,11 @@ import { EffectsModule } from '@ngrx/effects';
     AuthModule,
     FullCalendarModule,
     FontAwesomeModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(reducers, {}),
     EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot({ serializer: CustomSerializer }),
   ],
   providers: [
-    Store,
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
   ],
   bootstrap: [AppComponent],

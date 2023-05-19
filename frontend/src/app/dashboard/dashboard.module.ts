@@ -10,8 +10,6 @@ import * as fromStore from './store';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-// import { MyGroupsModule } from './containers/my-groups/my-groups.module';
-
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { MainAsideComponent } from './components/main-aside/main-aside.component';
 import { NewsFeedComponent } from './components/news-feed/news-feed.component';
@@ -42,6 +40,12 @@ export const ROUTES: Routes = [
       {
         path: 'my-groups',
         component: MyGroupsComponent,
+        children: [
+          {
+            path: ':id',
+            component: GroupViewComponent,
+          },
+        ],
       },
       {
         path: 'view',
@@ -53,9 +57,8 @@ export const ROUTES: Routes = [
         component: MyCalendarComponent,
       },
       {
-        path: 'group/:id',
+        path: 'groups/:id',
         component: GroupViewComponent,
-        outlet: 'group',
       },
     ],
   },
@@ -89,13 +92,10 @@ export const ROUTES: Routes = [
       fromStore.GROUPS_FEATURE_KEY,
       fromStore.GroupsReducer
     ),
-    StoreModule.forFeature(fromStore.GROUP_FEATURE_KEY, fromStore.GroupReducer),
     FullCalendarModule,
-    // MyGroupsModule,
     FontAwesomeModule,
     EffectsModule.forFeature(fromStore.effects),
   ],
   exports: [DashboardHeaderComponent],
-  providers: [],
 })
 export class DashboardModule {}
