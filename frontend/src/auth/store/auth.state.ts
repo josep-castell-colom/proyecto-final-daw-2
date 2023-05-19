@@ -11,7 +11,7 @@ export const AUTH_FEATURE_KEY = 'Auth';
 
 export const initialState: AuthState = {
   user: undefined,
-  authToken: 'hola',
+  authToken: '',
   loggedIn: false,
   loading: false,
 };

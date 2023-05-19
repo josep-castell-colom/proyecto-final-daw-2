@@ -30,6 +30,7 @@
     "@fullcalendar/list": "^6.1.5",
     "@fullcalendar/timegrid": "^6.1.5",
     "@ngrx/effects": "^15.4.0",
+    "@ngrx/router-store": "^16.0.0",
     "@ngrx/store": "^15.4.0",
     "@ngrx/store-devtools": "^15.4.0",
     "bcryptjs": "^2.4.3",

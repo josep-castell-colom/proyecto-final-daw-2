@@ -19,23 +19,6 @@ export class GroupEffects {
     private store: Store
   ) {}
 
-  loadGroup$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(groupActions.LoadGroup),
-      exhaustMap((action) => {
-        return this.apiService.getOne<Group>('groups', action.id).pipe(
-          map((group) => ({
-            type: groupActions.LOAD_GROUP_SUCCESS,
-            group,
-          })),
-          catchError((error) =>
-            of({ type: groupActions.LOAD_GROUP_FAIL, error })
-          )
-        );
-      })
-    )
-  );
-
   postComment$ = createEffect(() =>
     this.actions$.pipe(
       ofType(groupActions.PostComment),

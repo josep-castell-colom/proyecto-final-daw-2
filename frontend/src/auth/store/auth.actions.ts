@@ -10,7 +10,6 @@ export const LOG_OUT = '[Auth] Log out';
 export const LOG_OUT_SUCCESS = '[Auth] Log out success';
 export const LOG_OUT_FAIL = '[Auth] Log out fail';
 
-// login actions
 export const Login = createAction(
   LOG_IN,
   props<{ email: string; password: string }>()
@@ -25,7 +24,6 @@ export const SetAuthToken = createAction(
   props<{ token: string }>()
 );
 
-// logout actions
 export const LogOut = createAction(LOG_OUT);
 export const LogOutSuccess = createAction(LOG_OUT_SUCCESS);
 export const LogOutFail = createAction(LOG_OUT_FAIL, props<{ error: any }>);

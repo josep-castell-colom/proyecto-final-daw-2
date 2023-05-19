@@ -1,7 +1,8 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { Group } from 'src/app/models';
 import { Breadcrumb } from 'src/app/models/breadcrumb.interface';
 
 @Component({
@@ -24,24 +25,25 @@ import { Breadcrumb } from 'src/app/models/breadcrumb.interface';
     </div>
   </div>`,
 })
-export class DashboardHeaderComponent implements OnInit, OnDestroy {
+export class DashboardHeaderComponent implements OnDestroy {
+  @Input()
+  group!: Group | null;
+
+  title: string;
+
   url: string;
   subscription: Subscription;
-
-  @Input()
-  title: string;
 
   breadcrumbs: Breadcrumb[];
 
   constructor(private router: Router) {
     this.subscription = this.router.events
       .pipe(filter((e) => e instanceof RouterEvent))
-      .subscribe((e: any) => this.urlChangesHanler(e.url));
-  }
-
-  ngOnInit() {
-    // this.breadcrumbs = this.getBreadcrumbs();
-    // this.title = this.breadcrumbs[this.breadcrumbs.length - 1].name;
+      .subscribe((e: any) => {
+        setTimeout(() => {
+          this.urlChangesHanler(e.url);
+        });
+      });
   }
 
   ngOnDestroy(): void {
@@ -75,6 +77,17 @@ export class DashboardHeaderComponent implements OnInit, OnDestroy {
           return { name: modString, url: '/' + string };
         return { name: modString, url: '/dashboard/' + string };
       });
+    this.setGroupName(urlArray);
     return urlArray;
+  }
+
+  setGroupName(urlArray: Breadcrumb[]) {
+    if (
+      urlArray.length > 2 &&
+      urlArray[urlArray.length - 2].name === 'my groups' &&
+      this.group
+    ) {
+      urlArray[urlArray.length - 1].name = this.group.name;
+    }
   }
 }

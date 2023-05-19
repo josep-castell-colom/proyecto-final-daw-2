@@ -4,28 +4,6 @@ import * as actions from '../actions/group.actions';
 
 export const groupReducer = createReducer(
   initialState,
-  on(actions.LoadGroup, (state: GroupState) => {
-    return {
-      ...state,
-      loading: true,
-      loaded: false,
-    };
-  }),
-  on(actions.LoadGroupSuccess, (state: GroupState, { group }) => {
-    return {
-      ...state,
-      loading: false,
-      loaded: true,
-      group,
-    };
-  }),
-  on(actions.LoadGroupFail, (state: GroupState) => {
-    return {
-      ...state,
-      loading: false,
-      loaded: false,
-    };
-  }),
   on(actions.PostComment, (state: GroupState) => {
     return {
       ...state,

@@ -21,10 +21,7 @@ import { Store } from '@ngrx/store';
   template: ` <div [class.spanHidden]="spanHidden">
     <ul>
       <li
-        [routerLink]="[
-          '/dashboard',
-          { outlets: { primary: 'news-feed', group: null } }
-        ]"
+        [routerLink]="['/dashboard/news-feed']"
         routerLinkActive="active"
         (click)="hideGroups()"
       >
@@ -33,10 +30,7 @@ import { Store } from '@ngrx/store';
         <fa-icon [icon]="faGear" class="gear"></fa-icon>
       </li>
       <li
-        [routerLink]="[
-          '/dashboard',
-          { outlets: { primary: 'my-groups', group: null } }
-        ]"
+        [routerLink]="['/dashboard/my-groups']"
         (click)="showGroups()"
         routerLinkActive="active"
       >
@@ -47,20 +41,14 @@ import { Store } from '@ngrx/store';
       <ul class="groups" [class.hidden]="groupsListHidden" *ngIf="user?.groups">
         <li
           *ngFor="let group of user?.groups"
-          [routerLink]="[
-            '/dashboard',
-            { outlets: { group: ['group', group.id] } }
-          ]"
+          [routerLink]="['/dashboard/my-groups/', group.id]"
           routerLinkActive="active"
         >
           {{ group.name }}
         </li>
       </ul>
       <li
-        [routerLink]="[
-          '/dashboard',
-          { outlets: { primary: 'my-calendar', group: null } }
-        ]"
+        [routerLink]="['/dashboard/my-calendar']"
         routerLinkActive="active"
         (click)="hideGroups()"
       >
@@ -81,6 +69,10 @@ import { Store } from '@ngrx/store';
   </div>`,
 })
 export class MainAsideComponent {
+  @Input() user: User | null | undefined;
+
+  @Output() collapse = new EventEmitter();
+
   faNews = faNewspaper;
   faMusic = faMusic;
   faCalendar = faCalendarDays;
@@ -91,12 +83,6 @@ export class MainAsideComponent {
 
   spanHidden: boolean = false;
   groupsListHidden: boolean = true;
-
-  @Input()
-  user: User | null | undefined;
-
-  @Output()
-  collapse = new EventEmitter();
 
   constructor(private store: Store) {}
 
