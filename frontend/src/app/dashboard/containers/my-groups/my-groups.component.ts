@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Group } from 'src/app/models/group.interface';
-import { Observable } from 'rxjs/internal/Observable';
 import { Store } from '@ngrx/store';
 
-import * as dashboardStore from '../../store';
 import { getAuthUser } from 'src/auth/store';
 
 @Component({
@@ -12,7 +10,7 @@ import { getAuthUser } from 'src/auth/store';
   template: `<div>
     <div class="group-selector">
       <div
-        *ngFor="let group of authUserGroups$ | async"
+        *ngFor="let group of authUserGroups"
         [routerLink]="['/dashboard/my-groups', group.id]"
         routerLinkActive="active"
       >
@@ -23,7 +21,7 @@ import { getAuthUser } from 'src/auth/store';
   </div>`,
 })
 export class MyGroupsComponent implements OnInit {
-  authUserGroups$: Observable<Group[]>;
+  authUserGroups: Group[] | undefined;
 
   groupSelected: Group;
 
@@ -32,16 +30,12 @@ export class MyGroupsComponent implements OnInit {
   ngOnInit(): void {
     this.store.select(getAuthUser).subscribe((user) => {
       if (user) {
-        this.store.dispatch(dashboardStore.LoadAuthUserGroups());
-        this.authUserGroups$ = this.store.select(
-          dashboardStore.getAuthUserGroups
-        );
+        this.authUserGroups = user.groups;
       }
     });
   }
 
   selectGroup(group: Group) {
     this.groupSelected = group;
-    console.log(this.groupSelected);
   }
 }

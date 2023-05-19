@@ -29,38 +29,10 @@ export const getGroupsLoaded = createSelector(
   (state: fromState.GroupsState) => state.loaded
 );
 
-// auth user groups
-export const getAuthUserGroupsState = createSelector(
-  fromFeature.getDashboardState,
-  (state: fromState.DashboardState) => state.authUserGroups
-);
-
-export const getAuthUserGroupsEntities = createSelector(
-  getAuthUserGroupsState,
-  (state: fromState.GroupsState) => state.entities
-);
-
-export const getAuthUserGroups = createSelector(
-  getAuthUserGroupsEntities,
-  (entities) => {
-    return Object.keys(entities).map((id) => entities[parseInt(id, 10)]);
-  }
-);
-
-export const getAuthUserGroupsLoading = createSelector(
-  getAuthUserGroupsState,
-  (state: fromState.GroupsState) => state.loading
-);
-
-export const getAuthUserGroupsLoaded = createSelector(
-  getAuthUserGroupsState,
-  (state: fromState.GroupsState) => state.loaded
-);
-
 export const getSelectedGroup = createSelector(
   getAllGroupsEntities,
   fromRoot.getRouterState,
-  (entities, router) => {
+  (entities, router): Group => {
     return router.state && entities[(router.state.params as any).id];
   }
 );

@@ -37,40 +37,6 @@ export const groupsReducer = createReducer(
       loading: false,
       loaded: false,
     };
-  }),
-  on(actions.LoadAuthUserGroups, (state: GroupsState) => {
-    return {
-      ...state,
-      loading: true,
-      loaded: false,
-    };
-  }),
-  on(actions.LoadAuthUserGroupsSuccess, (state: GroupsState, { groups }) => {
-    const entities = groups.reduce(
-      (entities: { [id: number]: Group }, group: Group) => {
-        return {
-          ...entities,
-          [group.id]: group,
-        };
-      },
-      {
-        ...state.entities,
-      }
-    );
-
-    return {
-      ...state,
-      loading: false,
-      loaded: true,
-      authUserGroups: entities,
-    };
-  }),
-  on(actions.LoadAuthUserGroupsFail, (state: GroupsState) => {
-    return {
-      ...state,
-      loading: false,
-      loaded: false,
-    };
   })
 );
 
