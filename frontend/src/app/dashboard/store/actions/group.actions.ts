@@ -11,9 +11,10 @@ export const POST_COMMENT_SUCCESS = '[Dashboard] Post comment success';
 export const PostComment = createAction(
   POST_COMMENT,
   props<{
-    comment: models.RequestComment;
+    group: models.Group;
     sectionId: number;
     postId: number;
+    comment: models.RequestComment;
   }>()
 );
 export const PostCommentFail = createAction(
@@ -22,5 +23,9 @@ export const PostCommentFail = createAction(
 );
 export const PostCommentSuccess = createAction(
   POST_COMMENT_SUCCESS,
-  props<{ comment: models.ResponseComment; sectionId: number }>()
+  props<{
+    group: models.Group;
+    comment: models.ResponseComment;
+    sectionId: number;
+  }>()
 );

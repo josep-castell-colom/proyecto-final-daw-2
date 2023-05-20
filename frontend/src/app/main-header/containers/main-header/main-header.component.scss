@@ -22,6 +22,10 @@
 
 .tools {
   display: flex;
+  align-items: center;
+  input {
+    height: 1.5rem;
+  }
 }
 
 input {

@@ -48,6 +48,18 @@ export class AuthEffects {
     { dispatch: false }
   );
 
+  loginFail$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(actions.LoginFail),
+        tap(() => {
+          this.router.navigate(['/']);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
   logOut$ = createEffect(() =>
     this.actions$.pipe(
       ofType(actions.LogOut),

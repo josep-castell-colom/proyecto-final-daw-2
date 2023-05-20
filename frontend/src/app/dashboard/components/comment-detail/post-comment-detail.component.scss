@@ -13,13 +13,25 @@
   width: inherit;
 }
 
-.user-info {
-  width: 25%;
+.profile-picture__wrapper {
+  position: relative;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 1rem;
+}
+
+.profile-picture {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
 }
 
 .message {
   width: 75%;
-  margin-left: 1rem;
 }
 
 a {

@@ -13,7 +13,7 @@ import { Post } from 'src/app/models/post.interface';
         <span>Posted by: {{ post.user.name }}</span>
       </header>
       <div class="content">
-        <div *ngIf="post.image">
+        <div class="image" *ngIf="post.image">
           <img [src]="post.image" alt="Post image" />
         </div>
         <div class="body">

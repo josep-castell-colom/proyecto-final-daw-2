@@ -16,7 +16,7 @@ class PostSeeder extends Seeder
             'id' => 1,
             'title' => 'Sa setmana qui ve tenim bolo',
             'body' => 'Està confirmat, tocam en es Madison Square Garden. S\'han venut totes ses entrades. Podeu penjar-ho en es fil de notícies.',
-            'image' => '/storage/img/1/bolo.jpg',
+            'image' => '/assets/images/posts/bolo.jpg',
             'section_id' => 2,
             'user_id' => 1,
         ]);
@@ -25,7 +25,7 @@ class PostSeeder extends Seeder
             'id' => 2,
             'title' => 'Concert al Madison Square Garden',
             'body' => 'Com anam, foradats. Es proper divendres farem un concert al Madison Square Garden. Us esperam!',
-            'image' => '/storage/img/1/bolo.jpg',
+            'image' => '/assets/images/posts/bolo.jpg',
             'section_id' => 1,
             'user_id' => 3,
         ]);
@@ -34,7 +34,7 @@ class PostSeeder extends Seeder
             'id' => 3,
             'title' => 'Burzum estàn bastant bé',
             'body' => 'Encara que es tipo és un puto cap de fava.',
-            'image' => '/storage/img/1/burzum.jpg',
+            'image' => '/assets/images/posts/burzum.jpg',
             'section_id' => 3,
             'user_id' => 5,
         ]);
@@ -43,7 +43,7 @@ class PostSeeder extends Seeder
             'id' => 4,
             'title' => 'Això des facepaint com va?',
             'body' => 'No sé com punyetes llevarme tota aquesta merda de sa cara.',
-            'image' => '/storage/img/1/facepaint.jpg',
+            'image' => '/assets/images/posts/facepaint.jpg',
             'section_id' => 4,
             'user_id' => 6,
         ]);

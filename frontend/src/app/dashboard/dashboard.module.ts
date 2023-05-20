@@ -92,6 +92,7 @@ export const ROUTES: Routes = [
       fromStore.GROUPS_FEATURE_KEY,
       fromStore.GroupsReducer
     ),
+    StoreModule.forFeature(fromStore.GROUP_FEATURE_KEY, fromStore.GroupReducer),
     FullCalendarModule,
     FontAwesomeModule,
     EffectsModule.forFeature(fromStore.effects),

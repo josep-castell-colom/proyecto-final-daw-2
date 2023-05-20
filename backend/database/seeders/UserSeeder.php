@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'email' => 'josep@patata.es',
             'phone' => '555-34-67-55',
             'address' => 'C/ des Oms 33, Bunyola',
-            'image' => '/storage/img/1/josep.jpg',
+            'image' => '/assets/images/users/josep.jpg',
             'password' => Hash::make('patata123'),
         ]);
         $rafael = User::factory()->create([
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
             'email' => 'rafael@patata.es',
             'phone' => '555-34-87-55',
             'address' => 'C/ des Pomers 33, Palma',
-            'image' => '/storage/img/1/rafael.jpg',
+            'image' => '/assets/images/users/rafael.jpg',
             'password' => Hash::make('patata123'),
         ]);
         $jaume = User::factory()->create([
@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
             'email' => 'jaume@patata.es',
             'phone' => '555-94-67-55',
             'address' => 'C/ de ses Peres 44, Palma',
-            'image' => '/storage/img/1/jaume.jpg',
+            'image' => '/assets/images/users/jaume.jpg',
             'password' => Hash::make('patata123'),
         ]);
 
@@ -55,7 +55,7 @@ class UserSeeder extends Seeder
             'email' => 'pep@patata.es',
             'phone' => '455-94-67-55',
             'address' => 'C/ des Tarongers 14, Palma',
-            'image' => '/storage/img/1/pep.jpg',
+            'image' => '/assets/images/users/pep.jpg',
             'password' => Hash::make('patata123'),
         ]);
 
@@ -67,7 +67,7 @@ class UserSeeder extends Seeder
             'email' => 'joana@patata.es',
             'phone' => '257-54-67-55',
             'address' => 'C/ de ses Vinyes 34, Muro',
-            'image' => '/storage/img/1/joana.jpg',
+            'image' => '/assets/images/users/joana.jpg',
             'password' => Hash::make('patata123'),
         ]);
 
@@ -79,7 +79,7 @@ class UserSeeder extends Seeder
             'email' => 'maria@patata.es',
             'phone' => '965-64-27-15',
             'address' => 'C/ des Torrent 94, Muro',
-            'image' => '/storage/img/1/maria.jpg',
+            'image' => '/assets/images/users/maria.jpg',
             'password' => Hash::make('patata123'),
         ]);
 

@@ -7,16 +7,19 @@ import { ResponseComment } from 'src/app/models';
   template: `
     <div class="comment">
       <div class="body">
-        <div class="user-info">
+        <div class="profile-picture__wrapper">
           <img
+            class="profile-picture"
             [src]="comment.user.image"
             alt="{{ comment.user.name }} profile picture"
           />
-          <a href="#">{{ comment.user.name }}</a
-          >:
         </div>
         <div class="message">
-          {{ comment.body }}
+          <a href="#">{{ comment.user.name }}</a
+          >:
+          <div>
+            {{ comment.body }}
+          </div>
         </div>
       </div>
     </div>

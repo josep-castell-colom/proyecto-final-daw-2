@@ -9,15 +9,9 @@ import { Store } from '@ngrx/store';
 import * as groupActions from '../actions/group.actions';
 import { ApiService } from '../../services';
 
-import { Group } from 'src/app/models/group.interface';
-
 @Injectable()
 export class GroupEffects {
-  constructor(
-    private actions$: Actions,
-    private apiService: ApiService,
-    private store: Store
-  ) {}
+  constructor(private actions$: Actions, private apiService: ApiService) {}
 
   postComment$ = createEffect(() =>
     this.actions$.pipe(
@@ -26,8 +20,9 @@ export class GroupEffects {
         return this.apiService.post('comments', action.comment).pipe(
           map((comment) => ({
             type: groupActions.POST_COMMENT_SUCCESS,
-            comment,
+            group: action.group,
             sectionId: action.sectionId,
+            comment,
           })),
           catchError((error) =>
             of({ type: groupActions.POST_COMMENT_FAIL, error })

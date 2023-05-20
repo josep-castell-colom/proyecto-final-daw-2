@@ -7,7 +7,13 @@ import { User } from 'src/app/models/user.interface';
   styleUrls: ['./user-nav.component.scss'],
   template: `
     <div *ngIf="user">
-      <img [src]="user.image" alt="user profile picture" />
+      <div class="profile-picture__wrapper">
+        <img
+          class="profile-picture"
+          [src]="user.image"
+          alt="user profile picture"
+        />
+      </div>
       <a [routerLink]="['/dashboard/news-feed']" id="username">{{
         user.name
       }}</a>
