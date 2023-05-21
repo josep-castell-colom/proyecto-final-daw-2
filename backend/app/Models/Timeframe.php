@@ -36,6 +36,7 @@ class Timeframe extends Model
     public function groups(): BelongsToMany
     {
         return $this->belongsToMany(Group::class)
+            ->withPivot('confirmed')
             ->withTimestamps();
     }
 }
