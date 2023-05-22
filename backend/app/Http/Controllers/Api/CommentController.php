@@ -45,8 +45,10 @@ class CommentController extends Controller
      */
     public function update(UpdateCommentRequest $request, string $id): JsonResponse
     {
+        $comment = Comment::findOrFail($id);
+        $this->authorize('update', $comment);
         $validated = $request->validated();
-        Comment::findOrFail($id)->update($validated);
+        $comment->update($validated);
 
         return response()->json([
             'data' => new CommentResource(Comment::findOrFail($id)),
@@ -58,7 +60,9 @@ class CommentController extends Controller
      */
     public function destroy(string $id): Response
     {
-        Comment::findOrFail($id)->delete();
+        $comment = Comment::findOrFail($id);
+        $this->authorize('delete', $comment);
+        $comment->delete();
 
         return response()->noContent();
     }

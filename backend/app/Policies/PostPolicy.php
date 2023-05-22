@@ -39,7 +39,9 @@ class PostPolicy
     {
         return $user->id === $post->user_id
         ? Response::allow()
-        : Response::deny('No tiene permisos para actualizar este post.');
+        : Response::deny(
+            'No tiene permisos para actualizar este post.'
+        );
     }
 
     /**
@@ -49,7 +51,9 @@ class PostPolicy
     {
         return $user->id === $post->user_id
         ? Response::allow()
-        : Response::deny('No tiene permisos para eliminar este post.');
+        : Response::deny(
+            'No tiene permisos para eliminar este post.'
+        );
     }
 
     /**
