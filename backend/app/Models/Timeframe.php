@@ -27,6 +27,7 @@ class Timeframe extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class)
+            ->withPivot('group_id')
             ->withTimestamps();
     }
 
