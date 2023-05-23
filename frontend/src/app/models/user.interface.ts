@@ -1,5 +1,3 @@
-import { Group } from './group.interface';
-
 export interface User {
   id: number;
   name: string;
@@ -9,5 +7,14 @@ export interface User {
   phone?: string;
   address?: string;
   image?: string;
-  groups?: Group[];
+  groups?: UserGroup[];
+}
+
+interface UserGroup {
+  id: number;
+  name: string;
+  pivot: {
+    isAdmin: boolean;
+    isMember: boolean;
+  };
 }

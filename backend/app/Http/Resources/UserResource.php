@@ -27,7 +27,7 @@ class UserResource extends JsonResource
             'image' => $this->image,
             'instruments' => $this->instruments,
             'musicianroles' => $this->musicianroles,
-            'groups' => GroupCollection::make($this->groups),
+            'groups' => $this->groups,
             'styles' => $this->styles,
             'posts' => $this->posts,
             'comments' => $this->comments,

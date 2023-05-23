@@ -43,6 +43,7 @@ export class DashboardComponent implements OnInit {
     this.store
       .select(fromDashboardStore.getSelectedGroup)
       .subscribe((group) => (this.selectedGroup = group));
+    this.user$.subscribe(console.log);
   }
 
   collapseAsideHandler() {

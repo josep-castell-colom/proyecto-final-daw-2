@@ -48,6 +48,11 @@ export const groupsReducer = createReducer(
     // TODO fix commentSuccess reducer
     actions.PostCommentSuccess,
     (state: GroupsState, { group, comment, sectionId }) => {
+      console.log('reducer');
+      if (!group)
+        return {
+          ...state,
+        };
       const newGroup: Group = JSON.parse(JSON.stringify(group));
       const section = newGroup.sections.find(
         (section) => section.id === sectionId
@@ -60,7 +65,6 @@ export const groupsReducer = createReducer(
         ...state.entities,
         [group.id]: newGroup,
       };
-      console.log(entities);
 
       return {
         ...state,

@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Group } from 'src/app/models/group.interface';
 import { Store } from '@ngrx/store';
 
+import { Observable } from 'rxjs/internal/Observable';
+
 import { getAuthUser } from 'src/auth/store';
+import * as fromDashboardStore from '../../store';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'my-groups',
@@ -10,7 +14,7 @@ import { getAuthUser } from 'src/auth/store';
   template: `<div>
     <div class="group-selector">
       <div
-        *ngFor="let group of authUserGroups"
+        *ngFor="let group of authUserGroups | async"
         [routerLink]="['/dashboard/my-groups', group.id]"
         routerLinkActive="active"
       >
@@ -21,21 +25,29 @@ import { getAuthUser } from 'src/auth/store';
   </div>`,
 })
 export class MyGroupsComponent implements OnInit {
-  authUserGroups: Group[] | undefined;
-
-  groupSelected: Group;
+  authUserGroups!: Observable<Group[] | undefined>;
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.store.select(getAuthUser).subscribe((user) => {
       if (user) {
-        this.authUserGroups = user.groups;
+        const userGroupsIds = user.groups?.map((group) => {
+          if (group.pivot.isMember) {
+            return group.id;
+          }
+          return;
+        });
+        if (userGroupsIds) {
+          this.authUserGroups = this.store
+            .select(fromDashboardStore.getAllGroups)
+            .pipe(
+              map((groups) =>
+                groups.filter((group) => userGroupsIds?.includes(group.id))
+              )
+            );
+        }
       }
     });
-  }
-
-  selectGroup(group: Group) {
-    this.groupSelected = group;
   }
 }
