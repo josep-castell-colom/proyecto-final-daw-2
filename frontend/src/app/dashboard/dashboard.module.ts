@@ -88,11 +88,10 @@ export const ROUTES: Routes = [
     FormsModule,
     RouterModule.forChild(ROUTES),
     StoreModule.forFeature('dashboard', fromStore.reducers),
-    StoreModule.forFeature(
-      fromStore.GROUPS_FEATURE_KEY,
-      fromStore.GroupsReducer
-    ),
-    StoreModule.forFeature(fromStore.GROUP_FEATURE_KEY, fromStore.GroupReducer),
+    // StoreModule.forFeature(
+    //   fromStore.GROUPS_FEATURE_KEY,
+    //   fromStore.GroupsReducer
+    // ),
     FullCalendarModule,
     FontAwesomeModule,
     EffectsModule.forFeature(fromStore.effects),

@@ -37,7 +37,38 @@ export const groupsReducer = createReducer(
       loading: false,
       loaded: false,
     };
-  })
+  }),
+  on(actions.PostComment, (state: GroupsState) => {
+    return {
+      ...state,
+      loadingComments: true,
+    };
+  }),
+  on(
+    // TODO fix commentSuccess reducer
+    actions.PostCommentSuccess,
+    (state: GroupsState, { group, comment, sectionId }) => {
+      const newGroup: Group = JSON.parse(JSON.stringify(group));
+      const section = newGroup.sections.find(
+        (section) => section.id === sectionId
+      );
+      const post = section?.posts.find((post) => post.id === comment.post.id);
+      const comments = post?.comments;
+      comments?.push(comment);
+
+      const entities = {
+        ...state.entities,
+        [group.id]: newGroup,
+      };
+      console.log(entities);
+
+      return {
+        ...state,
+        entities,
+        loadingComments: false,
+      };
+    }
+  )
 );
 
 export function GroupsReducer(state: GroupsState, action: Action) {

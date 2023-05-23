@@ -31,4 +31,23 @@ export class GroupsEffects {
       )
     )
   );
+
+  postComment$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(groupsActions.PostComment),
+      exhaustMap((action) => {
+        return this.apiService.post('comments', action.comment).pipe(
+          map((comment) => ({
+            type: groupsActions.POST_COMMENT_SUCCESS,
+            group: action.group,
+            sectionId: action.sectionId,
+            comment,
+          })),
+          catchError((error) =>
+            of({ type: groupsActions.POST_COMMENT_FAIL, error })
+          )
+        );
+      })
+    )
+  );
 }

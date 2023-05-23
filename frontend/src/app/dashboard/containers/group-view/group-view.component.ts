@@ -14,27 +14,31 @@ import { ResponseComment } from 'src/app/models';
   styleUrls: ['group-view.component.scss'],
   template: `<div>
     <group-detail
-      [group]="group | async"
+      [group]="group$ | async"
       (commentSubmitted)="onCommentSubmitted($event)"
     ></group-detail>
+    {{ group$ | async | json }}
   </div>`,
 })
 export class GroupViewComponent implements OnInit {
-  group!: Observable<Group>;
+  group$!: Observable<Group>;
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
   id: number;
 
+  entities$: any;
+
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.group = this.store.select(dashboardStore.getSelectedGroup);
+    this.group$ = this.store.select(dashboardStore.getSelectedGroup);
+    this.entities$ = this.store.select(dashboardStore.getAllGroupsEntities);
   }
 
   onCommentSubmitted(comment: ResponseComment): void {
     this.store.select(authStore.getAuthUser).subscribe((user) => {
       if (user?.id) {
-        this.group.subscribe((group) => {
+        this.group$.subscribe((group) => {
           const commentBody = {
             body: comment.body,
             post_id: comment.post.id,

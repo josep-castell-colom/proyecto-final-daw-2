@@ -46,17 +46,22 @@ export const groupReducer = createReducer(
       //   }
       // }
       const newGroup: Group = JSON.parse(JSON.stringify(group));
-      newGroup.sections
-        .find((section) => section.id === sectionId)
-        ?.posts.find((post) => post.id === comment.post.id)
-        ?.comments.push(comment);
-      console.log(newGroup);
+      const section = newGroup.sections.find(
+        (section) => section.id === sectionId
+      );
+      const post = section?.posts.find((post) => post.id === comment.post.id);
+      const comments = post?.comments;
+      comments?.push(comment);
+
+      const entities = {
+        ...state.entities,
+        [group.id]: newGroup,
+      };
+      console.log(entities);
+
       return {
         ...state,
-        entities: {
-          ...state.entities,
-          [group.id]: newGroup,
-        },
+        entities,
         loadingComments: false,
       };
     }
