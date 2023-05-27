@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('image')->nullable();
             $table->boolean('isPublic')->default(0);
-            $table->foreignId('group_id')->constrained();
+            $table->foreignId('group_id')->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->timestamps();
         });
     }

@@ -33,6 +33,7 @@ class AuthController extends Controller
         $plainTextToken = $user->createToken('auth-token')->plainTextToken;
 
         return response()->json([
+            'message' => 'Autentificación exitosa',
             'plain-text-token' => $plainTextToken,
         ]);
     }
@@ -47,6 +48,9 @@ class AuthController extends Controller
             'name' => ['required', 'string'],
             'lastname' => ['required', 'string'],
             'email' => ['required', 'email'],
+            'phone' => 'string',
+            'address' => 'string',
+            'image' => 'string',
             'password' => ['required', 'string'],
         ]);
 

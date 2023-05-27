@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('timeframe_user', function (Blueprint $table) {
             $table->id();
             $table->foreignId('timeframe_id')
-            ->constrained()
-            ->cascadeOnDelete()
-            ->cascadeOnUpdate();
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->foreignId('user_id')
-            ->constrained()
-            ->cascadeOnDelete()
-            ->cascadeOnUpdate();
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->foreignId('group_id')
                 ->constrained()
                 ->cascadeOnDelete()

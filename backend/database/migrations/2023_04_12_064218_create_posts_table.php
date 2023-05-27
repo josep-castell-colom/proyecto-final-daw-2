@@ -16,8 +16,14 @@ return new class extends Migration
             $table->string('title');
             $table->string('body', 2500);
             $table->string('image')->nullable();
-            $table->foreignId('section_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('section_id')
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->foreignId('user_id')
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->timestamps();
         });
     }

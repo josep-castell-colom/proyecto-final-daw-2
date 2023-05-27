@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -16,14 +15,6 @@ class UserController extends Controller
     public function index()
     {
         return UserResource::collection(User::all());
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -43,6 +34,7 @@ class UserController extends Controller
         $this->authorize('update', $user);
         $validated = $request->validated();
         $user->update($validated);
+
         return response()->json([
             'message' => 'Usuario actualizado',
         ]);
@@ -53,6 +45,12 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $this->authorize('delete', $user);
+        $user->delete();
+
+        return response()->json([
+            'message' => 'Usuario eliminado',
+        ]);
     }
 }
