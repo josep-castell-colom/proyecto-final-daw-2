@@ -48,7 +48,6 @@ export const groupsReducer = createReducer(
     // TODO fix commentSuccess reducer
     actions.PostCommentSuccess,
     (state: GroupsState, { group, comment, sectionId }) => {
-      console.log('reducer');
       if (!group)
         return {
           ...state,

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { exhaustMap, of } from 'rxjs';
+import { exhaustMap, of, switchMap } from 'rxjs';
 import { catchError, map } from 'rxjs';
 
 import * as groupsActions from '../actions/groups.actions';
@@ -35,7 +35,7 @@ export class GroupsEffects {
   postComment$ = createEffect(() =>
     this.actions$.pipe(
       ofType(groupsActions.PostComment),
-      exhaustMap((action) => {
+      switchMap((action) => {
         return this.apiService.post('comments', action.comment).pipe(
           map((comment) => ({
             type: groupsActions.POST_COMMENT_SUCCESS,
