@@ -7,7 +7,8 @@ import * as dashboardStore from '../../store';
 import * as authStore from '../../../../auth/store';
 
 import { Group } from 'src/app/models/group.interface';
-import { ResponseComment } from 'src/app/models';
+import { ResponseComment, User } from 'src/app/models';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'group-view',
@@ -17,7 +18,6 @@ import { ResponseComment } from 'src/app/models';
       [group]="group$ | async"
       (commentSubmitted)="onCommentSubmitted($event)"
     ></group-detail>
-    {{ group$ | async | json }}
   </div>`,
 })
 export class GroupViewComponent implements OnInit {
@@ -36,26 +36,34 @@ export class GroupViewComponent implements OnInit {
   }
 
   onCommentSubmitted(comment: ResponseComment): void {
-    this.store.select(authStore.getAuthUser).subscribe((user) => {
-      if (user?.id) {
-        this.group$.subscribe((group) => {
-          const commentBody = {
-            body: comment.body,
-            post_id: comment.post.id,
-            user_id: user?.id,
-          };
-          const sectionId = comment.post.section.id;
-          const postId = comment.post.id;
-          this.store.dispatch(
-            dashboardStore.PostComment({
-              group,
-              sectionId,
-              postId,
-              comment: commentBody,
-            })
-          );
-        });
-      }
+    let userOnce!: User;
+    this.store
+      .select(authStore.getAuthUser)
+      .pipe(take(1))
+      .subscribe((user) => {
+        if (user) userOnce = user;
+      });
+    let groupOnce!: Group;
+    this.group$.pipe(take(1)).subscribe((group) => {
+      if (group) groupOnce = group;
     });
+
+    if (userOnce?.id) {
+      const commentBody = {
+        body: comment.body,
+        post_id: comment.post.id,
+        user_id: userOnce?.id,
+      };
+      const sectionId = comment.post.section.id;
+      const postId = comment.post.id;
+      this.store.dispatch(
+        dashboardStore.PostComment({
+          group: groupOnce,
+          sectionId,
+          postId,
+          comment: commentBody,
+        })
+      );
+    }
   }
 }

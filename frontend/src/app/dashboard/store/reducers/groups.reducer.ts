@@ -45,7 +45,6 @@ export const groupsReducer = createReducer(
     };
   }),
   on(
-    // TODO fix commentSuccess reducer
     actions.PostCommentSuccess,
     (state: GroupsState, { group, comment, sectionId }) => {
       if (!group)

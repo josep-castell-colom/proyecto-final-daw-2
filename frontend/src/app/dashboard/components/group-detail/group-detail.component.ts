@@ -11,9 +11,9 @@ import { Section } from 'src/app/models/section.interface';
         <div (click)="selectSection(section)">{{ section.name }}</div>
       </div>
     </div>
-    <div *ngIf="selectedSection" class="selected-section">
+    <div *ngIf="group.sections[selectedSection].posts" class="selected-section">
       <posts-view
-        [posts]="selectedSection.posts"
+        [posts]="group.sections[selectedSection].posts"
         (commentSubmitted)="onCommentSubmitted($event)"
       ></posts-view>
     </div>
@@ -21,18 +21,16 @@ import { Section } from 'src/app/models/section.interface';
 })
 export class GroupDetailComponent {
   @Input() group: Group | null;
-  selectedSection: Section;
-
+  selectedSection: number = 0;
   @Output() commentSubmitted = new EventEmitter();
 
-  ngOnInit(): void {
-    if (this.group?.sections) {
-      this.selectedSection = this.group.sections[0];
+  selectSection(querySection: Section): void {
+    if (this.group) {
+      const indexFound = this.group?.sections.findIndex(
+        (section) => section.id === querySection.id
+      );
+      if (indexFound !== -1) this.selectedSection = indexFound;
     }
-  }
-
-  selectSection(section: Section): void {
-    this.selectedSection = section;
   }
 
   onCommentSubmitted(comment: any): void {
