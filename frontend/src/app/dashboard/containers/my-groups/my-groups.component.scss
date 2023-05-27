@@ -1,18 +1,23 @@
 @import "variables";
 
 :host > div {
-  // height: 40px;
-  // overflow-y: scroll;
+  position: relative;
 }
 
 .group-selector {
+  position: absolute;
+  z-index: 10;
+  top: 120px;
+  width: 100%;
   display: flex;
   border-bottom: solid 1px $blue-gray-400;
-  background-color: rgba(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
   div {
     width: fit-content;
     padding: 0.37rem 0.5rem;
     border-right: solid 1px $blue-gray-400;
+    background-color: rgba(255, 255, 255, 0.6);
     cursor: pointer;
     transition: background-color 0.2s;
     &:hover {

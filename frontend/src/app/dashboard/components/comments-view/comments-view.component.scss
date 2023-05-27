@@ -45,7 +45,7 @@ button {
 .show-comments {
   display: inline-block;
   color: $blue-gray-500;
-  cursor: default;
+  cursor: pointer;
   margin: 1rem auto;
   &:hover {
     color: $blue-gray-400;

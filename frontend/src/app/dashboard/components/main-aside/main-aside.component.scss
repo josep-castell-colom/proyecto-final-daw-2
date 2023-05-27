@@ -4,8 +4,9 @@
   position: relative;
   height: calc(100vh - 50px);
   width: 50px;
+  margin-top: 50px;
   overflow: hidden;
-  background-color: $blue-gray-100;
+  background-color: rgba(255, 255, 255, 0.8);
   border-right: solid 1px $blue-gray-400;
   border-top: solid 1px $blue-gray-400;
   transition: 1s;

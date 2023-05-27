@@ -1,3 +1,6 @@
 :host > div {
-  width: calc(100vw - 300px);
+  height: calc(100vh - 50px);
+  top: 120px;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }

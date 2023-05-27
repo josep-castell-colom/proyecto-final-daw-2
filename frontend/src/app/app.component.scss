@@ -1,0 +1,5 @@
+@import "variables";
+
+:host > div {
+  background-image: linear-gradient(to right, $main-blue, $main-green);
+}

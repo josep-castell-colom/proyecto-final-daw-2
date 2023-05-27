@@ -2,12 +2,14 @@
 
 :host > div {
   display: flex;
-  background-color: $blue-gray-100;
+  overflow: hidden;
 }
 
 .pane {
+  margin-top: 50px;
   width: calc(100vw - 50px);
   transition: width 1s;
+  overflow: hidden;
 }
 
 .collapsedAside {

@@ -7,16 +7,17 @@
 .section-selector {
   position: sticky;
   z-index: 10;
-  top: 0;
+  top: 153px;
   width: 100%;
   display: flex;
   border-bottom: solid 1px $blue-gray-400;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(4px);
   & > div {
     width: fit-content;
     padding: 0.37rem 0.5rem;
     border-right: solid 1px $blue-gray-400;
+    background-color: rgba(255, 255, 255, 0.6);
     cursor: pointer;
     transition: background-color 0.2s;
     &:hover {

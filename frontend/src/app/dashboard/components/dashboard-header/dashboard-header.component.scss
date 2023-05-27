@@ -1,14 +1,24 @@
 @import "variables";
 
 :host > div {
+  position: absolute;
+  z-index: 20;
   border-bottom: solid 1px $blue-gray-400;
   height: 120px;
+  width: calc(100vw - 50px);
   overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  transition: width 1s;
 }
 
 a:hover {
   text-decoration: none;
   color: $blue-gray-400;
+}
+
+.collapsedAside {
+  width: calc(100vw - 50px) !important;
 }
 
 .breadcrumbs {
@@ -24,4 +34,11 @@ a:hover {
 
 .active {
   color: $blue-gray-500;
+}
+
+@media (min-width: $breakpoint-tablet) {
+  :host > div {
+    transition-delay: 0;
+    width: calc(100vw - 300px);
+  }
 }

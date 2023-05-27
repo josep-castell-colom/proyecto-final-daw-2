@@ -8,7 +8,7 @@ import { Breadcrumb } from 'src/app/models/breadcrumb.interface';
 @Component({
   selector: 'dashboard-header',
   styleUrls: ['dashboard-header.component.scss'],
-  template: `<div>
+  template: `<div [class.collapsedAside]="collapsedAside">
     <div class="breadcrumbs">
       <span *ngFor="let item of breadcrumbs; last as last">
         <a
@@ -26,8 +26,8 @@ import { Breadcrumb } from 'src/app/models/breadcrumb.interface';
   </div>`,
 })
 export class DashboardHeaderComponent implements OnDestroy {
-  @Input()
-  group!: Group | null;
+  @Input() group!: Group | null;
+  @Input() collapsedAside!: boolean;
 
   title: string;
 

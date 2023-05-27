@@ -1,7 +1,10 @@
 @import "variables";
 
 :host > div {
-  //
+  height: calc(100vh - 50px);
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 footer {

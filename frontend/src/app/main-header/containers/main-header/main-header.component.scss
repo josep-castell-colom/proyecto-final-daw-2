@@ -1,21 +1,20 @@
 @import "variables";
 
 :host > div {
+  position: fixed;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // background-color: $main-blue;
-  background-image: linear-gradient(
-    to right,
-    $mid-blue,
-    $green-blue,
-    $mid-green
-  );
+  background-image: linear-gradient(to right, $main-blue, $main-green);
   height: 50px;
+  width: 100%;
+  z-index: 100;
 }
 
 .logo {
   font-size: 1.3rem;
+  font-family: $font-title;
   margin: 0 0 -5px 1rem;
   cursor: pointer;
 }

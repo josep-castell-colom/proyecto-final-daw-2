@@ -6,7 +6,7 @@ import { User } from 'src/app/models/user.interface';
   styleUrls: ['./main-header.component.scss'],
   template: `
     <div>
-      <h1 class="logo" [routerLink]="['/']">AppName</h1>
+      <h1 class="logo" [routerLink]="['/']">MuSick!</h1>
       <div class="tools">
         <input type="text" placeholder="Search..." />
         <user-nav [user]="user"></user-nav>
