@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -36,9 +37,15 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $this->authorize('update', $user);
+        $validated = $request->validated();
+        $user->update($validated);
+        return response()->json([
+            'message' => 'Usuario actualizado',
+        ]);
     }
 
     /**
