@@ -112,29 +112,35 @@ Las tecnologías a emplear en el proyecto son consideradas estándard, de uso am
 
 - Lenguajes de programación.
 
-	- *Front end*. JavaScript, utilizando el *framework* Vue en su última versión (en estos momentos, 3). La generación de contenidos dinámicos del lado del cliente, así como una primera capa de validación de *inputs*, vendrá dada en esta parte.
+	- *Front end*. JavaScript, utilizando el *framework* Angular. La generación de contenidos dinámicos del lado del cliente, así como una primera capa de validación de *inputs*, vendrá dada en esta parte.
 
-	- *Back end*. PHP, con el *framework* Laravel, también en su última versión (actualmente, se ha alcanzado la versión 10). Laravel posibilita, por lo demás, la interacción con el SGBD a través del ORM Eloquent. En el lado del servidor se creará principalmente una API para servir datos de forma eficiente y segura a las peticiones del lado del cliente.
+	- *Back end*. PHP, con el *framework* Laravel en su versión más actualizada (actualmente, se ha alcanzado la versión 10). Laravel posibilita, por lo demás, la interacción con el SGBD a través del ORM Eloquent. En el lado del servidor se creará principalmente una API para servir datos de forma eficiente y segura a las peticiones del lado del cliente.
 
 - Lenguajes de marcado.
 
-	- HTML5 y CSS, este último a través del *framework* específico Tailwind en su versión más actual (3). La estructura básica y estilos de la página vendrán definidos en esta parte.
+	- HTML5 y CSS. La estructura básica y estilos de la página vendrán definidos en esta parte.
 
 	- Markdown, lenguaje de referencia para la escritura de documentación asociada al proyecto.
 
 - Sistema gestor de bases de datos
 
-	- El SGBD principal será PostgreSQL, en la versión de referencia de Ubuntu 22.04 (14).
+	- El SGBD principal será MySQL.
 
 - Servidor de despliegue y control de versiones.
 
-	- El servidor web utilizado para el despliegue será Apache, nuevamente en la versión disponible en los repositorios de Ubuntu 22.04 (actualmente, la 2.4).
+	- El servidor web utilizado para el despliegue será Apache.
 
 	- El sistema para llevar un control de versiones será a través de la herramienta `git`, con los repositorios en la nube de GitHub.
 
 - Otros
 
-	- El trabajo en local será realizado en sistemas operativos Ubuntu, versión 22.04. El editor de texto principal será Visual Studio Code/ VS Codium.
+	- El trabajo de desarrollo local será realizado en sistemas operativos Ubuntu.
+	
+	- El editor de texto principal será Visual Studio Code/ VS Codium.
+
+	- Para realizar el testeo de la API se empleará la herramienta Postman.
+
+	- En navegador principal para desarrollo será Firefox, con pruebas de compatibilidad en Chromium.
 
 #### Diseño de la base de datos
 
