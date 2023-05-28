@@ -11,6 +11,7 @@
     [collapsedAside]="collapsedAside"
     [selectedSection]="group.sections[selectedSection]"
     [showPostForm]="showPostForm"
+    (postSubmitted)="onPostSubmitted($event)"
   ></post-form>
   <div *ngIf="group.sections[selectedSection].posts" class="selected-section">
     <posts-view

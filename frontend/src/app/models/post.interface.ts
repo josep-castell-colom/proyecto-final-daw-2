@@ -10,3 +10,11 @@ export interface Post {
   comments: ResponseComment[];
   section: models.Section;
 }
+
+export interface PostRequest {
+  user_id: number;
+  title: string;
+  body: string;
+  image?: string;
+  section_id: number;
+}

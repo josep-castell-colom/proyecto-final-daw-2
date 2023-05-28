@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Section } from 'src/app/models';
 
 @Component({
@@ -10,4 +10,22 @@ export class PostFormComponent {
   @Input() showPostForm!: boolean;
   @Input() collapsedAside!: boolean | null;
   @Input() selectedSection!: Section;
+
+  @Output() postSubmitted = new EventEmitter<{
+    title: string;
+    body: string;
+    image?: string;
+  }>();
+
+  title = '';
+  body = '';
+  image = '';
+
+  onSubmit(): void {
+    this.postSubmitted.emit({
+      title: this.title,
+      body: this.body,
+      image: this.image,
+    });
+  }
 }

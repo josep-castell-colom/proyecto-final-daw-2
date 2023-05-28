@@ -12,6 +12,9 @@ export const LOAD_AUTH_USER_GROUPS_FAIL =
 export const LOAD_AUTH_USER_GROUPS_SUCCESS =
   '[Dashboard] Load auth user groups success';
 
+export const POST_POST = '[Dashboard] Post post';
+export const POST_POST_FAIL = '[Dashboard] Post post fail';
+export const POST_POST_SUCCESS = '[Dashboard] Post post success';
 export const POST_COMMENT = '[Dashboard] Post comment';
 export const POST_COMMENT_FAIL = '[Dashboard] Post comment fail';
 export const POST_COMMENT_SUCCESS = '[Dashboard] Post comment success';
@@ -36,6 +39,27 @@ export const LoadAuthUserGroupsFail = createAction(
 export const LoadAuthUserGroupsSuccess = createAction(
   LOAD_AUTH_USER_GROUPS_SUCCESS,
   props<{ groups: fromModels.Group[] }>()
+);
+
+export const PostPost = createAction(
+  POST_POST,
+  props<{
+    groupId: number;
+    sectionId: number;
+    post: fromModels.PostRequest;
+  }>()
+);
+export const PostPostFail = createAction(
+  POST_POST_FAIL,
+  props<{ error: any }>()
+);
+export const PostPostSuccess = createAction(
+  POST_POST_SUCCESS,
+  props<{
+    groupId: number;
+    sectionId: number;
+    post: fromModels.Post;
+  }>()
 );
 
 export const PostComment = createAction(

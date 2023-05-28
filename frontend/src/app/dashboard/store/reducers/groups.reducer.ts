@@ -41,9 +41,32 @@ export const groupsReducer = createReducer(
   on(actions.PostComment, (state: GroupsState) => {
     return {
       ...state,
-      loadingComments: true,
+      loading: true,
     };
   }),
+  on(
+    actions.PostPostSuccess,
+    (state: GroupsState, { groupId, sectionId, post }) => {
+      const newGroup: Group = JSON.parse(
+        JSON.stringify(state.entities[groupId])
+      );
+      const section = newGroup.sections.find(
+        (section) => section.id === sectionId
+      );
+      section?.posts.push(post);
+
+      const entities = {
+        ...state.entities,
+        [groupId]: newGroup,
+      };
+
+      return {
+        ...state,
+        entities,
+        loading: false,
+      };
+    }
+  ),
   on(
     actions.PostCommentSuccess,
     (state: GroupsState, { group_id, comment, sectionId }) => {
@@ -65,7 +88,7 @@ export const groupsReducer = createReducer(
       return {
         ...state,
         entities,
-        loadingComments: false,
+        loading: false,
       };
     }
   ),

@@ -4,11 +4,10 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 
 import * as dashboardStore from '../../store';
-import * as authStore from '../../../../auth/store';
 
 import { Group } from 'src/app/models/group.interface';
-import { ResponseComment, User } from 'src/app/models';
-import { take } from 'rxjs';
+import { PostRequest, ResponseComment } from 'src/app/models';
+import { GroupsService } from '../../services';
 
 @Component({
   selector: 'group-view',
@@ -17,6 +16,7 @@ import { take } from 'rxjs';
     <group-detail
       [group]="group$ | async"
       [collapsedAside]="collapsedAside$ | async"
+      (postSubmitted)="onPostSubmitted($event)"
       (commentSubmitted)="onCommentSubmitted($event)"
     ></group-detail>
   </div>`,
@@ -30,7 +30,7 @@ export class GroupViewComponent implements OnInit {
 
   entities$: any;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private groupsService: GroupsService) {}
 
   ngOnInit(): void {
     this.group$ = this.store.select(dashboardStore.getSelectedGroup);
@@ -38,14 +38,47 @@ export class GroupViewComponent implements OnInit {
     this.collapsedAside$ = this.store.select(dashboardStore.getCollapsedAside);
   }
 
+  onPostSubmitted({
+    postTitle,
+    postBody,
+    postImage,
+    groupId,
+    sectionId,
+  }: {
+    postTitle: string;
+    postBody: string;
+    postImage?: string;
+    groupId: number;
+    sectionId: number;
+  }): void {
+    let userOnce = this.groupsService.getUser();
+
+    if (userOnce?.id) {
+      let post: PostRequest;
+      if (postImage) {
+        post = {
+          title: postTitle,
+          body: postBody,
+          image: postImage,
+          section_id: sectionId,
+          user_id: userOnce?.id,
+        };
+      } else {
+        post = {
+          title: postTitle,
+          body: postBody,
+          section_id: sectionId,
+          user_id: userOnce?.id,
+        };
+      }
+      this.store.dispatch(
+        dashboardStore.PostPost({ groupId, sectionId: post.section_id, post })
+      );
+    }
+  }
+
   onCommentSubmitted(comment: ResponseComment): void {
-    let userOnce!: User;
-    this.store
-      .select(authStore.getAuthUser)
-      .pipe(take(1))
-      .subscribe((user) => {
-        if (user) userOnce = user;
-      });
+    let userOnce = this.groupsService.getUser();
 
     if (userOnce?.id) {
       const commentBody = {

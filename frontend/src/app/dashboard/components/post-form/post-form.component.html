@@ -1,10 +1,17 @@
 <div [class.showForm]="showPostForm" [class.collapsedAside]="collapsedAside">
-  <form>
+  <form (ngSubmit)="onSubmit()">
     <h2>Post to {{ selectedSection.name }}</h2>
-    <input type="text" name="title" id="title" placeholder="Post title" />
-    <textarea name="new-post" id="new-post" cols="30" rows="10">
-Say something...</textarea
+    <input
+      type="text"
+      name="title"
+      id="title"
+      placeholder="Post title"
+      [(ngModel)]="title"
+    />
+    <textarea name="body" id="body" cols="30" rows="10" [(ngModel)]="body">
+      Say something...</textarea
     >
+    <input type="file" name="image" id="image" [(ngModel)]="image" />
     <button type="submit">Send</button>
   </form>
 </div>

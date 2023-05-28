@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
-import { env } from 'src/env';
 import { HttpClient } from '@angular/common/http';
-import { Group } from 'src/app/models/group.interface';
-import { Store } from 'store';
-import { Observable, catchError, filter, map, of, switchMap, tap } from 'rxjs';
+
+import { Store } from '@ngrx/store';
+import * as authStore from '../../../auth/store';
+
+import { env } from 'src/env';
+
+import { Observable, map, take } from 'rxjs';
+import { Group, User } from 'src/app/models';
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +25,16 @@ export class GroupsService {
     return this.http
       .get<Group>(`${env.API_URL}/groups/${groupId}`)
       .pipe(map((response: any) => response.data));
+  }
+
+  getUser(): User {
+    let userOnce!: User;
+    this.store
+      .select(authStore.getAuthUser)
+      .pipe(take(1))
+      .subscribe((user) => {
+        if (user) userOnce = user;
+      });
+    return userOnce;
   }
 }
