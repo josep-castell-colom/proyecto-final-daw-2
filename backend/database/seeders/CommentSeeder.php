@@ -36,6 +36,12 @@ class CommentSeeder extends Seeder
             'post_id' => 2,
             'user_id' => 2,
         ]);
+        Comment::factory()->create([
+            'id' => 5,
+            'body' => 'A metrónomo no vamos. Tot es temps me feis es lio, Dream Theater no somos eh.',
+            'post_id' => 5,
+            'user_id' => '6',
+        ]);
 
     }
 }

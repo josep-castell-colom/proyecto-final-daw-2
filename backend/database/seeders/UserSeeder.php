@@ -83,6 +83,18 @@ class UserSeeder extends Seeder
             'password' => Hash::make('patata123'),
         ]);
 
+        $antonia = User::factory()->create([
+            'id' => 7,
+            'username' => 'antonia',
+            'name' => 'Antònia',
+            'lastname' => 'Coll',
+            'email' => 'antonia@patata.es',
+            'phone' => '955-63-23-81',
+            'address' => 'C/ de ses Figues Seques, 12',
+            'image' => 'assets/images/users/antonia.jpg',
+            'password' =>  Hash::make('patata123'),
+        ]);
+
         $josep->instruments()->attach(3);
         $josep->musicianroles()->attach(2);
         $josep->groups()->attach(1, ['isMember' => 1]);
@@ -126,5 +138,10 @@ class UserSeeder extends Seeder
         $maria->musicianroles()->attach(3);
         $maria->groups()->attach(2, ['isMember' => 1]);
         $maria->styles()->attach(5);
+
+        $antonia->instruments()->attach(3);
+        $antonia->musicianroles()->attach(2);
+        $antonia->groups()->attach(2, ['isMember' => 1]);
+        $antonia->styles()->attach(5);
     }
 }

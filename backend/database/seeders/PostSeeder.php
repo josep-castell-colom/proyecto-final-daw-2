@@ -33,7 +33,7 @@ class PostSeeder extends Seeder
         Post::factory()->create([
             'id' => 3,
             'title' => 'Burzum estàn bastant bé',
-            'body' => 'Encara que es tipo és un puto cap de fava.',
+            'body' => 'Encara que es tipo és un beneït cap de fava.',
             'image' => '/assets/images/posts/burzum.jpg',
             'section_id' => 3,
             'user_id' => 5,
@@ -42,10 +42,19 @@ class PostSeeder extends Seeder
         Post::factory()->create([
             'id' => 4,
             'title' => 'Això des facepaint com va?',
-            'body' => 'No sé com punyetes llevarme tota aquesta merda de sa cara.',
+            'body' => 'No sé com punyetes llevarme tot aquest potingue de sa cara.',
             'image' => '/assets/images/posts/facepaint.jpg',
             'section_id' => 4,
             'user_id' => 6,
+        ]);
+
+        Post::factory()->create([
+            'id' => 5,
+            'title' => 'Hem tret una cançó nova',
+            'body' => 'Sa bataca va a tota castanya, rollo tututututacatutututaca però costera avall',
+            'image' => '/assets/images/posts/bataca.jpg',
+            'section_id' => '3',
+            'user_id' => 7,
         ]);
     }
 }
