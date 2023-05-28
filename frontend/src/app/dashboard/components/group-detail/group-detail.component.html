@@ -1,0 +1,21 @@
+<div *ngIf="group">
+  <button type="button" class="show-post-form" (click)="toggleShowPost()">
+    {{ showPostForm ? "Cancel" : "New post" }}
+  </button>
+  <div class="section-selector">
+    <div *ngFor="let section of group.sections">
+      <div (click)="selectSection(section)">{{ section.name }}</div>
+    </div>
+  </div>
+  <post-form
+    [collapsedAside]="collapsedAside"
+    [selectedSection]="group.sections[selectedSection]"
+    [showPostForm]="showPostForm"
+  ></post-form>
+  <div *ngIf="group.sections[selectedSection].posts" class="selected-section">
+    <posts-view
+      [posts]="group.sections[selectedSection].posts"
+      (commentSubmitted)="onCommentSubmitted($event)"
+    ></posts-view>
+  </div>
+</div>

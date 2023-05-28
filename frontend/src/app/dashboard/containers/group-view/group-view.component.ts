@@ -16,6 +16,7 @@ import { take } from 'rxjs';
   template: `<div>
     <group-detail
       [group]="group$ | async"
+      [collapsedAside]="collapsedAside$ | async"
       (commentSubmitted)="onCommentSubmitted($event)"
     ></group-detail>
   </div>`,
@@ -24,6 +25,7 @@ export class GroupViewComponent implements OnInit {
   group$!: Observable<Group>;
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
+  collapsedAside$: Observable<boolean>;
   id: number;
 
   entities$: any;
@@ -33,6 +35,7 @@ export class GroupViewComponent implements OnInit {
   ngOnInit(): void {
     this.group$ = this.store.select(dashboardStore.getSelectedGroup);
     this.entities$ = this.store.select(dashboardStore.getAllGroupsEntities);
+    this.collapsedAside$ = this.store.select(dashboardStore.getCollapsedAside);
   }
 
   onCommentSubmitted(comment: ResponseComment): void {
@@ -43,10 +46,6 @@ export class GroupViewComponent implements OnInit {
       .subscribe((user) => {
         if (user) userOnce = user;
       });
-    let groupOnce!: Group;
-    this.group$.pipe(take(1)).subscribe((group) => {
-      if (group) groupOnce = group;
-    });
 
     if (userOnce?.id) {
       const commentBody = {
@@ -58,7 +57,7 @@ export class GroupViewComponent implements OnInit {
       const postId = comment.post.id;
       this.store.dispatch(
         dashboardStore.PostComment({
-          group: groupOnce,
+          group_id: comment.post.section.group_id,
           sectionId,
           postId,
           comment: commentBody,

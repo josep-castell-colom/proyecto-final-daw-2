@@ -23,6 +23,8 @@ import { GroupDetailComponent } from './components/group-detail/group-detail.com
 import { PostCommentsViewComponent } from './components/comments-view/comments-view.component';
 import { PostCommentDetailComponent } from './components/comment-detail/post-comment-detail.component';
 import { FormsModule } from '@angular/forms';
+import { PostFormComponent } from './components/post-form/post-form.component';
+import { GetSubscriptionPostsPipe } from '../pipes/get-subscription-posts.pipe';
 
 export const ROUTES: Routes = [
   {
@@ -71,6 +73,7 @@ export const ROUTES: Routes = [
 @NgModule({
   declarations: [
     DashboardComponent,
+    GetSubscriptionPostsPipe,
     MainAsideComponent,
     NewsFeedComponent,
     MyCalendarComponent,
@@ -82,16 +85,13 @@ export const ROUTES: Routes = [
     GroupDetailComponent,
     PostCommentsViewComponent,
     PostCommentDetailComponent,
+    PostFormComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     RouterModule.forChild(ROUTES),
     StoreModule.forFeature('dashboard', fromStore.reducers),
-    // StoreModule.forFeature(
-    //   fromStore.GROUPS_FEATURE_KEY,
-    //   fromStore.GroupsReducer
-    // ),
     FullCalendarModule,
     FontAwesomeModule,
     EffectsModule.forFeature(fromStore.effects),

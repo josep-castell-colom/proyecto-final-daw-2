@@ -3,6 +3,16 @@ import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'register',
+  styles: [
+    `
+      :host > div {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    `,
+  ],
   template: `
     <div>
       <auth-form (submitted)="registerUser($event)">

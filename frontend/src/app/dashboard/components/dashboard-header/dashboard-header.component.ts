@@ -27,7 +27,7 @@ import { Breadcrumb } from 'src/app/models/breadcrumb.interface';
 })
 export class DashboardHeaderComponent implements OnDestroy {
   @Input() group!: Group | null;
-  @Input() collapsedAside!: boolean;
+  @Input() collapsedAside!: boolean | null;
 
   title: string;
 

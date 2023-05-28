@@ -36,3 +36,8 @@ export const getSelectedGroup = createSelector(
     return router.state && entities[(router.state.params as any).id];
   }
 );
+
+export const getCollapsedAside = createSelector(
+  getGroupsState,
+  (state: fromState.GroupsState) => state.collapsedAside
+);

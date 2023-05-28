@@ -39,7 +39,7 @@ export class GroupsEffects {
         return this.apiService.post('comments', action.comment).pipe(
           map((comment) => ({
             type: groupsActions.POST_COMMENT_SUCCESS,
-            group: action.group,
+            group_id: action.group_id,
             sectionId: action.sectionId,
             comment,
           })),

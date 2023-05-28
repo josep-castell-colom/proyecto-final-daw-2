@@ -5,24 +5,14 @@ import { Section } from 'src/app/models/section.interface';
 @Component({
   selector: 'group-detail',
   styleUrls: ['group-detail.component.scss'],
-  template: `<div *ngIf="group">
-    <div class="section-selector">
-      <div *ngFor="let section of group.sections">
-        <div (click)="selectSection(section)">{{ section.name }}</div>
-      </div>
-    </div>
-    <div *ngIf="group.sections[selectedSection].posts" class="selected-section">
-      <posts-view
-        [posts]="group.sections[selectedSection].posts"
-        (commentSubmitted)="onCommentSubmitted($event)"
-      ></posts-view>
-    </div>
-  </div>`,
+  templateUrl: 'group-detail.component.html',
 })
 export class GroupDetailComponent {
   @Input() group: Group | null;
-  selectedSection: number = 0;
+  @Input() showPostForm: boolean = false;
+  @Input() collapsedAside!: boolean | null;
   @Output() commentSubmitted = new EventEmitter();
+  selectedSection: number = 0;
 
   selectSection(querySection: Section): void {
     if (this.group) {
@@ -35,5 +25,9 @@ export class GroupDetailComponent {
 
   onCommentSubmitted(comment: any): void {
     this.commentSubmitted.emit(comment);
+  }
+
+  toggleShowPost(): void {
+    this.showPostForm = !this.showPostForm;
   }
 }

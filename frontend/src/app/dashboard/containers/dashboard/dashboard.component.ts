@@ -11,19 +11,7 @@ import { Group } from 'src/app/models/group.interface';
 @Component({
   selector: 'dashboard',
   styleUrls: ['dashboard.component.scss'],
-  template: ` <div>
-    <main-aside
-      [user]="user$ | async"
-      (collapse)="collapseAsideHandler()"
-    ></main-aside>
-    <div class="pane" [class.collapsedAside]="collapsedAside">
-      <dashboard-header
-        [collapsedAside]="collapsedAside"
-        [group]="selectedGroup"
-      ></dashboard-header>
-      <router-outlet></router-outlet>
-    </div>
-  </div>`,
+  templateUrl: 'dashboard.component.html',
 })
 export class DashboardComponent implements OnInit {
   user$: Observable<User | undefined>;
@@ -31,7 +19,7 @@ export class DashboardComponent implements OnInit {
   groups$: Observable<Group[]>;
   selectedGroup!: Group;
 
-  collapsedAside: boolean = false;
+  collapsedAside$!: Observable<boolean>;
 
   constructor(
     private store: Store<fromDashboardStore.DashboardState>,
@@ -40,6 +28,9 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.user$ = this.store.select(fromAuthStore.getAuthUser);
+    this.collapsedAside$ = this.store.select(
+      fromDashboardStore.getCollapsedAside
+    );
     this.url = this.router.url;
     this.store.dispatch(fromDashboardStore.LoadAllGroups());
     this.groups$ = this.store.select(fromDashboardStore.getAllGroups);
@@ -49,6 +40,6 @@ export class DashboardComponent implements OnInit {
   }
 
   collapseAsideHandler() {
-    this.collapsedAside = !this.collapsedAside;
+    this.store.dispatch(fromDashboardStore.CollapseAside());
   }
 }

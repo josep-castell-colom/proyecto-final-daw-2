@@ -1,0 +1,50 @@
+@import "variables";
+
+:host > div {
+  position: fixed;
+  top: 200px;
+  left: 300px;
+  z-index: -10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: calc(100vw - 300px);
+  height: calc(100vh - 200px);
+  opacity: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  transition: opacity 0.3s;
+}
+
+form {
+  min-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1rem auto;
+  padding: 3rem;
+  background-color: $blue-gray-100;
+  border-radius: 20px;
+  box-shadow: 0 0 10px black;
+}
+
+input {
+  padding: 0.5rem;
+  border-radius: 20px 20px 0 0;
+}
+
+button {
+  padding: 1.5rem;
+  border-radius: 0 0 20px 20px;
+}
+
+.showForm {
+  opacity: 1 !important;
+  z-index: 5 !important;
+}
+
+.collapsedAside {
+  width: calc(100vw - 50px) !important;
+  left: 50px !important;
+}

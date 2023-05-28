@@ -8,6 +8,16 @@ import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'login',
+  styles: [
+    `
+      :host > div {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    `,
+  ],
   template: `
     <div>
       <auth-form (submitted)="loginUser($event)">

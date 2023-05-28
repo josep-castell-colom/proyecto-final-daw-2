@@ -16,7 +16,7 @@ import { Post } from 'src/app/models/post.interface';
   `,
 })
 export class PostsViewComponent {
-  @Input() posts: Post[];
+  @Input() posts: Post[] | null;
 
   @Output() commentSubmitted = new EventEmitter();
 

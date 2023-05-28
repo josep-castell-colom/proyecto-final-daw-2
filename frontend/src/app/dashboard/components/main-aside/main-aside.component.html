@@ -1,0 +1,49 @@
+<div [class.spanHidden]="spanHidden">
+  <ul>
+    <li
+      [routerLink]="['/dashboard/news-feed']"
+      routerLinkActive="active"
+      (click)="hideGroups()"
+    >
+      <fa-icon [icon]="faNews" class="main-icon"></fa-icon>
+      <span> News feed </span>
+      <fa-icon [icon]="faGear" class="gear"></fa-icon>
+    </li>
+    <li
+      [routerLink]="['/dashboard/my-groups']"
+      (click)="showGroups()"
+      routerLinkActive="active"
+    >
+      <fa-icon [icon]="faMusic" class="main-icon"></fa-icon>
+      <span> My groups </span>
+      <fa-icon [icon]="faGear" class="gear"></fa-icon>
+    </li>
+    <ul class="groups" [class.hidden]="groupsListHidden" *ngIf="user?.groups">
+      <li
+        *ngFor="let group of user?.groups"
+        [routerLink]="['/dashboard/my-groups/', group.id]"
+        routerLinkActive="active"
+      >
+        {{ group.name }}
+      </li>
+    </ul>
+    <li
+      [routerLink]="['/dashboard/my-calendar']"
+      routerLinkActive="active"
+      (click)="hideGroups()"
+    >
+      <fa-icon [icon]="faCalendar" class="main-icon"></fa-icon>
+      <span> My calendar </span>
+    </li>
+  </ul>
+  <ul class="bottom">
+    <li class="logout" (click)="logOutHandler()">
+      <fa-icon [icon]="faLogOut" class="main-icon"></fa-icon>
+      <span>Log Out</span>
+    </li>
+  </ul>
+  <div class="arrow" (click)="collapseAside()">
+    <fa-icon *ngIf="!spanHidden" [icon]="faLeft"></fa-icon>
+    <fa-icon *ngIf="spanHidden" [icon]="faRight"></fa-icon>
+  </div>
+</div>

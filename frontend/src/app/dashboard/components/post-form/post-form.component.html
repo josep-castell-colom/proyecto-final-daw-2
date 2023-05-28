@@ -1,0 +1,10 @@
+<div [class.showForm]="showPostForm" [class.collapsedAside]="collapsedAside">
+  <form>
+    <h2>Post to {{ selectedSection.name }}</h2>
+    <input type="text" name="title" id="title" placeholder="Post title" />
+    <textarea name="new-post" id="new-post" cols="30" rows="10">
+Say something...</textarea
+    >
+    <button type="submit">Send</button>
+  </form>
+</div>

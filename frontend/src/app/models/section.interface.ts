@@ -5,4 +5,5 @@ export interface Section {
   name: string;
   isPublic: boolean;
   posts: Post[];
+  group_id: number;
 }
