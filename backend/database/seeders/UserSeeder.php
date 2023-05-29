@@ -98,6 +98,7 @@ class UserSeeder extends Seeder
         $josep->instruments()->attach(3);
         $josep->musicianroles()->attach(2);
         $josep->groups()->attach(1, ['isMember' => 1]);
+        $josep->groups()->attach(2);
         $josep->styles()->attach(1);
         $josep->styles()->attach(2);
         $josep->styles()->attach(3);
@@ -121,7 +122,7 @@ class UserSeeder extends Seeder
 
         $pep->instruments()->attach(4);
         $pep->musicianroles()->attach(3);
-        $pep->groups()->attach(1, ['isAdmin' => 1]);
+        $pep->groups()->attach(1, ['isAdmin' => 1, 'isMember' => 1]);
         $pep->styles()->attach(1);
         $pep->styles()->attach(2);
         $pep->styles()->attach(3);
@@ -130,13 +131,15 @@ class UserSeeder extends Seeder
         $joana->instruments()->attach(1);
         $joana->instruments()->attach(2);
         $joana->musicianroles()->attach(1);
-        $joana->groups()->attach(2, ['isAdmin' => 1]);
+        $joana->groups()->attach(2, ['isAdmin' => 1, 'isMember' => 1]);
+        $joana->groups()->attach(1, ['isMember' => 1]);
         $joana->styles()->attach(5);
 
         $maria->instruments()->attach(1);
         $maria->instruments()->attach(4);
         $maria->musicianroles()->attach(3);
         $maria->groups()->attach(2, ['isMember' => 1]);
+        $maria->groups()->attach(1);
         $maria->styles()->attach(5);
 
         $antonia->instruments()->attach(3);
