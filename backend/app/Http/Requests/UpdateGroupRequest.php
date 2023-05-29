@@ -26,6 +26,10 @@ class UpdateGroupRequest extends FormRequest
                 'city' => 'string|nullable|max:255',
                 'description' => 'string|nullable|max:2500',
                 'image' => 'string|nullable|max:255',
+                'group_id' => 'numeric',
+                'user_id' => 'numeric',
+                'isAdmin' => 'boolean',
+                'isMember' => 'boolean',
             ];
     }
 }

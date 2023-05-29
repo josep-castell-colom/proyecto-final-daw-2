@@ -10,6 +10,7 @@ use App\Http\Resources\GroupResource;
 use App\Models\Group;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Request;
 
 class GroupController extends Controller
 {
@@ -46,7 +47,17 @@ class GroupController extends Controller
     public function update(UpdateGroupRequest $request, string $id): JsonResponse
     {
         $validated = $request->validated();
-        Group::findOrFail($id)->update($validated);
+        $group = Group::findOrFail($id);
+        $group->update($validated);
+        if (isset($request->user_id))
+        {
+            $group->users()->attach(
+                $request->user_id, [
+                    'isAdmin' => $request->isAdmin,
+                    'isMember' => $request->isMember,
+                ]
+            );
+        }
 
         return response()->json([
             'data' => new GroupResource(Group::findOrFail($id)),
