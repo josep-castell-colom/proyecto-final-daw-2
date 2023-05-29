@@ -2,7 +2,8 @@
 
 :host > div {
   height: calc(100vh - 50px);
-  width: 100%;
+  top: 120px;
+  padding-top: 120px;
   overflow-x: hidden;
   overflow-y: scroll;
 }
