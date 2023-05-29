@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -22,9 +23,10 @@ import { GroupViewComponent } from './containers/group-view/group-view.component
 import { GroupDetailComponent } from './components/group-detail/group-detail.component';
 import { PostCommentsViewComponent } from './components/comments-view/comments-view.component';
 import { PostCommentDetailComponent } from './components/comment-detail/post-comment-detail.component';
-import { FormsModule } from '@angular/forms';
 import { PostFormComponent } from './components/post-form/post-form.component';
 import { GetSubscriptionPostsPipe } from '../pipes/get-subscription-posts.pipe';
+import { CheckSectionVisibilityPipe } from '../pipes/check-section-visibility.pipe';
+import { UserViewComponent } from './containers/user-view/user-view.component';
 
 export const ROUTES: Routes = [
   {
@@ -50,17 +52,16 @@ export const ROUTES: Routes = [
         ],
       },
       {
-        path: 'view',
-        component: GroupViewComponent,
-        outlet: 'group',
-      },
-      {
         path: 'my-calendar',
         component: MyCalendarComponent,
       },
       {
         path: 'groups/:id',
         component: GroupViewComponent,
+      },
+      {
+        path: 'users/:id',
+        component: UserViewComponent,
       },
     ],
   },
@@ -72,20 +73,22 @@ export const ROUTES: Routes = [
 
 @NgModule({
   declarations: [
+    CheckSectionVisibilityPipe,
     DashboardComponent,
-    GetSubscriptionPostsPipe,
-    MainAsideComponent,
-    NewsFeedComponent,
-    MyCalendarComponent,
     DashboardHeaderComponent,
+    GetSubscriptionPostsPipe,
+    GroupDetailComponent,
+    GroupViewComponent,
+    MainAsideComponent,
+    MyCalendarComponent,
+    MyGroupsComponent,
+    NewsFeedComponent,
     PostsViewComponent,
     PostDetailComponent,
-    MyGroupsComponent,
-    GroupViewComponent,
-    GroupDetailComponent,
     PostCommentsViewComponent,
     PostCommentDetailComponent,
     PostFormComponent,
+    UserViewComponent,
   ],
   imports: [
     CommonModule,

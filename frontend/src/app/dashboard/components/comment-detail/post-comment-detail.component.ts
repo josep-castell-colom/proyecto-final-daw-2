@@ -15,7 +15,9 @@ import { ResponseComment } from 'src/app/models';
           />
         </div>
         <div class="message">
-          <a href="#">{{ comment.user.name }}</a
+          <a [routerLink]="['/dashboard/users/', comment.user.id]">{{
+            comment.user.name
+          }}</a
           >:
           <div>
             {{ comment.body }}

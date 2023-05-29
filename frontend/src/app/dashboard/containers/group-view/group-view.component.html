@@ -1,0 +1,23 @@
+<div *ngIf="user$ | async">
+  <div *ngIf="group" class="section-selector">
+    <div (click)="selectGroupProfile()">{{ group.name }}</div>
+    <div
+      *ngFor="
+        let section of group.sections | checkSectionVisibility : user : group.id
+      "
+    >
+      <div (click)="selectSection(section)">
+        {{ section.name }}
+      </div>
+    </div>
+  </div>
+  <group-detail
+    [collapsedAside]="collapsedAside$ | async"
+    [group]="group$ | async"
+    [selectedSection]="selectedSectionIndex"
+    [user]="user$ | async"
+    (postSubmitted)="onPostSubmitted($event)"
+    (commentSubmitted)="onCommentSubmitted($event)"
+    (groupEditSubmitted)="onGroupEditSubmitted($event)"
+  ></group-detail>
+</div>

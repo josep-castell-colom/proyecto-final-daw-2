@@ -6,6 +6,9 @@ import { Group } from 'src/app/models';
 export const LOAD_ALL_GROUPS = '[Dashboard] Load groups';
 export const LOAD_ALL_GROUPS_FAIL = '[Dashboard] Load groups fail';
 export const LOAD_ALL_GROUPS_SUCCESS = '[Dashboard] Load groups success';
+export const LOAD_ALL_USERS = '[Dashboard] Load users';
+export const LOAD_ALL_USERS_FAIL = '[Dashboard] Load users fail';
+export const LOAD_ALL_USERS_SUCCESS = '[Dashboard] Load users success';
 
 export const LOAD_AUTH_USER_GROUPS = '[Dashboard] Load auth user groups';
 export const LOAD_AUTH_USER_GROUPS_FAIL =
@@ -34,6 +37,16 @@ export const LoadAllGroupsFail = createAction(
 export const LoadAllGroupsSuccess = createAction(
   LOAD_ALL_GROUPS_SUCCESS,
   props<{ groups: fromModels.Group[] }>()
+);
+
+export const LoadAllUsers = createAction(LOAD_ALL_USERS);
+export const LoadAllUsersFail = createAction(
+  LOAD_ALL_USERS_FAIL,
+  props<{ error: any }>()
+);
+export const LoadAllUsersSuccess = createAction(
+  LOAD_ALL_USERS_SUCCESS,
+  props<{ users: fromModels.User[] }>()
 );
 
 export const LoadAuthUserGroups = createAction(LOAD_AUTH_USER_GROUPS);

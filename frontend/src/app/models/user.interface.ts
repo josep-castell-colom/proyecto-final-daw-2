@@ -8,6 +8,7 @@ export interface User {
   address?: string;
   image?: string;
   groups?: UserGroup[];
+  instruments?: { id: number; name: string }[];
 }
 
 interface UserGroup {
