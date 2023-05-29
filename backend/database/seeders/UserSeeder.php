@@ -107,6 +107,30 @@ class UserSeeder extends Seeder
             'password' => Hash::make('patata123'),
         ]);
 
+        $donna = User::factory()->create([
+            'id' => 9,
+            'username' => 'donna',
+            'name' => 'Donna',
+            'lastname' => 'Troy',
+            'email' => 'donna@patata.es',
+            'phone' => '555-45-33-22',
+            'address' => 'C/ de Sa Mola, 4',
+            'image' => 'assets/img/users/donna.jpg',
+            'password' => Hash::make('patata123'),
+        ]);
+
+        $mateu = User::factory()->create([
+            'id' => 10,
+            'username' => 'mateu',
+            'name' => 'Mateu',
+            'lastname' => 'Llabrés',
+            'email' => 'mateu@patata.es',
+            'phone' => '452-63-78-23',
+            'address' => 'C/de sa Serra, 1',
+            'image' => 'assets/img/users/mateu.jpg',
+            'password' => Hash::make('patata123'),
+        ]);
+
         $josep->instruments()->attach(3);
         $josep->musicianroles()->attach(2);
         $josep->groups()->attach(1, ['isMember' => 1]);
@@ -163,6 +187,16 @@ class UserSeeder extends Seeder
         $miquel->musicianroles()->attach(1);
         $miquel->groups()->attach(3, ['isAdmin' => 1, 'isMember' => 1]);
         $miquel->styles()->attach(4);
-        
+
+        $donna->instruments()->attach(3);
+        $donna->musicianroles()->attach(2);
+        $donna->groups()->attach(3, ['isMember' => 1]);
+        $donna->styles()->attach(4);
+
+        $mateu->instruments()->attach(2);
+        $mateu->musicianroles()->attach(4);
+        $mateu->groups()->attach(3, ['isMember' => 1]);
+        $mateu->styles()->attach(4);
+        $mateu->styles()->attach(2);
     }
 }
