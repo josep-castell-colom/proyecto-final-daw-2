@@ -92,7 +92,19 @@ class UserSeeder extends Seeder
             'phone' => '955-63-23-81',
             'address' => 'C/ de ses Figues Seques, 12',
             'image' => 'assets/images/users/antonia.jpg',
-            'password' =>  Hash::make('patata123'),
+            'password' => Hash::make('patata123'),
+        ]);
+
+        $miquel = User::factory()->create([
+            'id' => 8,
+            'username' => 'miquel',
+            'name' => 'Miquel',
+            'lastname' => 'Bonnin',
+            'email' => 'miquel@patata.es',
+            'phone' => '905-13-22-81',
+            'address' => 'C/ Mula Francis, 14',
+            'image' => 'assets/images/users/miquel.jpg',
+            'password' => Hash::make('patata123'),
         ]);
 
         $josep->instruments()->attach(3);
@@ -146,5 +158,11 @@ class UserSeeder extends Seeder
         $antonia->musicianroles()->attach(2);
         $antonia->groups()->attach(2, ['isMember' => 1]);
         $antonia->styles()->attach(5);
+
+        $miquel->instruments()->attach(1);
+        $miquel->musicianroles()->attach(1);
+        $miquel->groups()->attach(3, ['isAdmin' => 1, 'isMember' => 1]);
+        $miquel->styles()->attach(4);
+        
     }
 }

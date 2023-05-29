@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Group;
+use DB;
 use Illuminate\Database\Seeder;
 
 class GroupSeeder extends Seeder
@@ -17,7 +18,7 @@ class GroupSeeder extends Seeder
             'name' => 'Es Foradats',
             'city' => 'Palma de Mallorca',
             'description' => 'Feim rumba trash pop metal. O quelcom així, diuen.',
-            'image' => '/storage/img/1/esforadats.jpg',
+            'image' => '/assets/img/groups/esforadats.jpg',
         ]);
 
         $esforadats->styles()->attach(1);
@@ -30,9 +31,13 @@ class GroupSeeder extends Seeder
             'name' => 'Ses Bledes',
             'city' => 'Muro',
             'description' => 'Cantam molt bé, som tope pros',
-            'image' => '/storage/img/1/sesbledes.jpg',
+            'image' => '/assets/img/groups/sesbledes.jpg',
         ]);
 
         $sesbledes->styles()->attach(5);
+
+        //Load data from DB dump
+        DB::unprepared(file_get_contents('database/seeders/dumps/groups.sql'));
+
     }
 }

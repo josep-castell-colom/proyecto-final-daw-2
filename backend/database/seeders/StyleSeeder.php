@@ -36,5 +36,10 @@ class StyleSeeder extends Seeder
             'id' => 5,
             'name' => 'black metal',
         ]);
+
+        Style::factory()->create([
+            'id' => 6,
+            'name' => 'pasodoble',
+        ]);
     }
 }

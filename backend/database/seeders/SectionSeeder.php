@@ -47,5 +47,14 @@ class SectionSeeder extends Seeder
             'isPublic' => 0,
             'group_id' => 2,
         ]);
+
+        Section::factory()->create([
+            'id' => 5,
+            'name' => 'El muro del pasteleo',
+            'description' => 'Diabétic@s abstenerse porfa',
+            'image' => '/storage/img/1/pasteleo.jpg',
+            'isPublic' => 1,
+            'group_id' => 3,
+        ]);
     }
 }
