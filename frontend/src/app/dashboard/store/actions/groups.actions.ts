@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 
 import * as fromModels from 'src/app/models';
+import { Group } from 'src/app/models';
 
 export const LOAD_ALL_GROUPS = '[Dashboard] Load groups';
 export const LOAD_ALL_GROUPS_FAIL = '[Dashboard] Load groups fail';
@@ -18,6 +19,10 @@ export const POST_POST_SUCCESS = '[Dashboard] Post post success';
 export const POST_COMMENT = '[Dashboard] Post comment';
 export const POST_COMMENT_FAIL = '[Dashboard] Post comment fail';
 export const POST_COMMENT_SUCCESS = '[Dashboard] Post comment success';
+
+export const EDIT_GROUP = '[Dashboard] Edit group';
+export const EDIT_GROUP_FAIL = '[Dashboard] Edit group fail';
+export const EDIT_GROUP_SUCCESS = '[Dashboard] Edit group success';
 
 export const COLLAPSE_ASIDE = '[Dashboard] Collapse aside';
 
@@ -81,6 +86,24 @@ export const PostCommentSuccess = createAction(
     group_id: number;
     comment: fromModels.ResponseComment;
     sectionId: number;
+  }>()
+);
+export const EditGroup = createAction(
+  EDIT_GROUP,
+  props<{
+    group_id: number;
+    group: fromModels.GroupUpdate;
+  }>()
+);
+export const EditGroupFail = createAction(
+  EDIT_GROUP_FAIL,
+  props<{ error: any }>()
+);
+export const EditGroupSuccess = createAction(
+  EDIT_GROUP_SUCCESS,
+  props<{
+    group_id: number;
+    group: Group;
   }>()
 );
 

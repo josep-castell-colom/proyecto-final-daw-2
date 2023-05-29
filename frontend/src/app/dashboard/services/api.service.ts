@@ -26,4 +26,10 @@ export class ApiService {
       .post(`${env.API_URL}/${collection}`, JSON.stringify(body))
       .pipe(map((response: any) => response.data));
   }
+
+  patch(collection: string, id: number, body: object): Observable<any> {
+    return this.http
+      .patch(`${env.API_URL}/${collection}/${id}`, JSON.stringify(body))
+      .pipe(map((response: any) => response.data));
+  }
 }

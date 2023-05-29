@@ -1,22 +1,105 @@
 <div *ngIf="group">
-  <button type="button" class="show-post-form" (click)="toggleShowPost()">
+  <button
+    *ngIf="selectedSection >= 0"
+    type="button"
+    class="show-post-form"
+    (click)="toggleShowPost()"
+  >
     {{ showPostForm ? "Cancel" : "New post" }}
   </button>
-  <div class="section-selector">
-    <div *ngFor="let section of group.sections">
-      <div (click)="selectSection(section)">{{ section.name }}</div>
-    </div>
-  </div>
   <post-form
+    *ngIf="selectedSection >= 0"
     [collapsedAside]="collapsedAside"
     [selectedSection]="group.sections[selectedSection]"
     [showPostForm]="showPostForm"
     (postSubmitted)="onPostSubmitted($event)"
   ></post-form>
-  <div *ngIf="group.sections[selectedSection].posts" class="selected-section">
+  <div
+    *ngIf="selectedSection >= 0 && group.sections[selectedSection].posts"
+    class="selected-section"
+  >
     <posts-view
       [posts]="group.sections[selectedSection].posts"
       (commentSubmitted)="onCommentSubmitted($event)"
     ></posts-view>
+  </div>
+  <div *ngIf="selectedSection === -1" class="group-profile">
+    <div class="profile">
+      <div class="info">
+        <h2 class="group-name">{{ groupName }}</h2>
+        <fa-icon
+          *ngIf="userIsAdmin && !editingGroupForm"
+          [icon]="faEdit"
+          (click)="editingGroupForm = true"
+        ></fa-icon
+        ><br />
+        <img [src]="group.image" alt="Group profile image" />
+        <p class="group-headquarters profile-label">Headquarters:</p>
+        <p class="profile-info">{{ groupCity }}</p>
+        <p class="group-description profile-label">Description:</p>
+        <p class="profile-info">{{ groupDescription }}</p>
+        <div class="group-sections">
+          <p class="group-sections profile-label">Sections:</p>
+          <div class="sections-container">
+            <div *ngFor="let section of group.sections">
+              <p class="profile-info">
+                - {{ section.name }} ({{
+                  section.isPublic ? "Public" : "Private"
+                }})
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{ userIsAdmin }}
+      <form (ngSubmit)="onEditGroupSubmitted()" *ngIf="editingGroupForm">
+        <div>
+          <label for="group-name">
+            Group name:<br />
+            <input
+              type="text"
+              name="group-name"
+              id="group-name"
+              *ngIf="editingGroupForm"
+              [(ngModel)]="groupName"
+            />
+          </label>
+          <label for="group-image">
+            Group image:<br />
+            <input type="file" name="group-image" *ngIf="editingGroupForm" />
+          </label>
+          <label for="group-city">
+            Headquarters:<br />
+            <input
+              type="text"
+              name="group-city"
+              id="group-city"
+              *ngIf="editingGroupForm"
+              [(ngModel)]="groupCity"
+            />
+          </label>
+          <label for="group-description">
+            Description:<br />
+            <textarea
+              type="text"
+              name="group-description"
+              id="group-description"
+              *ngIf="editingGroupForm"
+              [(ngModel)]="groupDescription"
+              cols="30"
+              rows="3"
+            ></textarea>
+          </label>
+          <label for="group-sections">
+            Sections:
+            <fieldset>
+              <p *ngFor="let section of group.sections">{{ section.name }}</p>
+            </fieldset>
+            <fa-icon [icon]="faAdd"></fa-icon>
+          </label>
+        </div>
+        <button type="submit">Save</button>
+      </form>
+    </div>
   </div>
 </div>

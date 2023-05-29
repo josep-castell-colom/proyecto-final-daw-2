@@ -18,9 +18,9 @@
       <span> My groups </span>
       <fa-icon [icon]="faGear" class="gear"></fa-icon>
     </li>
-    <ul class="groups" [class.hidden]="groupsListHidden" *ngIf="user?.groups">
+    <ul class="groups" [class.hidden]="groupsListHidden">
       <li
-        *ngFor="let group of user?.groups"
+        *ngFor="let group of authUserGroups$ | async"
         [routerLink]="['/dashboard/my-groups/', group.id]"
         routerLinkActive="active"
       >

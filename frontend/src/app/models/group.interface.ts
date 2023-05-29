@@ -10,3 +10,12 @@ export interface Group {
   image?: string;
   users: User[];
 }
+
+export interface GroupUpdate {
+  id: number;
+  name?: string;
+  city?: string;
+  description?: string;
+  image?: string;
+  users?: number[];
+}

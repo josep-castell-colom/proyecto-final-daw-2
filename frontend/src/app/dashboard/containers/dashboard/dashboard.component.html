@@ -6,7 +6,7 @@
   <div class="pane" [class.collapsedAside]="collapsedAside$ | async">
     <dashboard-header
       [collapsedAside]="collapsedAside$ | async"
-      [group]="selectedGroup"
+      [group]="selectedGroup$ | async"
     ></dashboard-header>
     <router-outlet></router-outlet>
   </div>

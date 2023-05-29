@@ -69,4 +69,24 @@ export class GroupsEffects {
       })
     )
   );
+
+  editGroup$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(groupsActions.EditGroup),
+      switchMap((action) => {
+        return this.apiService
+          .patch('groups', action.group_id, action.group)
+          .pipe(
+            map((group) => ({
+              type: groupsActions.EDIT_GROUP_SUCCESS,
+              group_id: action.group_id,
+              group,
+            })),
+            catchError((error) =>
+              of({ type: groupsActions.EDIT_GROUP_FAIL, error })
+            )
+          );
+      })
+    )
+  );
 }

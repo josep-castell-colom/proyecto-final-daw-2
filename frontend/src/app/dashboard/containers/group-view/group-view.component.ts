@@ -4,38 +4,75 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 
 import * as dashboardStore from '../../store';
+import { getAuthUser } from 'src/auth/store';
 
 import { Group } from 'src/app/models/group.interface';
-import { PostRequest, ResponseComment } from 'src/app/models';
+import {
+  GroupUpdate,
+  PostRequest,
+  ResponseComment,
+  Section,
+  User,
+} from 'src/app/models';
 import { GroupsService } from '../../services';
 
 @Component({
   selector: 'group-view',
   styleUrls: ['group-view.component.scss'],
-  template: `<div>
+  template: `<div *ngIf="user$ | async">
+    <div *ngIf="group" class="section-selector">
+      <div (click)="selectGroupProfile()">{{ group.name }}</div>
+      <div *ngFor="let section of group.sections">
+        <div (click)="selectSection(section)">{{ section.name }}</div>
+      </div>
+    </div>
     <group-detail
-      [group]="group$ | async"
       [collapsedAside]="collapsedAside$ | async"
+      [group]="group$ | async"
+      [selectedSection]="selectedSectionIndex"
+      [user]="user$ | async"
       (postSubmitted)="onPostSubmitted($event)"
       (commentSubmitted)="onCommentSubmitted($event)"
+      (groupEditSubmitted)="onGroupEditSubmitted($event)"
     ></group-detail>
   </div>`,
 })
 export class GroupViewComponent implements OnInit {
+  collapsedAside$: Observable<boolean>;
   group$!: Observable<Group>;
+  group!: Group;
+  id: number;
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
-  collapsedAside$: Observable<boolean>;
-  id: number;
+  user$!: Observable<User | undefined>;
 
-  entities$: any;
+  selectedSectionIndex: number = -1;
+  selectedSectionId!: number | undefined;
 
   constructor(private store: Store, private groupsService: GroupsService) {}
 
   ngOnInit(): void {
     this.group$ = this.store.select(dashboardStore.getSelectedGroup);
-    this.entities$ = this.store.select(dashboardStore.getAllGroupsEntities);
     this.collapsedAside$ = this.store.select(dashboardStore.getCollapsedAside);
+    this.user$ = this.store.select(getAuthUser);
+    this.group$.subscribe((group) => (this.group = group));
+  }
+
+  selectSection(querySection: Section): void {
+    if (this.group) {
+      const indexFound = this.group?.sections.findIndex(
+        (section) => section.id === querySection.id
+      );
+      if (indexFound !== -1) {
+        this.selectedSectionIndex = indexFound;
+        this.selectedSectionId = querySection.id;
+      }
+    }
+  }
+
+  selectGroupProfile(): void {
+    this.selectedSectionIndex = -1;
+    this.selectedSectionId = undefined;
   }
 
   onPostSubmitted({
@@ -43,37 +80,33 @@ export class GroupViewComponent implements OnInit {
     postBody,
     postImage,
     groupId,
-    sectionId,
   }: {
     postTitle: string;
     postBody: string;
     postImage?: string;
     groupId: number;
-    sectionId: number;
   }): void {
     let userOnce = this.groupsService.getUser();
 
     if (userOnce?.id) {
-      let post: PostRequest;
-      if (postImage) {
-        post = {
+      if (this.selectedSectionId) {
+        let post: PostRequest = {
           title: postTitle,
           body: postBody,
-          image: postImage,
-          section_id: sectionId,
+          section_id: this.selectedSectionId,
           user_id: userOnce?.id,
         };
-      } else {
-        post = {
-          title: postTitle,
-          body: postBody,
-          section_id: sectionId,
-          user_id: userOnce?.id,
-        };
+        if (postImage) {
+          post.image = postImage;
+        }
+        this.store.dispatch(
+          dashboardStore.PostPost({
+            groupId,
+            sectionId: this.selectedSectionId,
+            post,
+          })
+        );
       }
-      this.store.dispatch(
-        dashboardStore.PostPost({ groupId, sectionId: post.section_id, post })
-      );
     }
   }
 
@@ -97,5 +130,31 @@ export class GroupViewComponent implements OnInit {
         })
       );
     }
+  }
+
+  onGroupEditSubmitted({
+    groupName,
+    groupImage,
+    groupCity,
+    groupDescription,
+  }: {
+    groupName?: string;
+    groupImage?: string;
+    groupCity?: string;
+    groupDescription?: string;
+  }) {
+    const group: GroupUpdate = {
+      id: this.group.id,
+      name: groupName,
+      image: groupImage,
+      city: groupCity,
+      description: groupDescription,
+    };
+    this.store.dispatch(
+      dashboardStore.EditGroup({
+        group_id: this.group.id,
+        group,
+      })
+    );
   }
 }

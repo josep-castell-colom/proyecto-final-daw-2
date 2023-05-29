@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -25,7 +25,7 @@ import { Breadcrumb } from 'src/app/models/breadcrumb.interface';
     </div>
   </div>`,
 })
-export class DashboardHeaderComponent implements OnDestroy {
+export class DashboardHeaderComponent implements OnChanges, OnDestroy {
   @Input() group!: Group | null;
   @Input() collapsedAside!: boolean | null;
 
@@ -44,6 +44,10 @@ export class DashboardHeaderComponent implements OnDestroy {
           this.urlChangesHanler(e.url);
         });
       });
+  }
+
+  ngOnChanges(): void {
+    if (this.group) this.title = this.group.name;
   }
 
   ngOnDestroy(): void {

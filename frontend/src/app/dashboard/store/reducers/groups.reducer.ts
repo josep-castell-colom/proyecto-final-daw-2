@@ -92,13 +92,31 @@ export const groupsReducer = createReducer(
       };
     }
   ),
-  on(actions.CollapseAside, (state: GroupsState) => {
+  on(actions.EditGroup, (state: GroupsState) => {
     return {
       ...state,
-      collapsedAside: !state.collapsedAside,
+      loading: true,
+    };
+  }),
+  on(actions.EditGroupSuccess, (state: GroupsState, { group_id, group }) => {
+    const entities = {
+      ...state.entities,
+      [group_id]: group,
+    };
+
+    return {
+      ...state,
+      entities,
+      loading: false,
     };
   })
 );
+on(actions.CollapseAside, (state: GroupsState) => {
+  return {
+    ...state,
+    collapsedAside: !state.collapsedAside,
+  };
+});
 
 export function GroupsReducer(state: GroupsState, action: Action) {
   return groupsReducer(state, action);

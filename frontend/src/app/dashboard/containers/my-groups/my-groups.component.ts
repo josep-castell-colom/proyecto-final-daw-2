@@ -11,18 +11,7 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'my-groups',
   styleUrls: ['my-groups.component.scss'],
-  template: `<div>
-    <div class="group-selector">
-      <div
-        *ngFor="let group of authUserGroups | async"
-        [routerLink]="['/dashboard/my-groups', group.id]"
-        routerLinkActive="active"
-      >
-        {{ group.name }}
-      </div>
-    </div>
-    <router-outlet></router-outlet>
-  </div>`,
+  templateUrl: 'my-groups.component.html',
 })
 export class MyGroupsComponent implements OnInit {
   authUserGroups!: Observable<Group[] | undefined>;

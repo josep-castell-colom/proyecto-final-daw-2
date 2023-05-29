@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
   user$: Observable<User | undefined>;
   url: string;
   groups$: Observable<Group[]>;
-  selectedGroup!: Group;
+  selectedGroup$!: Observable<Group>;
 
   collapsedAside$!: Observable<boolean>;
 
@@ -34,9 +34,9 @@ export class DashboardComponent implements OnInit {
     this.url = this.router.url;
     this.store.dispatch(fromDashboardStore.LoadAllGroups());
     this.groups$ = this.store.select(fromDashboardStore.getAllGroups);
-    this.store
-      .select(fromDashboardStore.getSelectedGroup)
-      .subscribe((group) => (this.selectedGroup = group));
+    this.selectedGroup$ = this.store.select(
+      fromDashboardStore.getSelectedGroup
+    );
   }
 
   collapseAsideHandler() {
