@@ -27,6 +27,7 @@ import { PostFormComponent } from './components/post-form/post-form.component';
 import { GetSubscriptionPostsPipe } from '../pipes/get-subscription-posts.pipe';
 import { CheckSectionVisibilityPipe } from '../pipes/check-section-visibility.pipe';
 import { UserViewComponent } from './containers/user-view/user-view.component';
+import { CheckUserIsMemberPipe } from '../pipes/check-member.pipe';
 
 export const ROUTES: Routes = [
   {
@@ -67,13 +68,14 @@ export const ROUTES: Routes = [
   },
   // {
   //   path: '**',
-  //   redirectTo: 'dashboard/news-feed',
+  //   redirectTo: '/dashboard',
   // },
 ];
 
 @NgModule({
   declarations: [
     CheckSectionVisibilityPipe,
+    CheckUserIsMemberPipe,
     DashboardComponent,
     DashboardHeaderComponent,
     GetSubscriptionPostsPipe,

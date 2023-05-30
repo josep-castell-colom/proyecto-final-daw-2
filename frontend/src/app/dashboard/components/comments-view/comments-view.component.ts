@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ResponseComment } from 'src/app/models';
+import { ResponseComment, User } from 'src/app/models';
 
 @Component({
   selector: 'post-comments-view',
@@ -8,7 +8,11 @@ import { ResponseComment } from 'src/app/models';
     <div>
       <div *ngIf="showComments">
         <div *ngFor="let comment of comments" class="comment-wrapper">
-          <post-comment-detail [comment]="comment"></post-comment-detail>
+          <post-comment-detail
+            [comment]="comment"
+            [user]="user"
+            (deleteComment)="onDeleteComment($event)"
+          ></post-comment-detail>
         </div>
         <form (ngSubmit)="onSubmit()">
           <input
@@ -28,8 +32,10 @@ import { ResponseComment } from 'src/app/models';
 })
 export class PostCommentsViewComponent implements OnInit {
   @Input() comments: ResponseComment[];
+  @Input() user: User | null | undefined;
 
   @Output() submitted = new EventEmitter<string>();
+  @Output() deleteComment = new EventEmitter();
 
   message: string;
   showComments = false;
@@ -48,5 +54,9 @@ export class PostCommentsViewComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted.emit(this.message);
+  }
+
+  onDeleteComment(commentId: number) {
+    this.deleteComment.emit(commentId);
   }
 }

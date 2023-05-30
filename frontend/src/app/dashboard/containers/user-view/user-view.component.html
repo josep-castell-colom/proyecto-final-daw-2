@@ -1,10 +1,16 @@
 <div>
   <div *ngIf="user" class="profile">
     <div>
-      <h2 class="user-name">{{ user.name }} {{ user.lastname }}</h2>
-      <fa-icon [icon]="faEdit" *ngIf="userIsOwner"></fa-icon><br />
-      <p>{{ user.email }}</p>
-      <p>{{ user.phone }}</p>
+      <h2 class="user-name">{{ userName }} {{ userLastName }}</h2>
+      <fa-icon
+        [icon]="faEdit"
+        *ngIf="userIsOwner"
+        (click)="editing = true"
+      ></fa-icon
+      ><br />
+      <p>{{ userMail }}</p>
+      <p>{{ userPhone }}</p>
+      <p>{{ userAddress }}</p>
       <p>Instruments:</p>
       <ul>
         <li *ngFor="let instrument of user.instruments" class="instrument-name">
@@ -18,4 +24,42 @@
     </div>
     <img [src]="user.image" alt="User profile image" />
   </div>
+  <form (ngSubmit)="onUserEditSubmit()" *ngIf="editing">
+    <div>
+      <label for="name">
+        Name:
+        <input type="text" name="name" id="name" [(ngModel)]="userName" />
+      </label>
+      <label for="last-name">
+        Last name:
+        <input
+          type="text"
+          name="last-name"
+          id="last-name"
+          [(ngModel)]="userLastName"
+        />
+      </label>
+      <label for="email">
+        E-mail:
+        <input type="text" name="email" id="email" [(ngModel)]="userMail" />
+      </label>
+      <label for="phone">
+        Phone:
+        <input type="text" name="phone" id="phone" [(ngModel)]="userPhone" />
+      </label>
+      <label for="address">
+        Address:
+        <input
+          type="text"
+          name="address"
+          id="address"
+          [(ngModel)]="userAddress"
+        />
+      </label>
+    </div>
+    <div class="actions">
+      <button type="submit">Save</button>
+      <button type="button" (click)="cancelHandler()">Cancel</button>
+    </div>
+  </form>
 </div>

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, map, of, switchMap, take, zip } from 'rxjs';
+import { Observable, filter, map, of, switchMap, take, zip } from 'rxjs';
 import {
   LoadAllUsers,
   getAllGroups,
@@ -70,7 +70,9 @@ export class MainHeaderComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.groups$ = this.store.select(getAllGroups);
+    this.groups$ = this.store
+      .select(getAllGroups)
+      .pipe(filter((group) => group !== undefined));
     this.store.dispatch(LoadAllUsers());
     this.users$ = this.store.select(getAllUsers);
   }

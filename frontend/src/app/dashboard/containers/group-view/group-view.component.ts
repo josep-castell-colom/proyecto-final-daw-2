@@ -106,6 +106,20 @@ export class GroupViewComponent implements OnInit {
     }
   }
 
+  onDeletePost({
+    postId,
+    sectionId,
+    groupId,
+  }: {
+    postId: number;
+    sectionId: number;
+    groupId: number;
+  }): void {
+    this.store.dispatch(
+      dashboardStore.DeletePost({ postId, sectionId, groupId })
+    );
+  }
+
   onCommentSubmitted(comment: ResponseComment): void {
     let userOnce = this.groupsService.getUser();
 
@@ -126,6 +140,27 @@ export class GroupViewComponent implements OnInit {
         })
       );
     }
+  }
+
+  onDeleteComment({
+    commentId,
+    postId,
+    sectionId,
+    groupId,
+  }: {
+    commentId: number;
+    postId: number;
+    sectionId: number;
+    groupId: number;
+  }): void {
+    this.store.dispatch(
+      dashboardStore.DeleteComment({
+        commentId,
+        sectionId,
+        groupId,
+        postId,
+      })
+    );
   }
 
   onGroupEditSubmitted({
@@ -152,5 +187,22 @@ export class GroupViewComponent implements OnInit {
         group,
       })
     );
+  }
+
+  onGroupDeleted({ group_id }: { group_id: number }) {
+    this.store.dispatch(dashboardStore.DeleteGroup({ group_id }));
+  }
+
+  onGroupFollowed({
+    follow,
+    user_id,
+    group_id,
+  }: {
+    follow: boolean;
+    user_id: number;
+    group_id: number;
+  }) {
+    if (follow)
+      this.store.dispatch(dashboardStore.FollowGroup({ user_id, group_id }));
   }
 }

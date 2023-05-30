@@ -7,7 +7,7 @@
   margin: 2rem;
   padding: 2rem 4rem;
   border-bottom: solid 1px $blue-gray-300;
-  border-radius: 50px;
+  border-radius: 10px;
   background-color: $blue-gray-100;
   transition: 1s;
   box-shadow: 0 0 10px $shadow-black, inset 0 0 5px $shadow-black;
@@ -18,9 +18,18 @@
 }
 
 .title {
+  display: inline;
   font-size: 2rem;
   margin-bottom: 1rem;
   color: $main-blue-dark;
+}
+
+fa-icon {
+  color: $blue-gray-400;
+  margin-left: 0.3rem;
+  &:hover {
+    color: $main-blue-dark;
+  }
 }
 
 .content {

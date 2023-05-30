@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { allGroupsInitialState, GroupsState } from '../state/groups.state';
 import * as actions from '../actions/groups.actions';
-import { Group, User } from 'src/app/models';
+import { Group, GroupUser, User } from 'src/app/models';
 
 export const groupsReducer = createReducer(
   allGroupsInitialState,
@@ -135,11 +135,161 @@ export const groupsReducer = createReducer(
     const entities = {
       ...state.groupEntities,
       [group_id]: group,
+      loading: false,
     };
 
     return {
       ...state,
       groupEntities: entities,
+      loading: false,
+    };
+  }),
+  on(actions.DeleteComment, (state: GroupsState) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+  on(
+    actions.DeleteCommentSuccess,
+    (state: GroupsState, { commentId, sectionId, groupId, postId }) => {
+      const newGroup: Group = JSON.parse(
+        JSON.stringify(state.groupEntities[groupId])
+      );
+      const section = newGroup.sections.find(
+        (section) => section.id === sectionId
+      );
+      const post = section?.posts.find((post) => post.id === postId);
+
+      const index = post?.comments
+        .map((comment) => comment.id)
+        .indexOf(commentId);
+
+      if (index) {
+        post?.comments.splice(index, 1);
+      }
+
+      const entities = {
+        ...state.groupEntities,
+        [groupId]: newGroup,
+      };
+
+      return {
+        ...state,
+        groupEntities: entities,
+        loading: false,
+      };
+    }
+  ),
+  on(actions.DeletePost, (state: GroupsState) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+  on(
+    actions.DeletePostSuccess,
+    (state: GroupsState, { postId, sectionId, groupId }) => {
+      let newGroup: Group = JSON.parse(
+        JSON.stringify(state.groupEntities[groupId])
+      );
+      let section = newGroup.sections.find(
+        (section) => section.id === sectionId
+      );
+
+      const index = section?.posts.map((post) => post.id).indexOf(postId);
+
+      if (index) {
+        section?.posts.splice(index, 1);
+      }
+
+      const entities = {
+        ...state.groupEntities,
+        [groupId]: newGroup,
+      };
+
+      return {
+        ...state,
+        groupEntities: entities,
+        loading: false,
+      };
+    }
+  ),
+  on(actions.DeleteGroup, (state: GroupsState) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+  on(actions.DeleteGroupSuccess, (state: GroupsState, { group_id }) => {
+    const { [group_id]: removed, ...entities } = state.groupEntities;
+
+    return {
+      ...state,
+      groupEntities: entities,
+      loading: false,
+    };
+  }),
+  on(actions.FollowGroup, (state: GroupsState) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+  on(
+    actions.FollowGroupSuccess,
+    (state: GroupsState, { group_id, user_id }) => {
+      const group = JSON.parse(JSON.stringify(state.groupEntities[group_id]));
+      const user = { ...state.userEntities[user_id] };
+      const groupUser: GroupUser = {
+        id: user.id,
+        name: user.name,
+        lastname: user.lastname,
+        instrument: user.instruments,
+        pivot: {
+          isMember: false,
+          isAdmin: false,
+        },
+      };
+      group.users.push(groupUser);
+
+      const authUser = JSON.parse(JSON.stringify(state.userEntities[user_id]));
+      authUser.groups.push(group);
+
+      const groupEntities = {
+        ...state.groupEntities,
+        [group_id]: group,
+        loading: false,
+      };
+      const userEntities = {
+        ...state.userEntities,
+        [user_id]: authUser,
+      };
+
+      return {
+        ...state,
+        groupEntities,
+        userEntities,
+        loading: false,
+      };
+    }
+  ),
+  on(actions.EditUser, (state: GroupsState) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+  on(actions.EditUserSuccess, (state: GroupsState, { user_id, user }) => {
+    const entities = {
+      ...state.userEntities,
+      [user_id]: user,
+      loading: false,
+    };
+
+    return {
+      ...state,
+      userEntities: entities,
       loading: false,
     };
   }),

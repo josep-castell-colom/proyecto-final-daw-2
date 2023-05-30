@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
 
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { exhaustMap, of, switchMap } from 'rxjs';
+import { exhaustMap, of, switchMap, tap } from 'rxjs';
 import { catchError, map } from 'rxjs';
 
 import * as groupsActions from '../actions/groups.actions';
 import * as fromServices from '../../services';
 import { Group } from 'src/app/models/group.interface';
 import { User } from 'src/app/models';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class GroupsEffects {
   constructor(
     private actions$: Actions,
-    private apiService: fromServices.ApiService
+    private apiService: fromServices.ApiService,
+    private router: Router
   ) {}
 
   loadGroups$ = createEffect(() =>
@@ -104,6 +106,117 @@ export class GroupsEffects {
               of({ type: groupsActions.EDIT_GROUP_FAIL, error })
             )
           );
+      })
+    )
+  );
+
+  deleteGroup$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(groupsActions.DeleteGroup),
+      switchMap((action) => {
+        return this.apiService.delete('groups', action.group_id).pipe(
+          tap(() => {
+            this.router.navigate(['/dashboard']);
+          }),
+          map(() => ({
+            type: groupsActions.DELETE_GROUP_SUCCESS,
+            group_id: action.group_id,
+          })),
+          catchError((error) =>
+            of({
+              type: groupsActions.DELETE_GROUP_FAIL,
+              error,
+            })
+          )
+        );
+      })
+    )
+  );
+
+  deletePost$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(groupsActions.DeletePost),
+      switchMap((action) => {
+        return this.apiService.delete('posts', action.postId).pipe(
+          map(() => ({
+            type: groupsActions.DELETE_POST_SUCCESS,
+            postId: action.postId,
+            groupId: action.groupId,
+            sectionId: action.sectionId,
+          })),
+          catchError((error) =>
+            of({
+              type: groupsActions.DELETE_POST_FAIL,
+              error,
+            })
+          )
+        );
+      })
+    )
+  );
+
+  deleteComment$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(groupsActions.DeleteComment),
+      switchMap((action) => {
+        return this.apiService.delete('comments', action.commentId).pipe(
+          map(() => ({
+            type: groupsActions.DELETE_COMMENT_SUCCESS,
+            commentId: action.commentId,
+            groupId: action.groupId,
+            sectionId: action.sectionId,
+            postId: action.postId,
+          })),
+          catchError((error) =>
+            of({
+              type: groupsActions.DELETE_COMMENT_FAIL,
+              error,
+            })
+          )
+        );
+      })
+    )
+  );
+
+  followGroup$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(groupsActions.FollowGroup),
+      switchMap((action) => {
+        const body = {
+          isAdmin: 0,
+          isMember: 0,
+        };
+        return this.apiService.patch('groupuser', action.group_id, body).pipe(
+          tap(() => {
+            this.router.navigate(['/dashboard/news-feed']);
+          }),
+          map(() => ({
+            type: groupsActions.FOLLOW_GROUP_SUCCESS,
+            group_id: action.group_id,
+            user_id: action.user_id,
+          })),
+          catchError((error) =>
+            of({ type: groupsActions.FOLLOW_GROUP_FAIL, error })
+          )
+        );
+      })
+    )
+  );
+
+  editUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(groupsActions.EditUser),
+      switchMap((action) => {
+        return this.apiService.patch('users', action.user_id, action.user).pipe(
+          map((user) => ({
+            type: groupsActions.EDIT_USER_SUCCESS,
+            user_id: action.user_id,
+            user,
+          })),
+          catchError((error) =>
+            of({ type: groupsActions.EDIT_USER_FAIL, error })
+          )
+        );
       })
     )
   );

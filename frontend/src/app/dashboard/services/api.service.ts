@@ -32,4 +32,10 @@ export class ApiService {
       .patch(`${env.API_URL}/${collection}/${id}`, JSON.stringify(body))
       .pipe(map((response: any) => response.data));
   }
+
+  delete(collection: string, id: number): Observable<any> {
+    return this.http
+      .delete(`${env.API_URL}/${collection}/${id}`)
+      .pipe(map((response: any) => response));
+  }
 }

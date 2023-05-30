@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 import * as authStore from '../auth/store';
 import { AuthService } from 'src/auth/shared/services/auth.service';
 
 import { User } from './models/user.interface';
+import { getAllUsers } from './dashboard/store';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,17 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.authService.checkAuthUser();
-    this.user$ = this.store.select(authStore.getAuthUser);
+    this.user$ = this.store
+      .select(authStore.getAuthUser)
+      .pipe(
+        switchMap((authUser) =>
+          this.store
+            .select(getAllUsers)
+            .pipe(
+              map((users) => users.find((user) => user.id === authUser?.id))
+            )
+        )
+      );
   }
 
   ngOnDestroy() {}

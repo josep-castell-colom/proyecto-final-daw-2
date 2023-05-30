@@ -56,13 +56,14 @@ export class MainAsideComponent implements OnChanges {
         return group.id;
       });
       if (userGroupsIds) {
-        this.authUserGroups$ = this.store
-          .select(getAllGroups)
-          .pipe(
-            map((groups) =>
-              groups.filter((group) => userGroupsIds?.includes(group.id))
-            )
-          );
+        this.authUserGroups$ = this.store.select(getAllGroups).pipe(
+          map((groups) => {
+            const trueGroups = groups.filter((group) => group !== undefined);
+            return trueGroups.filter((group) =>
+              userGroupsIds?.includes(group.id)
+            );
+          })
+        );
       }
     }
   }

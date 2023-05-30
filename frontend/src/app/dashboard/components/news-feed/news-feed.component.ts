@@ -13,7 +13,10 @@ import * as fromDashboardStore from '../../store';
     <div *ngFor="let group of userSubscriptions | async">
       <posts-view
         [posts]="group | getSubscriptionPosts"
+        [user]="user$ | async"
         (commentSubmitted)="onCommentSubmitted($event)"
+        (deleteComment)="onDeleteComment($event)"
+        (deletePost)="onDeletePost($event)"
       ></posts-view>
     </div>
   </div>`,
@@ -43,9 +46,14 @@ export class NewsFeedComponent implements OnInit {
           this.userSubscriptions = this.store
             .select(fromDashboardStore.getAllGroups)
             .pipe(
-              map((groups) =>
-                groups.filter((group) => userGroupsIds?.includes(group.id))
-              )
+              map((groups) => {
+                const trueGroups = groups.filter(
+                  (group) => group !== undefined
+                );
+                return trueGroups.filter((group) =>
+                  userGroupsIds?.includes(group.id)
+                );
+              })
             );
         }
       }
@@ -98,5 +106,40 @@ export class NewsFeedComponent implements OnInit {
         })
       );
     }
+  }
+
+  onDeletePost({
+    postId,
+    sectionId,
+    groupId,
+  }: {
+    postId: number;
+    sectionId: number;
+    groupId: number;
+  }): void {
+    this.store.dispatch(
+      fromDashboardStore.DeletePost({ postId, sectionId, groupId })
+    );
+  }
+
+  onDeleteComment({
+    commentId,
+    postId,
+    sectionId,
+    groupId,
+  }: {
+    commentId: number;
+    postId: number;
+    sectionId: number;
+    groupId: number;
+  }) {
+    this.store.dispatch(
+      fromDashboardStore.DeleteComment({
+        commentId,
+        postId,
+        sectionId,
+        groupId,
+      })
+    );
   }
 }
