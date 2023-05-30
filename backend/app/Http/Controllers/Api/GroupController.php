@@ -8,8 +8,11 @@ use App\Http\Requests\UpdateGroupRequest;
 use App\Http\Resources\GroupCollection;
 use App\Http\Resources\GroupResource;
 use App\Models\Group;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class GroupController extends Controller
 {
@@ -61,6 +64,20 @@ class GroupController extends Controller
             'data' => new GroupResource(Group::findOrFail($id)),
         ], 200);
     }
+
+    // public function addUserToGroup(Request $request, string $id): JsonResponse
+    // {
+    //     $group = Group::findOrFail($id);
+    //     $group->users()->attach([
+    //         'user_id' => auth()->user()->id,
+    //         'group_id' => $id,
+    //         'isAdmin' => $request->isAdmin,
+    //         'isMember' => $request->isMember,
+    //     ]);
+    //     return response()->json([
+    //         'message' => 'Usuario añadido al grupo',
+    //     ]);
+    // }
 
     /**
      * Remove the specified resource from storage.

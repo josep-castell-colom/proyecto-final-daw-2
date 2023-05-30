@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\SectionController;
 use App\Http\Controllers\Api\StyleController;
 use App\Http\Controllers\Api\TimeframeController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\GroupUserController;
 use App\Http\Resources\{
     UserResource,
 };
@@ -39,6 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('instruments', InstrumentController::class);
     Route::apiResource('musicianroles', MusicianroleController::class);
     Route::apiResource('groups', GroupController::class);
+    Route::apiResource('groupuser', GroupUserController::class);
     Route::apiResource('sections', SectionController::class);
     Route::apiResource('styles', StyleController::class);
     Route::apiResource('comments', CommentController::class);
