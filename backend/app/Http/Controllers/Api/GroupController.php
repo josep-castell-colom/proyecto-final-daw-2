@@ -65,20 +65,6 @@ class GroupController extends Controller
         ], 200);
     }
 
-    // public function addUserToGroup(Request $request, string $id): JsonResponse
-    // {
-    //     $group = Group::findOrFail($id);
-    //     $group->users()->attach([
-    //         'user_id' => auth()->user()->id,
-    //         'group_id' => $id,
-    //         'isAdmin' => $request->isAdmin,
-    //         'isMember' => $request->isMember,
-    //     ]);
-    //     return response()->json([
-    //         'message' => 'Usuario añadido al grupo',
-    //     ]);
-    // }
-
     /**
      * Remove the specified resource from storage.
      */

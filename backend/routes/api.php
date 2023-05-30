@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\GroupController;
+use App\Http\Controllers\Api\GroupUserController;
 use App\Http\Controllers\Api\InstrumentController;
 use App\Http\Controllers\Api\MusicianroleController;
 use App\Http\Controllers\Api\PostController;
@@ -10,7 +11,6 @@ use App\Http\Controllers\Api\SectionController;
 use App\Http\Controllers\Api\StyleController;
 use App\Http\Controllers\Api\TimeframeController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\GroupUserController;
 use App\Http\Resources\{
     UserResource,
 };
