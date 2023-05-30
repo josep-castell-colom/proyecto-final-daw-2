@@ -1,0 +1,38 @@
+@import "variables";
+
+:host > div {
+  height: calc(100vh - 50px);
+  padding: 2rem;
+  padding-top: calc(120px + 2rem);
+  overflow-y: scroll;
+  .profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: $blue-gray-100;
+    padding: 2rem 4rem;
+    border-radius: 50px;
+    box-shadow: 0 0 10px $shadow-black, inset 0 0 5px $shadow-black;
+    fa-icon {
+      margin-left: 0.5rem;
+      color: $blue-gray-400;
+      &:hover {
+        color: $main-blue-dark;
+      }
+    }
+    .user-name {
+      display: inline-block;
+    }
+    img {
+      max-width: 400px;
+      border-radius: 20px;
+    }
+    ul {
+      list-style: none;
+      padding: 0 0 0 0.5rem;
+    }
+    .instrument-name {
+      text-transform: capitalize;
+    }
+  }
+}

@@ -10,7 +10,12 @@ import { Post } from 'src/app/models/post.interface';
         <h3 class="title">
           {{ post.title }}
         </h3>
-        <span>Posted by: {{ post.user.name }}</span>
+        <span
+          >Posted by:
+          <a [routerLink]="['/dashboard/users/', post.user.id]">{{
+            post.user.name
+          }}</a></span
+        >
       </header>
       <div class="content">
         <div class="image" *ngIf="post.image">

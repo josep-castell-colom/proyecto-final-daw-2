@@ -26,6 +26,7 @@
     background-color: $blue-gray-100;
     padding: 2rem 4rem;
     border-radius: 50px;
+    box-shadow: 0 0 10px $shadow-black, inset 0 0 5px $shadow-black;
     fa-icon {
       margin-left: 0.5rem;
       color: $blue-gray-400;

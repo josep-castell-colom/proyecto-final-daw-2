@@ -7,6 +7,7 @@ import { catchError, map } from 'rxjs';
 import * as groupsActions from '../actions/groups.actions';
 import * as fromServices from '../../services';
 import { Group } from 'src/app/models/group.interface';
+import { User } from 'src/app/models';
 
 @Injectable()
 export class GroupsEffects {
@@ -26,6 +27,23 @@ export class GroupsEffects {
           })),
           catchError((error) =>
             of({ type: groupsActions.LOAD_ALL_GROUPS_FAIL, payload: error })
+          )
+        )
+      )
+    )
+  );
+
+  loadUsers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(groupsActions.LOAD_ALL_USERS),
+      exhaustMap(() =>
+        this.apiService.getAll<User>('users').pipe(
+          map((users) => ({
+            type: groupsActions.LOAD_ALL_USERS_SUCCESS,
+            users,
+          })),
+          catchError((error) =>
+            of({ type: groupsActions.LOAD_ALL_USERS_FAIL, payload: error })
           )
         )
       )

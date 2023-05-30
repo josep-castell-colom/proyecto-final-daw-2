@@ -19,23 +19,7 @@ import { GroupsService } from '../../services';
 @Component({
   selector: 'group-view',
   styleUrls: ['group-view.component.scss'],
-  template: `<div *ngIf="user$ | async">
-    <div *ngIf="group" class="section-selector">
-      <div (click)="selectGroupProfile()">{{ group.name }}</div>
-      <div *ngFor="let section of group.sections">
-        <div (click)="selectSection(section)">{{ section.name }}</div>
-      </div>
-    </div>
-    <group-detail
-      [collapsedAside]="collapsedAside$ | async"
-      [group]="group$ | async"
-      [selectedSection]="selectedSectionIndex"
-      [user]="user$ | async"
-      (postSubmitted)="onPostSubmitted($event)"
-      (commentSubmitted)="onCommentSubmitted($event)"
-      (groupEditSubmitted)="onGroupEditSubmitted($event)"
-    ></group-detail>
-  </div>`,
+  templateUrl: 'group-view.component.html',
 })
 export class GroupViewComponent implements OnInit {
   collapsedAside$: Observable<boolean>;
@@ -45,6 +29,7 @@ export class GroupViewComponent implements OnInit {
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
   user$!: Observable<User | undefined>;
+  user!: User;
 
   selectedSectionIndex: number = -1;
   selectedSectionId!: number | undefined;
@@ -56,6 +41,17 @@ export class GroupViewComponent implements OnInit {
     this.collapsedAside$ = this.store.select(dashboardStore.getCollapsedAside);
     this.user$ = this.store.select(getAuthUser);
     this.group$.subscribe((group) => (this.group = group));
+    this.user$.subscribe((user) => {
+      if (user) this.user = user;
+    });
+  }
+
+  checkSectionPrivacity(section: Section): boolean {
+    return section.isPublic ||
+      this.user.groups?.find((group) => this.group.id === group.id)?.pivot
+        .isMember
+      ? true
+      : false;
   }
 
   selectSection(querySection: Section): void {

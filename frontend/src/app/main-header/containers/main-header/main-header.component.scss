@@ -20,6 +20,7 @@
 }
 
 .tools {
+  position: relative;
   display: flex;
   align-items: center;
   input {
@@ -35,5 +36,25 @@ input {
   &:focus {
     outline: none;
     border: solid 1px $blue-gray-500;
+  }
+}
+
+.search-result {
+  position: absolute;
+  top: 1rem;
+  left: 5px;
+  width: 12.3rem;
+  padding: 0.5rem;
+  list-style: none;
+  background-color: $blue-gray-100;
+  border-radius: 5px;
+  box-shadow: 0 0 5px black, inset 0 0 5px $shadow-black;
+  li {
+    transition: 0.1s;
+    padding: 0.3rem;
+    cursor: default;
+    &:hover {
+      background-color: $blue-gray-300;
+    }
   }
 }

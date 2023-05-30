@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, OnDestroy } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { Group } from 'src/app/models';
+import { Group, User } from 'src/app/models';
 import { Breadcrumb } from 'src/app/models/breadcrumb.interface';
 
 @Component({
@@ -27,6 +27,7 @@ import { Breadcrumb } from 'src/app/models/breadcrumb.interface';
 })
 export class DashboardHeaderComponent implements OnChanges, OnDestroy {
   @Input() group!: Group | null;
+  @Input() user!: User | null;
   @Input() collapsedAside!: boolean | null;
 
   title: string;
@@ -88,10 +89,19 @@ export class DashboardHeaderComponent implements OnChanges, OnDestroy {
   setGroupName(urlArray: Breadcrumb[]) {
     if (
       urlArray.length > 2 &&
-      urlArray[urlArray.length - 2].name === 'my groups' &&
+      (urlArray[urlArray.length - 2].name === 'my groups' ||
+        urlArray[urlArray.length - 2].name === 'groups') &&
       this.group
     ) {
       urlArray[urlArray.length - 1].name = this.group.name;
+    } else if (
+      urlArray.length > 2 &&
+      urlArray[urlArray.length - 2].name === 'users' &&
+      this.user
+    ) {
+      urlArray[
+        urlArray.length - 1
+      ].name = `${this.user.name} ${this.user.lastname}`;
     }
   }
 }

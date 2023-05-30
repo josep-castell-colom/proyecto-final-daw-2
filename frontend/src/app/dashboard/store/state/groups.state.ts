@@ -1,7 +1,8 @@
-import { Group } from 'src/app/models/group.interface';
+import { Group, User } from 'src/app/models';
 
 export interface GroupsState {
-  entities: { [id: number]: Group };
+  groupEntities: { [id: number]: Group };
+  userEntities: { [id: number]: User };
   collapsedAside: boolean;
   loaded: boolean;
   loading: boolean;
@@ -10,7 +11,8 @@ export interface GroupsState {
 export const GROUPS_FEATURE_KEY = 'Groups';
 
 export const allGroupsInitialState: GroupsState = {
-  entities: {},
+  groupEntities: {},
+  userEntities: {},
   collapsedAside: false,
   loaded: false,
   loading: false,

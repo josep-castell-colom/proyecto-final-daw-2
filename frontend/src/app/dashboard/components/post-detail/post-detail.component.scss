@@ -10,6 +10,7 @@
   border-radius: 50px;
   background-color: $blue-gray-100;
   transition: 1s;
+  box-shadow: 0 0 10px $shadow-black, inset 0 0 5px $shadow-black;
 }
 
 .header {

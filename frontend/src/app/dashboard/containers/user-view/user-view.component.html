@@ -1,0 +1,21 @@
+<div>
+  <div *ngIf="user" class="profile">
+    <div>
+      <h2 class="user-name">{{ user.name }} {{ user.lastname }}</h2>
+      <fa-icon [icon]="faEdit" *ngIf="userIsOwner"></fa-icon><br />
+      <p>{{ user.email }}</p>
+      <p>{{ user.phone }}</p>
+      <p>Instruments:</p>
+      <ul>
+        <li *ngFor="let instrument of user.instruments" class="instrument-name">
+          {{ instrument.name }}
+        </li>
+      </ul>
+      <p>Groups:</p>
+      <ul>
+        <li *ngFor="let group of user.groups">{{ group.name }}</li>
+      </ul>
+    </div>
+    <img [src]="user.image" alt="User profile image" />
+  </div>
+</div>

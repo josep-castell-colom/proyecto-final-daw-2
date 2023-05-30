@@ -22,7 +22,6 @@ import { User } from 'src/app/models/user.interface';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { Group } from 'src/app/models';
-import { getAuthUser } from 'src/auth/store';
 import { getAllGroups } from '../../store';
 
 @Component({
@@ -54,10 +53,7 @@ export class MainAsideComponent implements OnChanges {
   ngOnChanges(): void {
     if (this.user) {
       const userGroupsIds = this.user.groups?.map((group) => {
-        if (group.pivot.isMember) {
-          return group.id;
-        }
-        return;
+        return group.id;
       });
       if (userGroupsIds) {
         this.authUserGroups$ = this.store
