@@ -26,6 +26,21 @@ export class AuthEffects {
     )
   );
 
+  register$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.Register),
+      exhaustMap((action) => {
+        return this.authService.register(action.email, action.password).pipe(
+          map(({ token }) => {
+            this.authService.setToken(token);
+            return { type: actions.SET_AUTH_TOKEN, token };
+          }),
+          catchError((error) => of({ type: actions.LOG_IN_FAIL, error }))
+        );
+      })
+    )
+  );
+
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(actions.SetAuthToken),
