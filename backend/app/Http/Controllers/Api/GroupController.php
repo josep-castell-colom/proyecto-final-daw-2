@@ -47,6 +47,7 @@ class GroupController extends Controller
     {
         $validated = $request->validated();
         $group = Group::findOrFail($id);
+        $this->authorize('update', $group);
         $group->update($validated);
         if (isset($request->user_id)) {
             $group->users()->attach(
@@ -67,7 +68,9 @@ class GroupController extends Controller
      */
     public function destroy(string $id): Response
     {
-        Group::findOrFail($id)->delete();
+        $group = Group::findOrFail($id);
+        $this->authorize($group);
+        $group->delete();
 
         return response()->noContent();
     }
