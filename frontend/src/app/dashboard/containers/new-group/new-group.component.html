@@ -1,0 +1,82 @@
+<div>
+  <div class="form-wrapper">
+    <div class="info">
+      <h2 class="group-name">{{ groupName }}</h2>
+      <img [src]="image" alt="Group profile image" />
+      <p class="group-headquarters profile-label">Headquarters:</p>
+      <p class="profile-info">{{ groupCity }}</p>
+      <p class="group-description profile-label">Description:</p>
+      <p class="profile-info">{{ groupDescription }}</p>
+      <div class="group-sections">
+        <p class="group-sections profile-label">Sections:</p>
+        <div class="sections-container">
+          <div *ngFor="let section of sections">
+            <p class="profile-info">
+              - {{ section.name }} ({{
+                section.isPublic ? "Public" : "Private"
+              }})
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="group-members">
+        <p class="group-members profile-label">Members:</p>
+        <div class="members-container">
+          <div *ngFor="let member of members">
+            <a
+              [routerLink]="['/dashboard/users/', member.id]"
+              class="profile-info"
+              >- {{ member.name
+              }}<span *ngIf="member?.pivot?.isAdmin">Admin</span></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <form (ngSubmit)="onSubmitted()">
+      <div>
+        <label for="group-name">
+          Group name:<br />
+          <input
+            type="text"
+            name="group-name"
+            id="group-name"
+            [(ngModel)]="groupName"
+          />
+        </label>
+        <label for="group-image">
+          Group image:<br />
+          <input type="file" name="group-image" />
+        </label>
+        <label for="group-city">
+          Headquarters:<br />
+          <input
+            type="text"
+            name="group-city"
+            id="group-city"
+            [(ngModel)]="groupCity"
+          />
+        </label>
+        <label for="group-description">
+          Description:<br />
+          <textarea
+            type="text"
+            name="group-description"
+            id="group-description"
+            [(ngModel)]="groupDescription"
+            cols="30"
+            rows="3"
+          ></textarea>
+        </label>
+        <label for="group-sections">
+          Sections:
+          <fieldset>
+            <p *ngFor="let section of sections">{{ section.name }}</p>
+          </fieldset>
+          <fa-icon [icon]="faAdd"></fa-icon>
+        </label>
+      </div>
+      <button type="submit">Save</button>
+    </form>
+  </div>
+</div>

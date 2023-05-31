@@ -23,6 +23,7 @@ import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { Group } from 'src/app/models';
 import { getAllGroups } from '../../store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'main-aside',
@@ -48,7 +49,7 @@ export class MainAsideComponent implements OnChanges {
   spanHidden: boolean = false;
   groupsListHidden: boolean = true;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
 
   ngOnChanges(): void {
     if (this.user) {
@@ -80,5 +81,10 @@ export class MainAsideComponent implements OnChanges {
   collapseAside() {
     this.spanHidden = !this.spanHidden;
     this.collapse.emit();
+  }
+
+  goToNewGroupHandler(event: Event) {
+    event.stopPropagation();
+    this.router.navigate(['/dashboard/new-group']);
   }
 }

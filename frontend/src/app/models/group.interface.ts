@@ -25,6 +25,14 @@ export interface GroupUser {
   };
 }
 
+export interface GroupAdd {
+  name?: string;
+  city?: string;
+  description?: string;
+  image?: string;
+  users?: number[];
+}
+
 export interface GroupUpdate {
   id: number;
   name?: string;

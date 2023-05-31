@@ -90,6 +90,37 @@ export class GroupsEffects {
     )
   );
 
+  addGroup$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(groupsActions.AddGroup),
+      switchMap((action) => {
+        return this.apiService.post('groups', action.group).pipe(
+          map((group) => ({
+            type: groupsActions.ADD_GROUP_SUCCESS,
+            group,
+          })),
+          catchError((error) =>
+            of({ type: groupsActions.EDIT_GROUP_FAIL, error })
+          )
+        );
+      })
+    )
+  );
+
+  addGroupSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(groupsActions.AddGroupSuccess),
+        tap((action) => {
+          this.router.navigate(['/dashboard/groups/', action.group.id]);
+        }),
+        catchError((error) =>
+          of({ type: groupsActions.EDIT_GROUP_FAIL, error })
+        )
+      ),
+    { dispatch: false }
+  );
+
   editGroup$ = createEffect(() =>
     this.actions$.pipe(
       ofType(groupsActions.EditGroup),

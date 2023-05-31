@@ -29,6 +29,9 @@ export const DELETE_COMMENT = '[Dashboard] Delete comment';
 export const DELETE_COMMENT_FAIL = '[Dashboard] Delete comment fail';
 export const DELETE_COMMENT_SUCCESS = '[Dashboard] Delete comment success';
 
+export const ADD_GROUP = '[Dashboard] Add group';
+export const ADD_GROUP_FAIL = '[Dashboard] Add group fail';
+export const ADD_GROUP_SUCCESS = '[Dashboard] Add group success';
 export const EDIT_GROUP = '[Dashboard] Edit group';
 export const EDIT_GROUP_FAIL = '[Dashboard] Edit group fail';
 export const EDIT_GROUP_SUCCESS = '[Dashboard] Edit group success';
@@ -157,6 +160,22 @@ export const DeleteCommentSuccess = createAction(
     groupId: number;
     sectionId: number;
     postId: number;
+  }>()
+);
+export const AddGroup = createAction(
+  ADD_GROUP,
+  props<{
+    group: fromModels.GroupAdd;
+  }>()
+);
+export const AddGroupFail = createAction(
+  ADD_GROUP_FAIL,
+  props<{ error: any }>()
+);
+export const AddGroupSuccess = createAction(
+  ADD_GROUP_SUCCESS,
+  props<{
+    group: Group;
   }>()
 );
 export const EditGroup = createAction(

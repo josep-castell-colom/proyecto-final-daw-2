@@ -1,3 +1,19 @@
 <div>
-  <router-outlet></router-outlet>
+  <button
+    type="button"
+    class="new-group-button"
+    [routerLink]="['/dashboard/new-group']"
+  >
+    New group
+  </button>
+  <div class="group-cards__wrapper">
+    <div class="group-card" *ngFor="let group of authUserGroups$ | async">
+      <div [routerLink]="['/dashboard/groups/', group.id]">
+        <h3>
+          {{ group.name }}
+        </h3>
+        <p>{{ group.description }}</p>
+      </div>
+    </div>
+  </div>
 </div>

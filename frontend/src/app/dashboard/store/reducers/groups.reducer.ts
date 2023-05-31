@@ -125,6 +125,24 @@ export const groupsReducer = createReducer(
       };
     }
   ),
+  on(actions.AddGroup, (state: GroupsState) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+  on(actions.AddGroupSuccess, (state: GroupsState, { group }) => {
+    const entities = {
+      ...state.groupEntities,
+      [group.id]: group,
+    };
+
+    return {
+      ...state,
+      groupEntities: entities,
+      loading: false,
+    };
+  }),
   on(actions.EditGroup, (state: GroupsState) => {
     return {
       ...state,
@@ -135,7 +153,6 @@ export const groupsReducer = createReducer(
     const entities = {
       ...state.groupEntities,
       [group_id]: group,
-      loading: false,
     };
 
     return {

@@ -12,6 +12,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
+import { NewGroupComponent } from './containers/new-group/new-group.component';
 import { MainAsideComponent } from './components/main-aside/main-aside.component';
 import { NewsFeedComponent } from './components/news-feed/news-feed.component';
 import { MyGroupsComponent } from './containers/my-groups/my-groups.component';
@@ -28,6 +29,7 @@ import { GetSubscriptionPostsPipe } from '../pipes/get-subscription-posts.pipe';
 import { CheckSectionVisibilityPipe } from '../pipes/check-section-visibility.pipe';
 import { UserViewComponent } from './containers/user-view/user-view.component';
 import { CheckUserIsMemberPipe } from '../pipes/check-member.pipe';
+import { GetInitialsPipe } from '../pipes/get-initials.pipe';
 
 export const ROUTES: Routes = [
   {
@@ -51,6 +53,10 @@ export const ROUTES: Routes = [
             component: GroupViewComponent,
           },
         ],
+      },
+      {
+        path: 'new-group',
+        component: NewGroupComponent,
       },
       {
         path: 'my-calendar',
@@ -78,6 +84,7 @@ export const ROUTES: Routes = [
     CheckUserIsMemberPipe,
     DashboardComponent,
     DashboardHeaderComponent,
+    GetInitialsPipe,
     GetSubscriptionPostsPipe,
     GroupDetailComponent,
     GroupViewComponent,
@@ -85,6 +92,7 @@ export const ROUTES: Routes = [
     MyCalendarComponent,
     MyGroupsComponent,
     NewsFeedComponent,
+    NewGroupComponent,
     PostsViewComponent,
     PostDetailComponent,
     PostCommentsViewComponent,

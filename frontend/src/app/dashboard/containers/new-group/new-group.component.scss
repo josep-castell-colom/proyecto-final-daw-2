@@ -1,0 +1,45 @@
+@import "variables";
+
+:host > div {
+  height: calc(100vh - 50px);
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding-top: 120px;
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  background-color: $blue-gray-200;
+  border-radius: 20px;
+  margin: 1.5rem;
+  padding: 1.5rem;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  margin-left: 3rem;
+  padding: 1.5rem;
+  max-width: 600px;
+  border: solid 1px $blue-gray-300;
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+  input {
+    margin-top: 0.3rem;
+    margin-bottom: 0.5rem;
+  }
+  button {
+    padding: 1rem;
+    margin-left: 1rem;
+  }
+  fa-icon {
+    color: $blue-gray-500;
+    &:hover {
+      color: $main-blue-dark;
+    }
+  }
+}

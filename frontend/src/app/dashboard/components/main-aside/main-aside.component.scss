@@ -34,8 +34,10 @@ li {
   }
   fa-icon {
     margin-right: 0.5rem;
-    transform: rotate(15deg);
     transition: transform 0.3s;
+    &.main-icon {
+      transform: rotate(15deg);
+    }
   }
   &:hover {
     background-color: lighten($green-blue, 25);
@@ -60,6 +62,9 @@ li {
   font-size: 0.95rem;
   &.hidden {
     display: none;
+  }
+  &.compact {
+    padding-left: 0;
   }
   li {
     border-left: solid 1px $blue-gray-400;
@@ -95,10 +100,16 @@ li {
   position: absolute;
   display: flex;
   right: 0;
+  padding: 0.2rem;
+  border-radius: 50%;
   opacity: 0;
   transition: opacity 0.3s, transform 1s;
+  &.hidden {
+    display: none;
+  }
   &:hover {
     opacity: 0.8 !important;
+    background-color: $blue-gray-400;
   }
 }
 
