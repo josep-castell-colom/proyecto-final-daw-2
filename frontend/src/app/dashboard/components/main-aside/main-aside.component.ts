@@ -13,7 +13,7 @@ import {
   faChevronLeft,
   faChevronRight,
   faRightFromBracket,
-  faGear,
+  faAdd,
 } from '@fortawesome/free-solid-svg-icons';
 
 import * as authStore from 'src/auth/store';
@@ -43,7 +43,7 @@ export class MainAsideComponent implements OnChanges {
   faLeft = faChevronLeft;
   faRight = faChevronRight;
   faLogOut = faRightFromBracket;
-  faGear = faGear;
+  faGear = faAdd;
 
   spanHidden: boolean = false;
   groupsListHidden: boolean = true;

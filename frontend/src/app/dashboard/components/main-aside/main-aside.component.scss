@@ -20,6 +20,7 @@ ul {
 
 li {
   display: flex;
+  align-items: center;
   height: 50px;
   padding: 0.7rem;
   border-bottom: solid 1px $blue-gray-400;
@@ -33,6 +34,8 @@ li {
   }
   fa-icon {
     margin-right: 0.5rem;
+    transform: rotate(15deg);
+    transition: transform 0.3s;
   }
   &:hover {
     background-color: lighten($green-blue, 25);
@@ -41,6 +44,7 @@ li {
     }
     fa-icon {
       color: $black;
+      transform: rotate(0deg);
     }
   }
 }
@@ -95,7 +99,6 @@ li {
   transition: opacity 0.3s, transform 1s;
   &:hover {
     opacity: 0.8 !important;
-    transform: rotate(180deg);
   }
 }
 
