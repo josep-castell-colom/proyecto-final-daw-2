@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Register } from 'src/auth/store';
 
 @Component({
   selector: 'register',
@@ -24,8 +26,10 @@ import { FormGroup } from '@angular/forms';
   `,
 })
 export class RegisterComponent {
-  constructor() {}
+  constructor(private store: Store) {}
   registerUser(event: FormGroup) {
-    console.log(event.value);
+    this.store.dispatch(
+      Register({ email: event.value.email, password: event.value.password })
+    );
   }
 }

@@ -29,11 +29,7 @@ import { Store } from '@ngrx/store';
   `,
 })
 export class LoginComponent {
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private store: Store
-  ) {}
+  constructor(private store: Store) {}
 
   loginUser(event: FormGroup) {
     this.store.dispatch(
@@ -42,8 +38,5 @@ export class LoginComponent {
         password: event.value.password,
       })
     );
-    // if (this.authService.logIn(event.value.email, event.value.password)) {
-    //   this.router.navigate(['dashboard']);
-    // }
   }
 }
