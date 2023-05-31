@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable, map, switchMap, tap } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 import * as authStore from '../auth/store';
 import { AuthService } from 'src/auth/shared/services/auth.service';
 
 import { User } from './models/user.interface';
-import { getAllUsers } from './dashboard/store';
+import { LoadAllUsers, getAllUsers } from './dashboard/store';
 
 @Component({
   selector: 'app-root',
@@ -20,24 +20,14 @@ import { getAllUsers } from './dashboard/store';
   `,
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'AppName';
   user$: Observable<User | null | undefined>;
+  allUsers$: Observable<User[]>;
 
   constructor(private authService: AuthService, private store: Store) {}
 
   ngOnInit() {
     this.authService.checkAuthUser();
-    this.user$ = this.store
-      .select(authStore.getAuthUser)
-      .pipe(
-        switchMap((authUser) =>
-          this.store
-            .select(getAllUsers)
-            .pipe(
-              map((users) => users.find((user) => user.id === authUser?.id))
-            )
-        )
-      );
+    this.user$ = this.store.select(authStore.getAuthUser);
   }
 
   ngOnDestroy() {}
