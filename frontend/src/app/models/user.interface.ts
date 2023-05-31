@@ -9,6 +9,10 @@ export interface User {
   image?: string;
   groups?: UserGroup[];
   instruments?: { id: number; name: string }[];
+  pivot: {
+    isMember: boolean;
+    isAdmin: boolean;
+  };
 }
 
 interface UserGroup {
@@ -18,4 +22,14 @@ interface UserGroup {
     isAdmin: boolean;
     isMember: boolean;
   };
+}
+
+export interface UserUpdate {
+  id: number;
+  name?: string;
+  lastname?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  image?: string;
 }

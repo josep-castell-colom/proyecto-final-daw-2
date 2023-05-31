@@ -11,6 +11,13 @@
 .body {
   display: flex;
   width: inherit;
+  fa-icon {
+    color: $blue-gray-400;
+    margin-left: 0.3rem;
+    &:hover {
+      color: $main-blue-dark;
+    }
+  }
 }
 
 .profile-picture__wrapper {

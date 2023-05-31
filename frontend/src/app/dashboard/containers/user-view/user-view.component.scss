@@ -5,7 +5,8 @@
   padding: 2rem;
   padding-top: calc(120px + 2rem);
   overflow-y: scroll;
-  .profile {
+  .profile,
+  form {
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -33,6 +34,23 @@
     }
     .instrument-name {
       text-transform: capitalize;
+    }
+  }
+  form {
+    margin-top: 2rem;
+  }
+  form > div {
+    display: flex;
+    flex-direction: column;
+    input {
+      margin-bottom: 0.5rem;
+    }
+  }
+  .actions {
+    display: flex;
+    flex-direction: column;
+    button {
+      padding: 1rem 2rem;
     }
   }
 }

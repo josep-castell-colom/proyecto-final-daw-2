@@ -7,7 +7,7 @@ import * as authStore from '../../../auth/store';
 import { env } from 'src/env';
 
 import { Observable, map, take } from 'rxjs';
-import { Group, User } from 'src/app/models';
+import { Group, Post, ResponseComment, User } from 'src/app/models';
 
 @Injectable({
   providedIn: 'root',
@@ -36,5 +36,12 @@ export class GroupsService {
         if (user) userOnce = user;
       });
     return userOnce;
+  }
+
+  checkUserIsOwner(
+    user: User | null | undefined,
+    target: ResponseComment | Post
+  ): boolean {
+    return user?.id === target.user.id;
   }
 }

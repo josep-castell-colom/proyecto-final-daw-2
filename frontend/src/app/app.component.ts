@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, map, switchMap, tap } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 import * as authStore from '../auth/store';
 import { AuthService } from 'src/auth/shared/services/auth.service';
 
 import { User } from './models/user.interface';
+import { LoadAllUsers, getAllUsers } from './dashboard/store';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +20,8 @@ import { User } from './models/user.interface';
   `,
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'AppName';
   user$: Observable<User | null | undefined>;
+  allUsers$: Observable<User[]>;
 
   constructor(private authService: AuthService, private store: Store) {}
 

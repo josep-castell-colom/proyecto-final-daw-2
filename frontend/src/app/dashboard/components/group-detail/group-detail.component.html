@@ -1,4 +1,20 @@
-<div *ngIf="group">
+<div *ngIf="group && user">
+  <button
+    *ngIf="selectedSection === -1 && userIsAdmin"
+    type="button"
+    class="show-post-form"
+    (click)="deleteGroup()"
+  >
+    Delete group
+  </button>
+  <button
+    *ngIf="selectedSection === -1 && !userIsAdmin"
+    type="button"
+    class="show-post-form"
+    (click)="followGroup()"
+  >
+    {{ userIsFollower ? "Unfollow" : "Follow" }}
+  </button>
   <button
     *ngIf="selectedSection >= 0"
     type="button"
@@ -20,7 +36,10 @@
   >
     <posts-view
       [posts]="group.sections[selectedSection].posts"
+      [user]="user"
       (commentSubmitted)="onCommentSubmitted($event)"
+      (deleteComment)="onDeleteComment($event)"
+      (deletePost)="onDeletePost($event)"
     ></posts-view>
   </div>
   <div *ngIf="selectedSection === -1" class="group-profile">
@@ -47,6 +66,32 @@
                   section.isPublic ? "Public" : "Private"
                 }})
               </p>
+            </div>
+          </div>
+        </div>
+        <div class="group-members">
+          <p class="group-members profile-label">Members:</p>
+          <div class="members-container">
+            <div *ngFor="let member of group.users | checkUserIsMember">
+              <a
+                [routerLink]="['/dashboard/users/', member.id]"
+                class="profile-info"
+                >- {{ member.name
+                }}<span *ngIf="user?.pivot?.isAdmin">Admin</span></a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="group-users">
+          <p class="group-users profile-label">Followers:</p>
+          <div class="users-container">
+            <div *ngFor="let user of group.users">
+              <a
+                [routerLink]="['/dashboard/users/', user.id]"
+                class="profile-info"
+              >
+                - {{ user.name }}
+              </a>
             </div>
           </div>
         </div>
@@ -98,6 +143,7 @@
           </label>
         </div>
         <button type="submit">Save</button>
+        <button type="button" (click)="cancelHandler()">Cancel</button>
       </form>
     </div>
   </div>

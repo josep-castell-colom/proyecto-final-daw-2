@@ -17,7 +17,11 @@
     [selectedSection]="selectedSectionIndex"
     [user]="user$ | async"
     (postSubmitted)="onPostSubmitted($event)"
+    (deletePost)="onDeletePost($event)"
     (commentSubmitted)="onCommentSubmitted($event)"
+    (deleteComment)="onDeleteComment($event)"
     (groupEditSubmitted)="onGroupEditSubmitted($event)"
+    (groupDeleted)="onGroupDeleted($event)"
+    (groupFollowed)="onGroupFollowed($event)"
   ></group-detail>
 </div>

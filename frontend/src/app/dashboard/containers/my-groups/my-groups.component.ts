@@ -1,42 +1,60 @@
-import { Component, OnInit } from '@angular/core';
-import { Group } from 'src/app/models/group.interface';
+import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-
-import { Observable } from 'rxjs/internal/Observable';
-
+import { Observable, Subject, map, takeUntil } from 'rxjs';
+import { Group, User } from 'src/app/models';
 import { getAuthUser } from 'src/auth/store';
-import * as fromDashboardStore from '../../store';
-import { map } from 'rxjs/operators';
+import { getAllGroups } from '../../store';
 
 @Component({
   selector: 'my-groups',
   styleUrls: ['my-groups.component.scss'],
   templateUrl: 'my-groups.component.html',
 })
-export class MyGroupsComponent implements OnInit {
-  authUserGroups!: Observable<Group[] | undefined>;
+export class MyGroupsComponent implements OnInit, OnChanges, OnDestroy {
+  authUserGroups$!: Observable<Group[]>;
+  user$!: Observable<User | undefined>;
+  user!: User | undefined;
 
   constructor(private store: Store) {}
 
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
   ngOnInit(): void {
-    this.store.select(getAuthUser).subscribe((user) => {
-      if (user) {
-        const userGroupsIds = user.groups?.map((group) => {
-          if (group.pivot.isMember) {
-            return group.id;
-          }
-          return;
-        });
-        if (userGroupsIds) {
-          this.authUserGroups = this.store
-            .select(fromDashboardStore.getAllGroups)
-            .pipe(
-              map((groups) =>
-                groups.filter((group) => userGroupsIds?.includes(group.id))
-              )
-            );
-        }
+    this.user$ = this.store.select(getAuthUser);
+    this.user$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((user) => (this.user = user));
+    if (this.user) {
+      const userGroupsIds = this.user.groups?.map((group) => {
+        return group.id;
+      });
+      if (userGroupsIds) {
+        this.authUserGroups$ = this.store.select(getAllGroups).pipe(
+          map((groups) => {
+            return groups.filter((group) => userGroupsIds?.includes(group.id));
+          })
+        );
       }
-    });
+    }
+  }
+
+  ngOnChanges(): void {
+    if (this.user) {
+      const userGroupsIds = this.user.groups?.map((group) => {
+        return group.id;
+      });
+      if (userGroupsIds) {
+        this.authUserGroups$ = this.store.select(getAllGroups).pipe(
+          map((groups) => {
+            return groups.filter((group) => userGroupsIds?.includes(group.id));
+          })
+        );
+      }
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }

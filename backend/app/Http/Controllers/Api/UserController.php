@@ -36,8 +36,8 @@ class UserController extends Controller
         $user->update($validated);
 
         return response()->json([
-            'message' => 'Usuario actualizado',
-        ]);
+            'data' => new UserResource(User::findOrFail($id)),
+        ], 200);
     }
 
     /**

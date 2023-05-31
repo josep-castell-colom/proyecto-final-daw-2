@@ -36,6 +36,23 @@ export class AuthService {
     );
   }
 
+  register(currentEmail: string, password: string): Observable<TokenResponse> {
+    return this.http.get(`http://localhost/sanctum/csrf-cookie`).pipe(
+      switchMap(() => {
+        return this.http.post(
+          `http://localhost/api/register`,
+          JSON.stringify({
+            email: currentEmail,
+            password: password,
+          })
+        );
+      }),
+      switchMap((response: any) =>
+        of({ token: response['plain-text-token'] as string })
+      )
+    );
+  }
+
   setToken(token: string) {
     sessionStorage.setItem('authToken', token);
   }

@@ -7,6 +7,7 @@ import { User } from 'src/app/models/user.interface';
   styleUrls: ['./user-nav.component.scss'],
   template: `
     <div *ngIf="user">
+      <a [routerLink]="['/dashboard/news-feed']" id="dashboard">Dashboard</a>
       <div class="profile-picture__wrapper">
         <img
           class="profile-picture"
@@ -14,7 +15,7 @@ import { User } from 'src/app/models/user.interface';
           alt="user profile picture"
         />
       </div>
-      <a [routerLink]="['/dashboard/news-feed']" id="username">{{
+      <a [routerLink]="['/dashboard/users/', user.id]" id="username">{{
         user.name
       }}</a>
     </div>
@@ -25,6 +26,5 @@ import { User } from 'src/app/models/user.interface';
   `,
 })
 export class UserNavComponent {
-  @Input()
-  user: User | null | undefined;
+  @Input() user: User | null | undefined;
 }

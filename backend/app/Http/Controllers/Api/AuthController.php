@@ -44,13 +44,7 @@ class AuthController extends Controller
     public function register(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'username' => ['required', 'string'],
-            'name' => ['required', 'string'],
-            'lastname' => ['required', 'string'],
             'email' => ['required', 'email'],
-            'phone' => 'string',
-            'address' => 'string',
-            'image' => 'string',
             'password' => ['required', 'string'],
         ]);
 

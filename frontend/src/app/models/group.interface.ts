@@ -8,7 +8,29 @@ export interface Group {
   description?: string;
   sections: Section[];
   image?: string;
-  users: User[];
+  users: GroupUser[];
+}
+
+export interface GroupUser {
+  id: number;
+  name: string;
+  lastname: string;
+  instrument?: {
+    id: number;
+    name: string;
+  }[];
+  pivot: {
+    isMember: boolean;
+    isAdmin: boolean;
+  };
+}
+
+export interface GroupAdd {
+  name?: string;
+  city?: string;
+  description?: string;
+  image?: string;
+  users?: number[];
 }
 
 export interface GroupUpdate {

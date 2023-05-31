@@ -1,5 +1,5 @@
 <div [class.spanHidden]="spanHidden">
-  <ul>
+  <ul class="main-ul" [class.compact]="spanHidden">
     <li
       [routerLink]="['/dashboard/news-feed']"
       routerLinkActive="active"
@@ -7,7 +7,6 @@
     >
       <fa-icon [icon]="faNews" class="main-icon"></fa-icon>
       <span> News feed </span>
-      <fa-icon [icon]="faGear" class="gear"></fa-icon>
     </li>
     <li
       [routerLink]="['/dashboard/my-groups']"
@@ -16,15 +15,24 @@
     >
       <fa-icon [icon]="faMusic" class="main-icon"></fa-icon>
       <span> My groups </span>
-      <fa-icon [icon]="faGear" class="gear"></fa-icon>
+      <fa-icon
+        (click)="goToNewGroupHandler($event)"
+        [class.hidden]="spanHidden"
+        [icon]="faGear"
+        class="gear"
+      ></fa-icon>
     </li>
-    <ul class="groups" [class.hidden]="groupsListHidden">
+    <ul
+      class="groups"
+      [class.hidden]="groupsListHidden"
+      [class.compact]="spanHidden"
+    >
       <li
         *ngFor="let group of authUserGroups$ | async"
-        [routerLink]="['/dashboard/my-groups/', group.id]"
+        [routerLink]="['/dashboard/groups/', group.id]"
         routerLinkActive="active"
       >
-        {{ group.name }}
+        {{ !spanHidden ? group.name : (group.name | getInitials) }}
       </li>
     </ul>
     <li

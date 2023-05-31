@@ -21,7 +21,7 @@ import { Breadcrumb } from 'src/app/models/breadcrumb.interface';
       </span>
     </div>
     <div class="title">
-      <h3>{{ title }}</h3>
+      <h2>{{ title }}</h2>
     </div>
   </div>`,
 })
@@ -48,7 +48,11 @@ export class DashboardHeaderComponent implements OnChanges, OnDestroy {
   }
 
   ngOnChanges(): void {
-    if (this.group) this.title = this.group.name;
+    if (this.group) {
+      this.title = this.group.name;
+      return;
+    }
+    if (this.user) this.title = `${this.user.name} ${this.user.lastname}`;
   }
 
   ngOnDestroy(): void {
@@ -67,7 +71,6 @@ export class DashboardHeaderComponent implements OnChanges, OnDestroy {
     const urlArray = this.url
       .split('/')
       .map((string: string) => string.replace(/[:()]/, ''))
-      .map((string: string) => string.replace('groupgroup', ''))
       .filter((string: string) => string !== '')
       .map((string: string) => {
         let modString = '';
@@ -82,11 +85,11 @@ export class DashboardHeaderComponent implements OnChanges, OnDestroy {
           return { name: modString, url: '/' + string };
         return { name: modString, url: '/dashboard/' + string };
       });
-    this.setGroupName(urlArray);
+    this.setDashboardHeaderTitle(urlArray);
     return urlArray;
   }
 
-  setGroupName(urlArray: Breadcrumb[]) {
+  setDashboardHeaderTitle(urlArray: Breadcrumb[]) {
     if (
       urlArray.length > 2 &&
       (urlArray[urlArray.length - 2].name === 'my groups' ||
