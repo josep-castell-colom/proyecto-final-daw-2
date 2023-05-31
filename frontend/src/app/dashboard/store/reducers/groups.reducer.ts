@@ -165,7 +165,7 @@ export const groupsReducer = createReducer(
         .map((comment) => comment.id)
         .indexOf(commentId);
 
-      if (index) {
+      if (index !== undefined && index !== -1) {
         post?.comments.splice(index, 1);
       }
 
@@ -199,7 +199,7 @@ export const groupsReducer = createReducer(
 
       const index = section?.posts.map((post) => post.id).indexOf(postId);
 
-      if (index) {
+      if (index !== undefined && index !== -1) {
         section?.posts.splice(index, 1);
       }
 
@@ -238,32 +238,48 @@ export const groupsReducer = createReducer(
   }),
   on(
     actions.FollowGroupSuccess,
-    (state: GroupsState, { group_id, user_id }) => {
-      const group = JSON.parse(JSON.stringify(state.groupEntities[group_id]));
-      const user = { ...state.userEntities[user_id] };
-      const groupUser: GroupUser = {
-        id: user.id,
-        name: user.name,
-        lastname: user.lastname,
-        instrument: user.instruments,
-        pivot: {
-          isMember: false,
-          isAdmin: false,
-        },
-      };
-      group.users.push(groupUser);
+    (state: GroupsState, { follow, group_id, user_id }) => {
+      let group = JSON.parse(JSON.stringify(state.groupEntities[group_id]));
+      const user = JSON.parse(JSON.stringify(state.userEntities[user_id]));
 
-      const authUser = JSON.parse(JSON.stringify(state.userEntities[user_id]));
-      authUser.groups.push(group);
+      if (follow) {
+        group = {
+          ...group,
+          pivot: {
+            isAdmin: false,
+            isMember: false,
+          },
+        };
+        const groupUser: GroupUser = {
+          id: user.id,
+          name: user.name,
+          lastname: user.lastname,
+          instrument: user.instruments,
+          pivot: {
+            isMember: false,
+            isAdmin: false,
+          },
+        };
+        group.users.push(groupUser);
+        user.groups.push(group);
+      } else {
+        const groupIndex = user.groups
+          .map((group: Group) => group.id)
+          .indexOf(group_id);
+        const userIndex = group.users
+          .map((user: User) => user.id)
+          .indexOf(user_id);
+        group.users.splice(userIndex, 1);
+        user.groups.splice(groupIndex, 1);
+      }
 
       const groupEntities = {
         ...state.groupEntities,
         [group_id]: group,
-        loading: false,
       };
       const userEntities = {
         ...state.userEntities,
-        [user_id]: authUser,
+        [user_id]: user,
       };
 
       return {

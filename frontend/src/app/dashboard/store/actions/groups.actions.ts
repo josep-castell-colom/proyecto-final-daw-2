@@ -214,13 +214,14 @@ export const EditUserSuccess = createAction(
 export const FollowGroup = createAction(
   FOLLOW_GROUP,
   props<{
+    follow: boolean;
     user_id: number;
     group_id: number;
   }>()
 );
 export const FollowGroupSuccess = createAction(
   FOLLOW_GROUP_SUCCESS,
-  props<{ group_id: number; user_id: number }>()
+  props<{ follow: boolean; group_id: number; user_id: number }>()
 );
 export const FollowGroupFail = createAction(FOLLOW_GROUP_FAIL);
 

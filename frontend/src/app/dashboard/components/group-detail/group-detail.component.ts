@@ -51,8 +51,9 @@ export class GroupDetailComponent implements OnInit, OnChanges {
   groupDescription: string | undefined;
   newSections: any[];
 
-  userIsAdmin!: boolean;
+  userIsFollower!: boolean;
   userIsMember!: boolean;
+  userIsAdmin!: boolean;
   editingGroupForm = false;
 
   faEdit = faPenToSquare;
@@ -61,11 +62,14 @@ export class GroupDetailComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.userIsAdmin = this.checkUserIsAdmin();
     this.userIsMember = this.checkUserIsMember();
+    this.userIsFollower = this.checkUserIsFollower();
     this.setInfo();
   }
 
   ngOnChanges(): void {
     this.userIsAdmin = this.checkUserIsAdmin();
+    this.userIsMember = this.checkUserIsMember();
+    this.userIsFollower = this.checkUserIsFollower();
     this.setInfo();
   }
 
@@ -130,9 +134,8 @@ export class GroupDetailComponent implements OnInit, OnChanges {
     this.showPostForm = !this.showPostForm;
   }
 
-  checkUserIsAdmin(): boolean {
+  checkUserIsFollower(): boolean {
     return this.user?.groups?.find((group) => group.id === this.group?.id)
-      ?.pivot.isAdmin
       ? true
       : false;
   }
@@ -140,6 +143,13 @@ export class GroupDetailComponent implements OnInit, OnChanges {
   checkUserIsMember(): boolean {
     return this.user?.groups?.find((group) => group.id === this.group?.id)
       ?.pivot.isMember
+      ? true
+      : false;
+  }
+
+  checkUserIsAdmin(): boolean {
+    return this.user?.groups?.find((group) => group.id === this.group?.id)
+      ?.pivot.isAdmin
       ? true
       : false;
   }
@@ -160,12 +170,13 @@ export class GroupDetailComponent implements OnInit, OnChanges {
   }
 
   followGroup(): void {
-    if (this.user?.id && this.group?.id)
+    if (this.user?.id && this.group?.id) {
       this.groupFollowed.emit({
-        follow: true,
+        follow: !this.userIsFollower,
         user_id: this.user?.id,
         group_id: this.group?.id,
       });
+    }
   }
 
   deleteGroup(): void {

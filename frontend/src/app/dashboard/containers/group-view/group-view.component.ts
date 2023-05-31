@@ -202,7 +202,8 @@ export class GroupViewComponent implements OnInit {
     user_id: number;
     group_id: number;
   }) {
-    if (follow)
-      this.store.dispatch(dashboardStore.FollowGroup({ user_id, group_id }));
+    this.store.dispatch(
+      dashboardStore.FollowGroup({ follow, user_id, group_id })
+    );
   }
 }

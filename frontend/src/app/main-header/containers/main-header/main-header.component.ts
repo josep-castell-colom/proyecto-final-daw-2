@@ -70,9 +70,7 @@ export class MainHeaderComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.groups$ = this.store
-      .select(getAllGroups)
-      .pipe(filter((group) => group !== undefined));
+    this.groups$ = this.store.select(getAllGroups);
     this.store.dispatch(LoadAllUsers());
     this.users$ = this.store.select(getAllUsers);
   }

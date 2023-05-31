@@ -58,10 +58,7 @@ export class MainAsideComponent implements OnChanges {
       if (userGroupsIds) {
         this.authUserGroups$ = this.store.select(getAllGroups).pipe(
           map((groups) => {
-            const trueGroups = groups.filter((group) => group !== undefined);
-            return trueGroups.filter((group) =>
-              userGroupsIds?.includes(group.id)
-            );
+            return groups.filter((group) => userGroupsIds?.includes(group.id));
           })
         );
       }

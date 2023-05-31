@@ -13,7 +13,7 @@
     class="show-post-form"
     (click)="followGroup()"
   >
-    {{ userIsMember ? "Unfollow" : "Follow" }}
+    {{ userIsFollower ? "Unfollow" : "Follow" }}
   </button>
   <button
     *ngIf="selectedSection >= 0"

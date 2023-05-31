@@ -47,10 +47,7 @@ export class NewsFeedComponent implements OnInit {
             .select(fromDashboardStore.getAllGroups)
             .pipe(
               map((groups) => {
-                const trueGroups = groups.filter(
-                  (group) => group !== undefined
-                );
-                return trueGroups.filter((group) =>
+                return groups.filter((group) =>
                   userGroupsIds?.includes(group.id)
                 );
               })

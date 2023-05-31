@@ -182,6 +182,22 @@ export class GroupsEffects {
     this.actions$.pipe(
       ofType(groupsActions.FollowGroup),
       switchMap((action) => {
+        if (!action.follow) {
+          return this.apiService.delete('groupuser', action.group_id).pipe(
+            tap(() => {
+              this.router.navigate(['/dashboard/news-feed']);
+            }),
+            map(() => ({
+              type: groupsActions.FOLLOW_GROUP_SUCCESS,
+              follow: action.follow,
+              group_id: action.group_id,
+              user_id: action.user_id,
+            })),
+            catchError((error) =>
+              of({ type: groupsActions.FOLLOW_GROUP_FAIL, error })
+            )
+          );
+        }
         const body = {
           isAdmin: 0,
           isMember: 0,
@@ -192,6 +208,7 @@ export class GroupsEffects {
           }),
           map(() => ({
             type: groupsActions.FOLLOW_GROUP_SUCCESS,
+            follow: action.follow,
             group_id: action.group_id,
             user_id: action.user_id,
           })),
