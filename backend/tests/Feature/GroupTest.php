@@ -98,6 +98,31 @@ class GroupTest extends TestCase
             ->assertJson([
                 'message' => 'Grupo eliminado',
             ]);
+    }
 
+    /**
+     * Test an user can update a group
+     */
+    public function test_user_can_update_group(): void
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user)
+        ->postJson('api/groups', [
+            'id' => 4,
+            'name' => 'Patata',
+            'city' => 'Patata City',
+            'description' => 'Patata Music',
+            'image' => 'assets/img/patata.jpg',
+        ]);
+        DB::unprepared(
+            'INSERT INTO group_user
+                (group_id, user_id, isAdmin, isMember)
+            VALUES
+                (4, 1, 1, 1);'
+        );
+        $response = $this->putJson('api/groups/4', [
+            'name' => 'Membrillo',
+        ]);
+        $response->assertStatus(200);
     }
 }
