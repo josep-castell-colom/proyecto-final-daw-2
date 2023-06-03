@@ -17,7 +17,10 @@ class TimeframeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'id' => 1,
+            'dayofweek' => fake()->randomNumber(1, true),
+            'start' => fake()->randomNumber(6, true),
+            'end' => fake()->randomNumber(6, true),
         ];
     }
 }

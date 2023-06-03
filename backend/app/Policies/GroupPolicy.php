@@ -15,9 +15,9 @@ class GroupPolicy
     public function update(User $user, Group $group): Response
     {
         $groupuser_id = DB::table('group_user')
-        ->select('group_id', 'isAdmin')
-        ->where('user_id', $user->id)
-        ->get();
+            ->select('group_id', 'isAdmin')
+            ->where('user_id', $user->id)
+            ->get();
         foreach ($groupuser_id as $group_) {
             if ($group->id === $group_->group_id && $group_->isAdmin) {
                 return Response::allow();
@@ -35,11 +35,14 @@ class GroupPolicy
     public function delete(User $user, Group $group): Response
     {
         $groupuser_id = DB::table('group_user')
-        ->select('group_id', 'isAdmin')
-        ->where('user_id', $user->id)
-        ->get();
+            ->select('group_id', 'isAdmin')
+            ->where('user_id', $user->id)
+            ->get();
         foreach ($groupuser_id as $group_) {
-            if ($group->id === $group_->group_id && $group_->isAdmin) {
+            if (
+             $group->id === $group_->group_id
+            && $group_->isAdmin
+            ) {
                 return Response::allow();
             }
         }

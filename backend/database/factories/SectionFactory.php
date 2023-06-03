@@ -17,7 +17,12 @@ class SectionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'id' => 1,
+            'name' => fake()->sentence(),
+            'description' => fake()->paragraph(),
+            'image' => fake()->url(),
+            'isPublic' => 0,
+            'group_id' => 1,
         ];
     }
 }

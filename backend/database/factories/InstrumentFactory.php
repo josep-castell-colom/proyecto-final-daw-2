@@ -17,7 +17,8 @@ class InstrumentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'id' => 1,
+            'name' => fake()->sentence(),
         ];
     }
 }
