@@ -9,7 +9,6 @@ use App\Http\Resources\GroupCollection;
 use App\Http\Resources\GroupResource;
 use App\Models\Group;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 
 class GroupController extends Controller
 {
@@ -43,8 +42,9 @@ class GroupController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateGroupRequest $request, string $id): JsonResponse
-    {
+    public function update(
+        UpdateGroupRequest $request, string $id
+        ): JsonResponse {
         $validated = $request->validated();
         $group = Group::findOrFail($id);
         $this->authorize('update', $group);
@@ -66,12 +66,14 @@ class GroupController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): Response
+    public function destroy(string $id): JsonResponse
     {
         $group = Group::findOrFail($id);
         $this->authorize($group);
         $group->delete();
 
-        return response()->noContent();
+        return response()->json([
+            'message' => 'Grupo eliminado',
+        ]);
     }
 }
