@@ -38,6 +38,11 @@ export const EDIT_GROUP_SUCCESS = '[Dashboard] Edit group success';
 export const DELETE_GROUP = '[Dashboard] Delete group';
 export const DELETE_GROUP_FAIL = '[Dashboard] Delete group fail';
 export const DELETE_GROUP_SUCCESS = '[Dashboard] Delete group success';
+
+export const ADD_SECTION = '[Dashboard] Add section';
+export const ADD_SECTION_SUCCESS = '[Dashboard] Add section success';
+export const ADD_SECTION_FAIL = '[Dashboard] Add section fail';
+
 export const EDIT_USER = '[Dashboard] Edit user';
 export const EDIT_USER_FAIL = '[Dashboard] Edit user fail';
 export const EDIT_USER_SUCCESS = '[Dashboard] Edit user success';
@@ -166,6 +171,7 @@ export const AddGroup = createAction(
   ADD_GROUP,
   props<{
     group: fromModels.GroupAdd;
+    user: User;
   }>()
 );
 export const AddGroupFail = createAction(
@@ -176,6 +182,7 @@ export const AddGroupSuccess = createAction(
   ADD_GROUP_SUCCESS,
   props<{
     group: Group;
+    user: User;
   }>()
 );
 export const EditGroup = createAction(
@@ -211,6 +218,18 @@ export const DeleteGroupSuccess = createAction(
   props<{
     group_id: number;
   }>()
+);
+export const AddSection = createAction(
+  ADD_SECTION,
+  props<{ section: fromModels.Section }>()
+);
+export const AddSectionSuccess = createAction(
+  ADD_SECTION_SUCCESS,
+  props<{ section: fromModels.Section }>()
+);
+export const AddSectionFail = createAction(
+  ADD_SECTION_FAIL,
+  props<{ error: any }>()
 );
 export const EditUser = createAction(
   EDIT_USER,

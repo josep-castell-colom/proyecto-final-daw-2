@@ -10,6 +10,7 @@ import { User } from 'src/app/models/user.interface';
       <a [routerLink]="['/dashboard/news-feed']" id="dashboard">Dashboard</a>
       <div class="profile-picture__wrapper">
         <img
+          [routerLink]="['/dashboard/users/', user.id]"
           class="profile-picture"
           [src]="user.image"
           alt="user profile picture"

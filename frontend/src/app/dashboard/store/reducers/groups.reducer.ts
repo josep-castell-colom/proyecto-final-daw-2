@@ -131,15 +131,41 @@ export const groupsReducer = createReducer(
       loading: true,
     };
   }),
-  on(actions.AddGroupSuccess, (state: GroupsState, { group }) => {
-    const entities = {
+  on(actions.AddGroupSuccess, (state: GroupsState, { group, user }) => {
+    let newGroup = JSON.parse(JSON.stringify(group));
+    let newUser = JSON.parse(JSON.stringify(user));
+    newGroup = {
+      ...newGroup,
+      pivot: {
+        isAdmin: true,
+        isMember: true,
+      },
+    };
+    let groupUser: GroupUser = {
+      id: user.id,
+      name: user.name,
+      lastname: user.lastname,
+      instrument: user.instruments,
+      pivot: {
+        isMember: true,
+        isAdmin: true,
+      },
+    };
+    newGroup.users.push(groupUser);
+    newUser.groups.push(newGroup);
+    const groupEntities = {
       ...state.groupEntities,
       [group.id]: group,
+    };
+    const userEntities = {
+      ...state.userEntities,
+      [newUser.id]: newUser,
     };
 
     return {
       ...state,
-      groupEntities: entities,
+      groupEntities,
+      userEntities,
       loading: false,
     };
   }),
@@ -159,6 +185,19 @@ export const groupsReducer = createReducer(
       ...state,
       groupEntities: entities,
       loading: false,
+    };
+  }),
+  on(actions.AddSectionSuccess, (state: GroupsState, { section }) => {
+    const newState = JSON.parse(JSON.stringify(state));
+    const group = newState.groupEntities[section.group_id];
+    group.sections.push(section);
+    const entities = {
+      ...state.groupEntities,
+      [section.group_id]: group,
+    };
+    return {
+      ...state,
+      groupEntities: entities,
     };
   }),
   on(actions.DeleteComment, (state: GroupsState) => {

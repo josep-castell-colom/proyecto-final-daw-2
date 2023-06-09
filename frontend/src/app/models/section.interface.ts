@@ -7,3 +7,10 @@ export interface Section {
   posts: Post[];
   group_id: number;
 }
+
+export interface AddSection {
+  name: string;
+  description: string;
+  isPublic: boolean;
+  group_id: number;
+}

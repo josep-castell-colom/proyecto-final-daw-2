@@ -148,6 +148,8 @@ export class GroupDetailComponent implements OnInit, OnChanges {
   }
 
   checkUserIsAdmin(): boolean {
+    console.log('group:::', this.group);
+    console.log('user:::', this.user);
     return this.user?.groups?.find((group) => group.id === this.group?.id)
       ?.pivot.isAdmin
       ? true

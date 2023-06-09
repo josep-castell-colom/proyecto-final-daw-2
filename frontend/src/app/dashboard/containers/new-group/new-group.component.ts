@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 import { faAdd } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,8 +13,9 @@ import { AddGroup } from '../../store';
   styleUrls: ['new-group.component.scss'],
   templateUrl: 'new-group.component.html',
 })
-export class NewGroupComponent implements OnInit {
+export class NewGroupComponent implements OnInit, OnDestroy {
   user$!: Observable<User | undefined>;
+  user!: User;
   groupName: string | undefined = 'New Group';
   groupImage: string | undefined;
   groupCity: string | undefined = 'Musictown';
@@ -25,10 +26,22 @@ export class NewGroupComponent implements OnInit {
 
   faAdd = faAdd;
 
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
   constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.user$ = this.store.select(getAuthUser);
+    this.user$.pipe(takeUntil(this.destroy$)).subscribe((user) => {
+      if (user) {
+        this.user = user;
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   onSubmitted(): void {
@@ -38,6 +51,8 @@ export class NewGroupComponent implements OnInit {
       description: this.groupDescription,
       city: this.groupCity,
     };
-    this.store.dispatch(AddGroup({ group }));
+    if (this.user) {
+      this.store.dispatch(AddGroup({ group, user: this.user }));
+    }
   }
 }

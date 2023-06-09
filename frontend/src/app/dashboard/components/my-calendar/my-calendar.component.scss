@@ -32,7 +32,13 @@ footer {
 
 .calendar {
   position: relative;
-  width: 80%;
   max-width: 900px;
   background-color: white;
+  border-radius: 5px;
+}
+
+@media (min-width: $breakpoint-tablet) {
+  .calendar {
+    width: 80%;
+  }
 }

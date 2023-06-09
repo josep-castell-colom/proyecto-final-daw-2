@@ -84,7 +84,6 @@ export class UserUpdateComponent implements OnInit, OnChanges, OnDestroy {
       user.address &&
       user.address !== ''
     ) {
-      console.log('check valid');
       return true;
     }
     return false;

@@ -77,7 +77,6 @@ export class MainAsideComponent implements OnInit, OnChanges {
   getWidth(): void {
     this.screenWidth = window.innerWidth;
     this.spanHidden = this.screenWidth < 768;
-    console.log(this.screenWidth);
   }
 
   logOutHandler() {

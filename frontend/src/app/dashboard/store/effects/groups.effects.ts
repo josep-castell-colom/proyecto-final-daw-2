@@ -96,10 +96,12 @@ export class GroupsEffects {
     this.actions$.pipe(
       ofType(groupsActions.AddGroup),
       switchMap((action) => {
+        console.log('post group');
         return this.apiService.post('groups', action.group).pipe(
           map((group) => ({
             type: groupsActions.ADD_GROUP_SUCCESS,
             group,
+            user: action.user,
           })),
           catchError((error) =>
             of({ type: groupsActions.EDIT_GROUP_FAIL, error })
@@ -114,6 +116,11 @@ export class GroupsEffects {
       this.actions$.pipe(
         ofType(groupsActions.AddGroupSuccess),
         tap((action) => {
+          const body = {
+            isAdmin: 1,
+            isMember: 1,
+          };
+          this.apiService.patch('groupuser', action.group.id, body);
           this.router.navigate(['/dashboard/groups/', action.group.id]);
         }),
         catchError((error) =>
@@ -160,6 +167,23 @@ export class GroupsEffects {
               type: groupsActions.DELETE_GROUP_FAIL,
               error,
             })
+          )
+        );
+      })
+    )
+  );
+
+  addSection$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(groupsActions.AddSection),
+      switchMap((action) => {
+        return this.apiService.post('sections', action.section).pipe(
+          map((section) => ({
+            type: groupsActions.ADD_SECTION_SUCCESS,
+            section,
+          })),
+          catchError((error) =>
+            of({ type: groupsActions.ADD_SECTION_FAIL, error })
           )
         );
       })

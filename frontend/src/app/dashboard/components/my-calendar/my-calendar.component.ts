@@ -4,13 +4,11 @@ import {
   CalendarOptions,
   DateSelectArg,
   EventClickArg,
-  EventApi,
 } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
-import esLocale from '@fullcalendar/core/locales/es';
 
 @Component({
   selector: 'my-calendar',
@@ -40,7 +38,6 @@ export class MyCalendarComponent {
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
     events: [{ title: 'Meeting', start: new Date() }],
-    // locale: esLocale,
   };
 
   handleDateSelect(selectInfo: DateSelectArg) {

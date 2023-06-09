@@ -65,9 +65,11 @@
                 - {{ section.name }} ({{
                   section.isPublic ? "Public" : "Private"
                 }})
+                <span *ngIf="userIsAdmin">delete</span>
               </p>
             </div>
           </div>
+          <span *ngIf="userIsAdmin">add section</span>
         </div>
         <div class="group-members">
           <p class="group-members profile-label">Members:</p>
