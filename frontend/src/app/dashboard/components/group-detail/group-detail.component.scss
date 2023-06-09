@@ -35,8 +35,12 @@
         color: $main-blue-dark;
       }
     }
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
     img {
-      margin-left: calc(-4rem + 10px);
       max-width: calc(100vw - 70px);
       border-radius: 20px;
     }
