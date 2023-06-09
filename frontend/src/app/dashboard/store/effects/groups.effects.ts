@@ -96,7 +96,6 @@ export class GroupsEffects {
     this.actions$.pipe(
       ofType(groupsActions.AddGroup),
       switchMap((action) => {
-        console.log('post group');
         return this.apiService.post('groups', action.group).pipe(
           map((group) => ({
             type: groupsActions.ADD_GROUP_SUCCESS,

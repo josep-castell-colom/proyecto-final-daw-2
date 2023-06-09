@@ -28,7 +28,6 @@ export class ApiService {
   }
 
   patch(collection: string, id: number, body: object): Observable<any> {
-    console.log('test');
     return this.http
       .patch(`${env.API_URL}/${collection}/${id}`, JSON.stringify(body))
       .pipe(map((response: any) => response.data));
