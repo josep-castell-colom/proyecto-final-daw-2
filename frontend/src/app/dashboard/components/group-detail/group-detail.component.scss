@@ -23,6 +23,7 @@
   .profile {
     display: flex;
     align-items: center;
+    max-width: inherit;
     background-color: $blue-gray-100;
     padding: 2rem 4rem;
     border-radius: 10px;
@@ -86,11 +87,12 @@
   }
 }
 
-@media (min-width: $breakpoint-tablet) {
+@media (min-width: $breakpoint-big-screen) {
   .group-profile {
     margin: 3rem 2rem 1rem;
     .profile {
       flex-direction: column;
+      justify-content: center;
       img {
         margin-left: 5rem;
         max-width: 600px !important;
