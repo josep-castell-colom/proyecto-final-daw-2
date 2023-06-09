@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 4rem;
+  padding: 2rem 0;
   border-bottom: solid 1px $blue-gray-300;
   border-radius: 10px;
   background-color: $blue-gray-100;
@@ -22,6 +22,7 @@
 .groupName {
   display: inline-block;
   cursor: pointer;
+  margin-top: 1rem;
   margin-bottom: 1.5rem;
   color: $main-green-dark;
 }
@@ -67,5 +68,6 @@ fa-icon {
 @media (min-width: $breakpoint-big-screen) {
   .post {
     margin: 2rem;
+    padding: 2rem 4rem;
   }
 }

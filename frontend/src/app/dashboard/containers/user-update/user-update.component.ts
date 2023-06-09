@@ -62,7 +62,6 @@ export class UserUpdateComponent implements OnInit, OnChanges, OnDestroy {
       address: this.userAddress,
     };
     if (this.checkValidForm(user)) {
-      console.log('valid');
       this.formValid = true;
       this.store.dispatch(EditUser({ user_id: user.id, user }));
     } else {
