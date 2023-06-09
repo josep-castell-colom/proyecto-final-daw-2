@@ -19,4 +19,3 @@ VALUES
     'assets/img/groups/banyalbufars', 
     '2023-05-29 20:39:13', '2023-05-29 20:39:18'
   );
-

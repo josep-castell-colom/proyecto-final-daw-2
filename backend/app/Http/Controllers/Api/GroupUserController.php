@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Group;
 use Auth;
 use DB;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class GroupUserController extends Controller
@@ -13,7 +14,7 @@ class GroupUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): JsonResponse
     {
         $user = Auth::user();
         $group = Group::findOrFail($id);
@@ -32,7 +33,7 @@ class GroupUserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): JsonResponse
     {
         $user = Auth::user();
         DB::table('group_user')
