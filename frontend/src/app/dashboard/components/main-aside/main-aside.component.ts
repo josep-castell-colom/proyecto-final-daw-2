@@ -4,6 +4,8 @@ import {
   Output,
   EventEmitter,
   OnChanges,
+  HostListener,
+  OnInit,
 } from '@angular/core';
 
 import { faNewspaper } from '@fortawesome/free-regular-svg-icons';
@@ -30,7 +32,7 @@ import { Router } from '@angular/router';
   styleUrls: ['main-aside.component.scss'],
   templateUrl: 'main-aside.component.html',
 })
-export class MainAsideComponent implements OnChanges {
+export class MainAsideComponent implements OnInit, OnChanges {
   @Input() user: User | null | undefined;
   @Input() groups: Group[] | undefined;
 
@@ -46,10 +48,15 @@ export class MainAsideComponent implements OnChanges {
   faLogOut = faRightFromBracket;
   faGear = faAdd;
 
+  screenWidth!: number;
   spanHidden: boolean = false;
   groupsListHidden: boolean = true;
 
   constructor(private store: Store, private router: Router) {}
+
+  ngOnInit(): void {
+    this.getWidth();
+  }
 
   ngOnChanges(): void {
     if (this.user) {
@@ -64,6 +71,13 @@ export class MainAsideComponent implements OnChanges {
         );
       }
     }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  getWidth(): void {
+    this.screenWidth = window.innerWidth;
+    this.spanHidden = this.screenWidth < 768;
+    console.log(this.screenWidth);
   }
 
   logOutHandler() {

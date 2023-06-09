@@ -108,14 +108,14 @@ li {
 
 .gear {
   position: absolute;
-  display: flex;
+  display: none;
   right: 0;
   padding: 0.2rem;
   border-radius: 50%;
   opacity: 0;
   transition: opacity 0.3s, transform 1s;
   &.hidden {
-    display: none;
+    display: none !important;
   }
   &:hover {
     opacity: 0.8 !important;
@@ -158,5 +158,8 @@ li {
   }
   .arrow {
     display: block;
+  }
+  .gear {
+    display: flex;
   }
 }

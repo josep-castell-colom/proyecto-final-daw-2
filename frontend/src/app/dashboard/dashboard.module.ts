@@ -30,6 +30,7 @@ import { CheckSectionVisibilityPipe } from '../pipes/check-section-visibility.pi
 import { UserViewComponent } from './containers/user-view/user-view.component';
 import { CheckUserIsMemberPipe } from '../pipes/check-member.pipe';
 import { GetInitialsPipe } from '../pipes/get-initials.pipe';
+import { UserUpdateComponent } from './containers/user-update/user-update.component';
 
 export const ROUTES: Routes = [
   {
@@ -70,6 +71,10 @@ export const ROUTES: Routes = [
         path: 'users/:id',
         component: UserViewComponent,
       },
+      {
+        path: 'user-update/:id',
+        component: UserUpdateComponent,
+      },
     ],
   },
   // {
@@ -98,6 +103,7 @@ export const ROUTES: Routes = [
     PostCommentsViewComponent,
     PostCommentDetailComponent,
     PostFormComponent,
+    UserUpdateComponent,
     UserViewComponent,
   ],
   imports: [

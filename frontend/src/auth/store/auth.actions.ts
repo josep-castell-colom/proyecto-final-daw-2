@@ -19,12 +19,12 @@ export const Login = createAction(
 );
 export const LoginSuccess = createAction(
   LOG_IN_SUCCESS,
-  props<{ user: User }>()
+  props<{ user: User; register: boolean }>()
 );
 export const LoginFail = createAction(LOG_IN_FAIL, props<{ error: any }>());
 export const SetAuthToken = createAction(
   SET_AUTH_TOKEN,
-  props<{ token: string }>()
+  props<{ token: string; register: boolean }>()
 );
 export const Register = createAction(
   REGISTER,

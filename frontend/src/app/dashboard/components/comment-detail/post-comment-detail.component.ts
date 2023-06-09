@@ -27,7 +27,6 @@ import { GroupsService } from '../../services';
           ></fa-icon>
           <div>
             {{ comment.body }}
-            {{ checkUserIsOwner(user, comment) }}
           </div>
         </div>
       </div>
@@ -42,9 +41,9 @@ export class PostCommentDetailComponent {
 
   faTrash = faTrash;
 
-  constructor(private groupsService: GroupsService) {}
-
   checkUserIsOwner = this.groupsService.checkUserIsOwner;
+
+  constructor(private groupsService: GroupsService) {}
 
   onDeleteComment(commentId: number | undefined): void {
     if (commentId) this.deleteComment.emit(commentId);

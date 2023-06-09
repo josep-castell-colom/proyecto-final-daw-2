@@ -29,11 +29,13 @@
 }
 
 input {
+  width: 100px;
   border-radius: 20px;
   border: none;
   box-shadow: inset 2px 2px 2px $shadow-black;
   padding: 0.2rem 0.2rem 0.2rem 0.5rem;
   &:focus {
+    width: auto;
     outline: none;
     border: solid 1px $blue-gray-500;
   }
@@ -56,5 +58,11 @@ input {
     &:hover {
       background-color: $blue-gray-300;
     }
+  }
+}
+
+@media (min-width: $breakpoint-tablet) {
+  input {
+    width: auto;
   }
 }

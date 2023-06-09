@@ -1,23 +1,15 @@
-import {
-  Component,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, takeUntil, tap } from 'rxjs';
 import { User } from 'src/app/models';
 import { EditUser, getSelectedUser } from '../../store';
-import { faPenSquare } from '@fortawesome/free-solid-svg-icons';
-import { getAuthUser } from 'src/auth/store';
 
 @Component({
-  selector: 'user-view',
-  styleUrls: ['user-view.component.scss'],
-  templateUrl: 'user-view.component.html',
+  selector: 'user-update',
+  styleUrls: ['user-update.component.scss'],
+  templateUrl: 'user-update.component.html',
 })
-export class UserViewComponent implements OnInit, OnChanges, OnDestroy {
+export class UserUpdateComponent implements OnInit, OnChanges, OnDestroy {
   user$!: Observable<User>;
   user!: User;
 
@@ -29,26 +21,16 @@ export class UserViewComponent implements OnInit, OnChanges, OnDestroy {
 
   formValid = true;
 
-  userIsOwner!: boolean;
-  editing = false;
-
-  faEdit = faPenSquare;
-
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.user$ = this.store.select(getSelectedUser);
-    this.user$.pipe(takeUntil(this.destroy$)).subscribe((user) => {
-      this.user = user;
-      if (user) {
-        this.store.select(getAuthUser).subscribe((user) => {
-          this.userIsOwner = user?.id === this.user.id;
-        });
-      }
-      this.setInfo();
-    });
+    this.user$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((user) => (this.user = user));
+    this.setInfo();
   }
 
   ngOnChanges(): void {
@@ -80,11 +62,12 @@ export class UserViewComponent implements OnInit, OnChanges, OnDestroy {
       address: this.userAddress,
     };
     if (this.checkValidForm(user)) {
+      console.log('valid');
       this.formValid = true;
       this.store.dispatch(EditUser({ user_id: user.id, user }));
     } else {
       this.formValid = false;
-      this.setInfo();
+      this.cancelHandler();
     }
   }
 
@@ -101,13 +84,13 @@ export class UserViewComponent implements OnInit, OnChanges, OnDestroy {
       user.address &&
       user.address !== ''
     ) {
+      console.log('check valid');
       return true;
     }
     return false;
   }
 
   cancelHandler() {
-    this.editing = false;
     this.setInfo();
   }
 }

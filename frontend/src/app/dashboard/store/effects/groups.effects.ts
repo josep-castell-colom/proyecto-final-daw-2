@@ -9,13 +9,15 @@ import * as fromServices from '../../services';
 import { Group } from 'src/app/models/group.interface';
 import { User } from 'src/app/models';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class GroupsEffects {
   constructor(
     private actions$: Actions,
     private apiService: fromServices.ApiService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
 
   loadGroups$ = createEffect(() =>
@@ -267,5 +269,17 @@ export class GroupsEffects {
         );
       })
     )
+  );
+
+  editUserSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(groupsActions.EditUserSuccess),
+        tap(() => {
+          this.router.navigate(['/dashboard/news-feed']);
+        })
+      );
+    },
+    { dispatch: false }
   );
 }

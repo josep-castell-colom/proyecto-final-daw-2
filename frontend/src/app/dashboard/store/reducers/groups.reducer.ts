@@ -317,7 +317,6 @@ export const groupsReducer = createReducer(
     const entities = {
       ...state.userEntities,
       [user_id]: user,
-      loading: false,
     };
 
     return {

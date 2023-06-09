@@ -81,3 +81,11 @@
     }
   }
 }
+
+@media (min-width: $breakpoint-tablet) {
+  .group-profile {
+    .profile {
+      flex-direction: column;
+    }
+  }
+}

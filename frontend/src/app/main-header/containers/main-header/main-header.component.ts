@@ -1,4 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, filter, map, of, switchMap, take, zip } from 'rxjs';
 import {
@@ -17,13 +24,14 @@ import { User } from 'src/app/models/user.interface';
       <h1 class="logo" [routerLink]="['/']">MuSick!</h1>
       <div class="tools">
         <input
+          #searchInput
           *ngIf="user"
           type="text"
           placeholder="Search..."
           [(ngModel)]="search"
           (input)="searchHandler()"
         />
-        <ul *ngIf="search.length > 0" class="search-result">
+        <ul *ngIf="showSearchResult && search.length > 0" class="search-result">
           <div *ngIf="searchResult.groups.length > 0">
             <span>Groups:</span>
             <li
@@ -57,12 +65,15 @@ import { User } from 'src/app/models/user.interface';
     </div>
   `,
 })
-export class MainHeaderComponent implements OnInit {
+export class MainHeaderComponent implements OnInit, AfterViewInit {
   @Input() user: User | null | undefined;
+
+  @ViewChild('searchInput') input!: ElementRef;
 
   groups$!: Observable<Group[]>;
   users$!: Observable<User[]>;
 
+  showSearchResult: boolean = false;
   searchResult: { groups: Group[]; users: User[] } = { groups: [], users: [] };
 
   search = '';
@@ -75,10 +86,18 @@ export class MainHeaderComponent implements OnInit {
     this.users$ = this.store.select(getAllUsers);
   }
 
+  ngAfterViewInit(): void {
+    // console.log(this.input);
+    // this.input.nativeElement.onblur = () => {
+    //   this.showSearchResult = false;
+    // };
+  }
+
   searchHandler(): void {
     this.searchFilter(this.search).subscribe((result) => {
       if (result) this.searchResult = result;
     });
+    this.showSearchResult = true;
   }
 
   searchFilter(search: string): Observable<any> {
@@ -97,10 +116,10 @@ export class MainHeaderComponent implements OnInit {
           ),
         ];
         result.users = users.filter((user: User) => {
-          return (
-            user.name.toLowerCase().includes(search.toLowerCase()) ||
-            user.lastname.toLowerCase().includes(search.toLowerCase())
-          );
+          return user.name && user.lastname
+            ? user.name.toLowerCase().includes(search.toLowerCase()) ||
+                user.lastname.toLowerCase().includes(search.toLowerCase())
+            : user.email.toLowerCase().includes(search.toLowerCase());
         });
         return result;
       })

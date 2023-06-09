@@ -31,6 +31,8 @@ export class GroupViewComponent implements OnInit {
   user$!: Observable<User | undefined>;
   user!: User;
 
+  formValid = true;
+
   selectedSectionIndex: number = -1;
   selectedSectionId!: number | undefined;
 

@@ -1,0 +1,42 @@
+<div>
+  <h2>Please fill up your info</h2>
+  <form (ngSubmit)="onUserEditSubmit()">
+    <h3 *ngIf="!formValid">All fields are required!</h3>
+    <div>
+      <label for="name">
+        Name:
+        <input type="text" name="name" id="name" [(ngModel)]="userName" />
+      </label>
+      <label for="last-name">
+        Last name:
+        <input
+          type="text"
+          name="last-name"
+          id="last-name"
+          [(ngModel)]="userLastName"
+        />
+      </label>
+      <label for="email">
+        E-mail:
+        <input type="text" name="email" id="email" [(ngModel)]="userMail" />
+      </label>
+      <label for="phone">
+        Phone:
+        <input type="text" name="phone" id="phone" [(ngModel)]="userPhone" />
+      </label>
+      <label for="address">
+        Address:
+        <input
+          type="text"
+          name="address"
+          id="address"
+          [(ngModel)]="userAddress"
+        />
+      </label>
+    </div>
+    <div class="actions">
+      <button type="submit">Save</button>
+      <button type="button" (click)="cancelHandler()">Cancel</button>
+    </div>
+  </form>
+</div>

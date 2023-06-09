@@ -4,13 +4,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2rem;
   padding: 2rem 4rem;
   border-bottom: solid 1px $blue-gray-300;
   border-radius: 10px;
   background-color: $blue-gray-100;
   transition: 1s;
   box-shadow: 0 0 10px $shadow-black, inset 0 0 5px $shadow-black;
+  width: calc(100vw - 50px);
+  margin: 0;
+  overflow: hidden;
 }
 
 .header {
@@ -32,6 +34,10 @@ fa-icon {
   }
 }
 
+.body {
+  max-width: 80%;
+}
+
 .content {
   display: flex;
   flex-direction: column;
@@ -43,5 +49,12 @@ fa-icon {
   margin: 1rem;
   img {
     border-radius: 20px;
+    max-width: calc(100vw - 60px);
+  }
+}
+
+@media (min-width: $breakpoint-big-screen) {
+  .post {
+    margin: 2rem;
   }
 }

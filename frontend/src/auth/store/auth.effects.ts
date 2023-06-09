@@ -5,7 +5,17 @@ import { AuthService } from '../shared/services/auth.service';
 
 import * as actions from './auth.actions';
 import { LoadAllUsers, getAllUsers } from 'src/app/dashboard/store';
-import { catchError, exhaustMap, find, map, of, switchMap, tap } from 'rxjs';
+import {
+  catchError,
+  exhaustMap,
+  find,
+  map,
+  of,
+  switchMap,
+  tap,
+  zip,
+  zipWith,
+} from 'rxjs';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
@@ -18,7 +28,7 @@ export class AuthEffects {
         return this.authService.logIn(action.email, action.password).pipe(
           map(({ token }) => {
             this.authService.setToken(token);
-            return { type: actions.SET_AUTH_TOKEN, token };
+            return { type: actions.SET_AUTH_TOKEN, token, register: false };
           }),
           catchError((error) => of({ type: actions.LOG_IN_FAIL, error }))
         );
@@ -33,7 +43,7 @@ export class AuthEffects {
         return this.authService.register(action.email, action.password).pipe(
           map(({ token }) => {
             this.authService.setToken(token);
-            return { type: actions.SET_AUTH_TOKEN, token };
+            return { type: actions.SET_AUTH_TOKEN, token, register: true };
           }),
           catchError((error) => of({ type: actions.LOG_IN_FAIL, error }))
         );
@@ -44,7 +54,7 @@ export class AuthEffects {
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(actions.SetAuthToken),
-      switchMap(() =>
+      switchMap((action) =>
         this.authService.getAuthUser().pipe(
           switchMap((authUser) => {
             this.store.dispatch(LoadAllUsers());
@@ -55,7 +65,14 @@ export class AuthEffects {
               );
             return userOut;
           }),
-          map((user) => ({ type: actions.LOG_IN_SUCCESS, user })),
+          switchMap((user) => zip(of(user), of(action.register))),
+          map(([user, register]) => {
+            return {
+              type: actions.LOG_IN_SUCCESS,
+              user,
+              register,
+            };
+          }),
           catchError((error) => of({ type: actions.LOG_IN_FAIL, error }))
         )
       )
@@ -66,8 +83,12 @@ export class AuthEffects {
     () => {
       return this.actions$.pipe(
         ofType(actions.LoginSuccess),
-        tap(() => {
-          this.router.navigate(['/dashboard']);
+        tap((action) => {
+          if (action.register && action.user) {
+            this.router.navigate(['/dashboard/user-update/', action.user.id]);
+          } else {
+            this.router.navigate(['/dashboard']);
+          }
         })
       );
     },

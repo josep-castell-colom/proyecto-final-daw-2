@@ -47,9 +47,9 @@ export class AuthService {
           })
         );
       }),
-      switchMap((response: any) =>
-        of({ token: response['plain-text-token'] as string })
-      )
+      switchMap((response: any) => {
+        return of({ token: response['access_token'] as string });
+      })
     );
   }
 
@@ -70,7 +70,7 @@ export class AuthService {
   checkAuthUser() {
     const token = sessionStorage.getItem('authToken');
     if (token) {
-      this.store.dispatch(authStore.SetAuthToken({ token }));
+      this.store.dispatch(authStore.SetAuthToken({ token, register: false }));
     }
   }
 }

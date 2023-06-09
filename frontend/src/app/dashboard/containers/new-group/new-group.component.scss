@@ -10,6 +10,7 @@
 
 .form-wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   background-color: $blue-gray-200;
   border-radius: 20px;
@@ -19,8 +20,8 @@
 
 form {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-left: 3rem;
   padding: 1.5rem;
   max-width: 600px;
   border: solid 1px $blue-gray-300;
@@ -41,5 +42,15 @@ form {
     &:hover {
       color: $main-blue-dark;
     }
+  }
+}
+
+@media (min-width: $breakpoint-tablet) {
+  .form-wrapper {
+    flex-direction: row;
+  }
+  form {
+    margin-left: 3rem;
+    flex-direction: row;
   }
 }
