@@ -34,6 +34,10 @@
         color: $main-blue-dark;
       }
     }
+    img {
+      max-width: calc(100vw - 70px);
+      border-radius: 20px;
+    }
     .group-name {
       display: inline-block;
     }
@@ -87,6 +91,10 @@
     margin: 3rem 2rem 1rem;
     .profile {
       flex-direction: column;
+      img {
+        margin-left: 5rem;
+        max-width: 600px !important;
+      }
     }
   }
   .show-post-form {
