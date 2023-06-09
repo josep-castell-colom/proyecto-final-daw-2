@@ -24,7 +24,7 @@ class GroupTest extends TestCase
     }
 
     /**
-     * Test Group model exists in DB after creation
+     * Test Group model exists
      */
     public function test_group_model_exists(): void
     {
