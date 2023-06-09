@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { User } from 'src/app/models';
+import { Group, User } from 'src/app/models';
 import { Post } from 'src/app/models/post.interface';
 
 @Component({
@@ -11,6 +11,8 @@ import { Post } from 'src/app/models/post.interface';
         <post-detail
           [post]="post"
           [user]="user"
+          [group]="group"
+          [newsFeed]="newsFeed"
           (commentSubmitted)="onCommentSubmitted($event)"
           (deleteComment)="onDeleteComment($event)"
           (postDelete)="onDeletePost($event)"
@@ -22,6 +24,8 @@ import { Post } from 'src/app/models/post.interface';
 export class PostsViewComponent {
   @Input() posts: Post[] | null;
   @Input() user: User | null | undefined;
+  @Input() group!: Group;
+  @Input() newsFeed!: boolean;
 
   @Output() commentSubmitted = new EventEmitter();
   @Output() deleteComment = new EventEmitter();

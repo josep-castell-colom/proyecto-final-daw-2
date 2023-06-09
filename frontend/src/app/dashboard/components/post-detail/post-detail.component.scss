@@ -19,11 +19,22 @@
   text-align: center;
 }
 
+.groupName {
+  display: inline-block;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  color: $main-green-dark;
+}
+
 .title {
   display: inline;
   font-size: 2rem;
   margin-bottom: 1rem;
   color: $main-blue-dark;
+}
+
+.postedBy {
+  color: $main-green-dark;
 }
 
 fa-icon {

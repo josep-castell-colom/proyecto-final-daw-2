@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { User } from 'src/app/models';
+import { Group, User } from 'src/app/models';
 import { Post } from 'src/app/models/post.interface';
 import { GroupsService } from '../../services';
 
@@ -11,6 +11,12 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
   template: `
     <div class="post">
       <header class="header">
+        <a
+          *ngIf="newsFeed"
+          class="groupName"
+          [routerLink]="['/dashboard/groups/', group.id]"
+          >{{ group.name }}</a
+        ><br />
         <h3 class="title">
           {{ post.title }}
         </h3>
@@ -20,7 +26,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
           (click)="onDeletePost()"
         ></fa-icon
         ><br />
-        <span
+        <span class="postedBy"
           >Posted by:
           <a [routerLink]="['/dashboard/users/', post.user.id]">{{
             post.user.name
@@ -51,6 +57,8 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 export class PostDetailComponent {
   @Input() post: Post;
   @Input() user: User | null | undefined;
+  @Input() group!: Group;
+  @Input() newsFeed!: boolean;
 
   @Output() commentSubmitted = new EventEmitter();
   @Output() deleteComment = new EventEmitter();

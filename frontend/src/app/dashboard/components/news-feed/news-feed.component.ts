@@ -13,7 +13,9 @@ import * as fromDashboardStore from '../../store';
     <div *ngFor="let group of userSubscriptions | async">
       <posts-view
         [posts]="group | getSubscriptionPosts"
+        [group]="group"
         [user]="user$ | async"
+        [newsFeed]="true"
         (commentSubmitted)="onCommentSubmitted($event)"
         (deleteComment)="onDeleteComment($event)"
         (deletePost)="onDeletePost($event)"
